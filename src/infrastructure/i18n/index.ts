@@ -2,7 +2,7 @@
  * @Author: Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date: 2025-05-03 09:36:35
  * @LastEditors: Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime: 2025-05-04 12:54:33
+ * @LastEditTime: 2025-05-06 01:16:01
  * @FilePath: /server/src/i18n/index.ts
  * @Description: i18n configuration for localization
  */
@@ -10,7 +10,6 @@ import i18next, { i18n } from 'i18next'
 import middleware from 'i18next-http-middleware'
 import Backend from 'i18next-fs-backend'
 import { join } from 'path'
-import { lookup } from 'dns'
 
 /**
  * List of supported namespaces for translations files
