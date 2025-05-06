@@ -1,10 +1,10 @@
 /*
- * @Author: Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @Date: 2025-05-03 23:22:37
- * @LastEditors: Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime: 2025-05-04 14:40:35
- * @FilePath: /server/src/infrastructure/i18n/i18n.service.ts
- * @Description: Implementation of the I18n service for internationalization
+ * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
+ * @Date          : 2025-05-03 23:22:37
+ * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
+ * @LastEditTime  : 2025-05-07 00:17:20
+ * @FilePath      : /server/src/infrastructure/i18n/i18n.service.ts
+ * @Description   : Implementation of the I18n service for internationalization
  */
 
 import { Request } from 'express'
@@ -106,6 +106,8 @@ export class I18nService implements II18nService {
    * @description 
    * Changes the language for the entire application instance
    * 
+   * @throws {Error} If the specified language is not supported
+   * 
    * @example
    * await i18nService.changeLanguage('vi')
    * 
@@ -116,6 +118,12 @@ export class I18nService implements II18nService {
    * })
    */
   public async changeLanguage(language: string): Promise<void> {
+    const supportedLanguages = i18next.options.supportedLngs
+    
+    if (!Array.isArray(supportedLanguages) || !supportedLanguages.includes(language)) {
+      throw new Error(`Language ${language} is not supported`)
+    }
+    
     await i18next.changeLanguage(language)
   }
 }
@@ -140,7 +148,7 @@ export class I18nService implements II18nService {
 //   app.get('/v1/api/test-i18n', (req, res, next) => {
 //     const t = i18nService.getTFunction(req)
 //     const greeting = t('common:GREETING', { name: 'Phuc' })
-//     const error = t('common:BAD_REQUEST', { lng: 'vi' })
+//     const error = t('common:BAD_REQUEST')
 
 //     res.json({
 //       language: req.language,

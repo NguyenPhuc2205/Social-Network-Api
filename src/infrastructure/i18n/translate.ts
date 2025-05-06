@@ -1,19 +1,15 @@
 /*
- * @Author: Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @Date: 2025-05-03 09:52:11
- * @LastEditors: Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime: 2025-05-06 01:17:25
- * @FilePath: /server/src/infrastructure/i18n/translate.ts
- * @Description: Utility for translating message keys
+ * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
+ * @Date          : 2025-05-03 09:52:11
+ * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
+ * @LastEditTime  : 2025-05-06 01:17:25
+ * @FilePath      : /server/src/infrastructure/i18n/translate.ts
+ * @Description   : Utility for translating message keys
  */
 
 import i18next from 'i18next'
-import { MessageKeys } from '~/shared/types/message-keys.type'
-
-/**
- * Type definition for values that can be interpolated into translation strings
-*/
-export type InterpolationValues = Record<string, string | number | boolean | Date>
+import { InterpolationValues } from '~/infrastructure/i18n/i18n.interface'
+import { MessageKeys } from '~/shared/types'
 
 /**
  * Translates a message key to the corresponding text in the specified language

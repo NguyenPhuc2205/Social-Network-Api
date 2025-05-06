@@ -1,10 +1,10 @@
 /*
- * @Author: Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @Date: 2025-05-03 23:22:37
- * @LastEditors: Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime: 2025-05-04 10:35:48
- * @FilePath: /server/src/infrastructure/i18n/i18n.interface.ts
- * @Description: Interface for i18n (internationalization) service
+ * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
+ * @Date          : 2025-05-03 23:22:37
+ * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
+ * @LastEditTime  : 2025-05-04 10:35:48
+ * @FilePath      : /server/src/infrastructure/i18n/i18n.interface.ts
+ * @Description   : Interface for i18n (internationalization) service
  */
 
 import { Request } from 'express'
