@@ -7,8 +7,8 @@
  * @Description  : API response class for standardizing API responses
  */
 
-import { HTTP_STATUS } from '~/shared/constants/http-status'
-import { MessageKeys, MESSAGES } from '~/shared/types/message-keys.type'
+import { HTTP_STATUS } from '~/shared/constants'
+import { MessageKeys, MESSAGES } from '~/shared/types'
 
 /**
  * Interface for API response metadata
