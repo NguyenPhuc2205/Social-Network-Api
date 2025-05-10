@@ -6,11 +6,12 @@
  * @FilePath     : \server\src\infrastructure\loggers\winston.log.ts
  * @Description  : Create a logger using Winston with daily rotation and custom formatting
  */
+
 import fs from 'fs'
 import path from 'path'
 import winston from 'winston'
 import DailyRotateFile from 'winston-daily-rotate-file'
-import { ILogContext, ILogParams, IWinstonLogger } from '~/infrastructure/loggers/winston.interface'
+import { ILogContext, ILogParams, IWinstonLoggerService } from '~/infrastructure/loggers/winston.interface'
 import { v4 as uuidv4 } from 'uuid'
 
 const { createLogger, format, transports } = winston
@@ -18,12 +19,12 @@ const { combine, timestamp, splat, colorize, uncolorize, printf, align, label, e
 
 /**
  * Winston implementation of the logger service
- * @class WinstonLogger
- * @implements {IWinstonLogger}
+ * @class WinstonLoggerService
+ * @implements {IWinstonLoggerService}
  * @description Provides structured logging capabilities with Winston transport
  */
-export class WinstonLogger implements IWinstonLogger {
-  private static instance: IWinstonLogger | null = null
+export class WinstonLoggerService implements IWinstonLoggerService {
+  private static instance: IWinstonLoggerService | null = null
   private logger: winston.Logger
   private readonly logDir: string = path.resolve('logs')
   private logLevel: string = 'debug'
@@ -38,15 +39,15 @@ export class WinstonLogger implements IWinstonLogger {
   }
 
   /**
-   * Gets the singleton instance of the WinstonLogger
+   * Gets the singleton instance of the WinstonLoggerService
    * @static
-   * @returns {IWinstonLogger} The singleton instance of WinstonLogger
+   * @returns {IWinstonLoggerService} The singleton instance of WinstonLoggerService
    */
-  public static getInstance(): IWinstonLogger {
-    if (!WinstonLogger.instance) {
-      WinstonLogger.instance = new WinstonLogger()
+  public static getInstance(): IWinstonLoggerService {
+    if (!WinstonLoggerService.instance) {
+      WinstonLoggerService.instance = new WinstonLoggerService()
     }
-    return WinstonLogger.instance
+    return WinstonLoggerService.instance
   }
 
   /**
@@ -399,7 +400,7 @@ export class WinstonLogger implements IWinstonLogger {
 }
 
 // Example usage
-// const logger = WinstonLogger.getInstance()
+// const logger = WinstonLoggerService.getInstance()
 // const contextObj = { module: 'Controller', method: 'GET', route: '/api/v1/resource', action: 'fetch' }
 // const contextArray = ['Controller', 'GET', '/api/v1/resource', 'fetch']
 // const requestId = uuidv4()

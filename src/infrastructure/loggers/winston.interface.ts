@@ -16,10 +16,10 @@
  * @property {string} [action] - Specific action being performed (e.g., 'create', 'validate', 'fetch')
  */
 export interface ILogContext {
-  module?: string // Controller, Service, etc.
-  method?: string // Method name (function or http method)
-  route?: string  // API route
-  action?: string // Action beingn performed
+  module?: string // Component/module (Controller, Service, etc.)
+  method?: string // Method name or HTTP method
+  route?: string  // API route or function path
+  action?: string // Specific action being performed
 }
 
 /**
@@ -41,9 +41,9 @@ export interface ILogParams {
 
 /**
  * Interface for Winston Logger implementation
- * @interface IWinstonLogger
+ * @interface IWinstonLoggerService
  */
-export interface IWinstonLogger {
+export interface IWinstonLoggerService {
   /**
    * Log an informational message
    * @param {string | ILogParams} messageOrParams - Log message string or params object
