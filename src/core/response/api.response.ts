@@ -134,16 +134,6 @@ export class ApiResponse<T> {
 // const setupTestServer = () => {
 //   const container = new Container()
   
-//   class MockApiResponseService implements IApiResponseService {
-//     resolveMessage(options: any): string {
-//       return options.message || options.defaultMessage || 'Message';
-//     }
-//   }
-  
-//   container.bind<IApiResponseService>(DI_TYPES.IApiResponseService).to(MockApiResponseService)
-  
-//   const apiResponseService = container.get<IApiResponseService>(DI_TYPES.IApiResponseService)
-  
 //   const app = express()
 //   app.use(express.json())
   
@@ -151,7 +141,7 @@ export class ApiResponse<T> {
 //   app.get('/api/success', (req: Request, res: Response, next: NextFunction) => {
 //     const response = ApiResponse.success({
 //       messageKey: MESSAGES.SUCCESS,
-//       message: 'Successfully retrieved data',
+//       message: 'Successfully retrieved data', // Translated message from service (example)
 //       data: {
 //         version: '1.0.0',
 //         serverTime: new Date().toISOString(),
@@ -171,7 +161,7 @@ export class ApiResponse<T> {
 //   app.get('/api/error', (req: Request, res: Response) => {
 //     const response = ApiResponse.error({
 //       messageKey: MESSAGES.VALIDATION_ERROR,
-//       message: 'Validation failed for input data',
+//       message: 'Validation failed for input data',  // Translated message (example)
 //       errors: {
 //         username: { 
 //           message: 'Username must be between 3-20 characters',
