@@ -7,15 +7,10 @@
  * @Description         : Export API response interfaces and classes
  */
 export {
-  IApiResponseService,
   IApiResponseMetadata,
   IApiErrorDetails,
   IApiResponseOptions,
 } from '~/core/response/api.response.interface'
-
-export {
-  ApiResponseService,
-} from '~/core/response/api.response.service'
 
 export {
   ApiResponse,

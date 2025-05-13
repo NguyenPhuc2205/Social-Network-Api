@@ -13,14 +13,14 @@ import { AppError, ValidationError } from '~/core/errors'
 import { DI_TYPES } from '~/core/providers'
 import { ApiResponse } from '~/core/response/api.response'
 import { II18nService } from '~/infrastructure/i18n'
-import { ILogContext, IWinstonLogger } from '~/infrastructure/loggers'
+import { ILogContext, IWinstonLoggerService } from '~/infrastructure/loggers'
 import { HTTP_STATUS } from '~/shared/constants'
 import { MESSAGES } from '~/shared/types'
 
 @injectable()
 export class ErrorHandlerMiddleware {
   constructor(
-    @inject(DI_TYPES.IWinstonLogger) private logger: IWinstonLogger,
+    @inject(DI_TYPES.IWinstonLoggerService) private logger: IWinstonLoggerService,
     @inject(DI_TYPES.II18nService) private i18nService: II18nService
   ) {}
 

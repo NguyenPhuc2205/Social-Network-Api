@@ -8,10 +8,9 @@
  */
 
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
-import { IApiResponseMetadata, IApiErrorDetails, IApiResponseOptions, IApiResponseService } from '~/core/response/api.response.interface'
+import { IApiResponseMetadata, IApiErrorDetails, IApiResponseOptions } from '~/core/response/api.response.interface'
 import { MessageKeys, MESSAGES } from '~/shared/types'
-import { inject, injectable } from 'inversify'
-import { DI_TYPES } from '~/core/providers'
+import { injectable } from 'inversify'
 
 /**
  * Standard API response class
@@ -26,7 +25,7 @@ import { DI_TYPES } from '~/core/providers'
 export class ApiResponse<T> {
   public readonly status: 'success' | 'error'
   public readonly messageKey: MessageKeys
-  public readonly message?: string
+  public readonly message: string
   public readonly data?: T
   public readonly code?: string
   public readonly statusCode?: number
@@ -38,22 +37,12 @@ export class ApiResponse<T> {
   /**
    * Creates a new API response
    * @constructor
-   * @param {IApiResponseService} apiResponseService - Service for resolving messages
    * @param {IApiResponseOptions<T>} options - Response options
    */
-  constructor(
-    @inject(DI_TYPES.IApiResponseService) private apiResponseService: IApiResponseService,
-    options: IApiResponseOptions<T>
-  ) {
+  constructor(options: IApiResponseOptions<T>) {
     this.status = options.status
     this.messageKey = options.messageKey
-    this.message = this.apiResponseService.resolveMessage({
-      message: options.message,
-      messageKey: options.messageKey,
-      preferFixedMessage: options.preferFixedMessage,
-      req: options.req,
-      defaultMessage: options.status === 'success' ? 'Operation successful' : 'An error occurred',
-    })
+    this.message = options.message
     this.data = options.data
     this.code = options.code
     this.statusCode = options.statusCode || (options.status === 'success' ? HTTP_STATUS.OK : HTTP_STATUS.BAD_REQUEST)
@@ -67,76 +56,54 @@ export class ApiResponse<T> {
    * Creates a success response
    * @static
    * @template T - Type of data returned in the response
-   * @param {IApiResponseService} apiResponseService - Service for resolving messages
-   * @param {Partial<IApiResponseOptions<T>> & { messageKey: MessageKeys }} options - Success response options
+   * @param {Partial<IApiResponseOptions<T>> & { messageKey: MessageKeys, message: string }} options - Success response options
    * @param {MessageKeys} options.messageKey - Message key for localization (required)
+   * @param {string} options.message - Success message (required)
    * @param {T} [options.data] - Response data
-   * @param {string} [options.message] - Success message (overrides message from messageKey)
-   * @param {boolean} [options.preferFixedMessage] - Whether to prefer fixed message over localized message
    * @param {string} [options.code] - Success code
    * @param {number} [options.statusCode] - HTTP status code
    * @param {IApiResponseMetadata} [options.metadata] - Additional metadata
    * @param {string} [options.requestId] - Request ID for tracing
-   * @param {Request} [options.req] - Express request object for i18n
    * @returns {ApiResponse<T>} Success API response
    */
-  public static success<T>(
-    apiResponseService: IApiResponseService,
-    options: Partial<IApiResponseOptions<T>> & { messageKey: MessageKeys }  
-  ): ApiResponse<T> {
-    return new ApiResponse<T>(
-      apiResponseService,
-      {
-        status: 'success',
-        messageKey: options.messageKey || MESSAGES.SUCCESS,
-        message: options.message,
-        preferFixedMessage: options.preferFixedMessage,
-        data: options.data,
-        code: options.code || RESPONSE_CODES.SUCCESS.code,
-        statusCode: options.statusCode || RESPONSE_CODES.SUCCESS.defaultStatus || HTTP_STATUS.OK,
-        metadata: options.metadata,
-        requestId: options.requestId,
-        req: options.req,
-      }
-    )    
+  public static success<T>(options: Partial<IApiResponseOptions<T>> & { messageKey: MessageKeys, message: string }): ApiResponse<T> {
+    return new ApiResponse<T>({
+      status: 'success',
+      messageKey: options.messageKey || MESSAGES.SUCCESS,
+      message: options.message,
+      data: options.data,
+      code: options.code || RESPONSE_CODES.SUCCESS.code,
+      statusCode: options.statusCode || RESPONSE_CODES.SUCCESS.defaultStatus || HTTP_STATUS.OK,
+      metadata: options.metadata,
+      requestId: options.requestId,
+    })    
   }
 
   /**
    * Creates an error response
    * @static
    * @template T - Type of data returned in the response
-   * @param {IApiResponseService} apiResponseService - Service for resolving messages
-   * @param {Partial<IApiResponseOptions<T>> & { messageKey: MessageKeys }} options - Error response options
-   * @param {string} [options.message] - Error message (overrides message from messageKey)
-   * @param {MessageKeys} options.messageKey - Message key for localization
-   * @param {boolean} [options.preferFixedMessage] - Whether to prefer fixed message over localized message
+   * @param {Partial<IApiResponseOptions<T>> & { messageKey: MessageKeys, message: string }} options - Error response options
+   * @param {MessageKeys} options.messageKey - Message key for localization (required)
+   * @param {string} options.message - Error message (required)
    * @param {string} [options.code] - Error code
    * @param {number} [options.statusCode] - HTTP status code
    * @param {Record<string, IApiErrorDetails>} [options.errors] - Structured validation/error details keyed by field name
    * @param {IApiResponseMetadata} [options.metadata] - Additional metadata
    * @param {string} [options.requestId] - Request ID for tracing
-   * @param {Request} [options.req] - Express request object for i18n
    * @returns {ApiResponse<T>} Error API response
    */
-  public static error<T>(
-    apiResponseService: IApiResponseService,
-    options: Partial<IApiResponseOptions<T>> & { messageKey: MessageKeys }
-  ): ApiResponse<T> {
-    return new ApiResponse<T>(
-      apiResponseService,
-      {
-        status: 'error',
-        messageKey: options.messageKey || MESSAGES.UNKNOWN_ERROR,
-        message: options.message,
-        preferFixedMessage: options.preferFixedMessage,
-        code: options.code || RESPONSE_CODES.INTERNAL_SERVER_ERROR.code,
-        statusCode: options.statusCode || RESPONSE_CODES.INTERNAL_SERVER_ERROR.defaultStatus || HTTP_STATUS.INTERNAL_SERVER_ERROR,
-        errors: options.errors,
-        metadata: options.metadata,
-        requestId: options.requestId,
-        req: options.req,
-      }
-    )
+  public static error<T>(options: Partial<IApiResponseOptions<T>> & { messageKey: MessageKeys, message: string }): ApiResponse<T> {
+    return new ApiResponse<T>({
+      status: 'error',
+      messageKey: options.messageKey || MESSAGES.UNKNOWN_ERROR,
+      message: options.message,
+      code: options.code || RESPONSE_CODES.INTERNAL_SERVER_ERROR.code,
+      statusCode: options.statusCode || RESPONSE_CODES.INTERNAL_SERVER_ERROR.defaultStatus || HTTP_STATUS.INTERNAL_SERVER_ERROR,
+      errors: options.errors,
+      metadata: options.metadata,
+      requestId: options.requestId,
+    })
   }
 
   /**
@@ -182,7 +149,7 @@ export class ApiResponse<T> {
   
 //   // Example endpoint with success response
 //   app.get('/api/success', (req: Request, res: Response, next: NextFunction) => {
-//     const response = ApiResponse.success(apiResponseService, {
+//     const response = ApiResponse.success({
 //       messageKey: MESSAGES.SUCCESS,
 //       message: 'Successfully retrieved data',
 //       data: {
@@ -202,7 +169,7 @@ export class ApiResponse<T> {
   
 //   // Example endpoint with error response
 //   app.get('/api/error', (req: Request, res: Response) => {
-//     const response = ApiResponse.error(apiResponseService, {
+//     const response = ApiResponse.error({
 //       messageKey: MESSAGES.VALIDATION_ERROR,
 //       message: 'Validation failed for input data',
 //       errors: {
