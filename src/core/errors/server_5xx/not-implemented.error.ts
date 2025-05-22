@@ -10,7 +10,7 @@
 import { injectable } from 'inversify'
 import { AppError } from '~/core/errors'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
-import { MessageKeys, MESSAGES } from '~/shared/types'
+import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Not Implemented Error (501)
@@ -30,16 +30,15 @@ import { MessageKeys, MESSAGES } from '~/shared/types'
  * ```
  */
 @injectable()
-export class NotImplementedError extends AppError {
-  constructor(options: {
+export class NotImplementedError extends AppError {  constructor(options: {
     message: string,
-    messageKey?: MessageKeys,
+    translationKey?: TranslationKeys,
     code?: string,
     metadata?: Record<string, any>,
     requestId?: string
   }) {
     super({
-      messageKey: options.messageKey || MESSAGES.NOT_IMPLEMENTED || 'common:NOT_IMPLEMENTED',
+      translationKey: options.translationKey || TRANSLATION_KEYS.NOT_IMPLEMENTED || 'common:NOT_IMPLEMENTED',
       message: options.message,
       statusCode: HTTP_STATUS.NOT_IMPLEMENTED,
       code: options.code || 'NOT_IMPLEMENTED',

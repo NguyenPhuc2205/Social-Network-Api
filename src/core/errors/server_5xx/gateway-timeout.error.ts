@@ -10,7 +10,7 @@
 import { injectable } from 'inversify'
 import { AppError } from '~/core/errors'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
-import { MessageKeys, MESSAGES } from '~/shared/types'
+import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Gateway Timeout Error (504)
@@ -32,16 +32,15 @@ import { MessageKeys, MESSAGES } from '~/shared/types'
  * ```
  */
 @injectable()
-export class GatewayTimeoutError extends AppError {
-  constructor(options: {
+export class GatewayTimeoutError extends AppError {  constructor(options: {
     message: string,
-    messageKey?: MessageKeys,
+    translationKey?: TranslationKeys,
     code?: string,
     metadata?: Record<string, any>,
     requestId?: string
   }) {
     super({
-      messageKey: options.messageKey || MESSAGES.GATEWAY_TIMEOUT || 'common:GATEWAY_TIMEOUT',
+      translationKey: options.translationKey || TRANSLATION_KEYS.GATEWAY_TIMEOUT || 'common:GATEWAY_TIMEOUT',
       message: options.message,
       statusCode: HTTP_STATUS.GATEWAY_TIMEOUT,
       code: options.code || 'GATEWAY_TIMEOUT',

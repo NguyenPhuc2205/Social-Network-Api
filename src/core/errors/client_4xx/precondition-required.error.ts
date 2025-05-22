@@ -10,7 +10,7 @@
 import { injectable } from 'inversify'
 import { AppError } from '~/core/errors'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
-import { MessageKeys, MESSAGES } from '~/shared/types'
+import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Precondition Required Error (428)
@@ -34,16 +34,15 @@ import { MessageKeys, MESSAGES } from '~/shared/types'
  * ```
  */
 @injectable()
-export class PreconditionRequiredError extends AppError {
-  constructor(options: {
+export class PreconditionRequiredError extends AppError {  constructor(options: {
     message: string,
-    messageKey?: MessageKeys,
+    translationKey?: TranslationKeys,
     code?: string,
     metadata?: Record<string, any>,
     requestId?: string
   }) {
     super({
-      messageKey: options.messageKey || MESSAGES.PRECONDITION_REQUIRED || 'common:PRECONDITION_REQUIRED',
+      translationKey: options.translationKey || TRANSLATION_KEYS.PRECONDITION_REQUIRED || 'common:PRECONDITION_REQUIRED',
       message: options.message,
       statusCode: HTTP_STATUS.PRECONDITION_REQUIRED,
       code: options.code || 'PRECONDITION_REQUIRED',

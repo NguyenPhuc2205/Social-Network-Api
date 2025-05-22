@@ -10,7 +10,7 @@
 import { injectable } from 'inversify'
 import { AppError } from '~/core/errors'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
-import { MessageKeys, MESSAGES } from '~/shared/types'
+import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Method Not Allowed Error (405)
@@ -36,7 +36,7 @@ import { MessageKeys, MESSAGES } from '~/shared/types'
 export class MethodNotAllowedError extends AppError {
   constructor(options: {
     message: string,
-    messageKey?: MessageKeys,
+    translationKey?: TranslationKeys,
     code?: string,
     metadata?: Record<string, any>,
     cause?: Error,
@@ -44,7 +44,7 @@ export class MethodNotAllowedError extends AppError {
   }) {
     super({
       message: options.message,
-      messageKey: options.messageKey || MESSAGES.METHOD_NOT_ALLOWED,
+      translationKey: options.translationKey || TRANSLATION_KEYS.METHOD_NOT_ALLOWED,
       statusCode: HTTP_STATUS.METHOD_NOT_ALLOWED,
       code: options.code || RESPONSE_CODES.METHOD_NOT_ALLOWED?.code || 'METHOD_NOT_ALLOWED',
       metadata: options.metadata,

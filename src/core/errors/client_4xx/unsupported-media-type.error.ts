@@ -10,7 +10,7 @@
 import { injectable } from 'inversify'
 import { AppError } from '~/core/errors'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
-import { MessageKeys, MESSAGES } from '~/shared/types'
+import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Unsupported Media Type Error (415)
@@ -30,16 +30,15 @@ import { MessageKeys, MESSAGES } from '~/shared/types'
  * ```
  */
 @injectable()
-export class UnsupportedMediaTypeError extends AppError {
-  constructor(options: {
+export class UnsupportedMediaTypeError extends AppError {  constructor(options: {
     message: string,
-    messageKey?: MessageKeys,
+    translationKey?: TranslationKeys,
     code?: string,
     metadata?: Record<string, any>,
     requestId?: string
   }) {
     super({
-      messageKey: options.messageKey || MESSAGES.UNSUPPORTED_MEDIA_TYPE || 'common:UNSUPPORTED_MEDIA_TYPE',
+      translationKey: options.translationKey || TRANSLATION_KEYS.UNSUPPORTED_MEDIA_TYPE || 'common:UNSUPPORTED_MEDIA_TYPE',
       message: options.message,
       statusCode: HTTP_STATUS.UNSUPPORTED_MEDIA_TYPE,
       code: options.code || 'UNSUPPORTED_MEDIA_TYPE',

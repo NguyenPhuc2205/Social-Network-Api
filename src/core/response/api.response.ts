@@ -2,14 +2,14 @@
  * @Author       : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date         : 2025-02-12 16:52:32
  * @LastEditors  : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime : 2025-05-03 16:25:56
+ * @LastEditTime : 2025-05-14 00:22:08
  * @FilePath     : /server/src/core/response/api.response.ts
  * @Description  : API response class for standardizing API responses
  */
 
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
 import { IApiResponseMetadata, IApiErrorDetails, IApiResponseOptions } from '~/core/response/api.response.interface'
-import { MessageKeys, MESSAGES } from '~/shared/types'
+import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 import { injectable } from 'inversify'
 
 /**
@@ -24,7 +24,7 @@ import { injectable } from 'inversify'
 @injectable()
 export class ApiResponse<T> {
   public readonly status: 'success' | 'error'
-  public readonly messageKey: MessageKeys
+  public readonly translationKey: TranslationKeys
   public readonly message: string
   public readonly data?: T
   public readonly code?: string
@@ -41,7 +41,7 @@ export class ApiResponse<T> {
    */
   constructor(options: IApiResponseOptions<T>) {
     this.status = options.status
-    this.messageKey = options.messageKey
+    this.translationKey = options.translationKey
     this.message = options.message
     this.data = options.data
     this.code = options.code
@@ -56,8 +56,8 @@ export class ApiResponse<T> {
    * Creates a success response
    * @static
    * @template T - Type of data returned in the response
-   * @param {Partial<IApiResponseOptions<T>> & { messageKey: MessageKeys, message: string }} options - Success response options
-   * @param {MessageKeys} options.messageKey - Message key for localization (required)
+   * @param {Partial<IApiResponseOptions<T>> & { translationKey: TranslationKeys, message: string }} options - Success response options
+   * @param {TranslationKeys} options.translationKey - Message key for localization (required)
    * @param {string} options.message - Success message (required)
    * @param {T} [options.data] - Response data
    * @param {string} [options.code] - Success code
@@ -66,10 +66,10 @@ export class ApiResponse<T> {
    * @param {string} [options.requestId] - Request ID for tracing
    * @returns {ApiResponse<T>} Success API response
    */
-  public static success<T>(options: Partial<IApiResponseOptions<T>> & { messageKey: MessageKeys, message: string }): ApiResponse<T> {
+  public static success<T>(options: Partial<IApiResponseOptions<T>> & { translationKey: TranslationKeys, message: string }): ApiResponse<T> {
     return new ApiResponse<T>({
       status: 'success',
-      messageKey: options.messageKey || MESSAGES.SUCCESS,
+      translationKey: options.translationKey || TRANSLATION_KEYS.SUCCESS,
       message: options.message,
       data: options.data,
       code: options.code || RESPONSE_CODES.SUCCESS.code,
@@ -83,8 +83,8 @@ export class ApiResponse<T> {
    * Creates an error response
    * @static
    * @template T - Type of data returned in the response
-   * @param {Partial<IApiResponseOptions<T>> & { messageKey: MessageKeys, message: string }} options - Error response options
-   * @param {MessageKeys} options.messageKey - Message key for localization (required)
+   * @param {Partial<IApiResponseOptions<T>> & { translationKey: TranslationKeys, message: string }} options - Error response options
+   * @param {TranslationKeys} options.translationKey - Message key for localization (required)
    * @param {string} options.message - Error message (required)
    * @param {string} [options.code] - Error code
    * @param {number} [options.statusCode] - HTTP status code
@@ -93,16 +93,42 @@ export class ApiResponse<T> {
    * @param {string} [options.requestId] - Request ID for tracing
    * @returns {ApiResponse<T>} Error API response
    */
-  public static error<T>(options: Partial<IApiResponseOptions<T>> & { messageKey: MessageKeys, message: string }): ApiResponse<T> {
+  public static error<T>(options: Partial<IApiResponseOptions<T>> & { translationKey: TranslationKeys, message: string }): ApiResponse<T> {
     return new ApiResponse<T>({
       status: 'error',
-      messageKey: options.messageKey || MESSAGES.UNKNOWN_ERROR,
+      translationKey: options.translationKey || TRANSLATION_KEYS.UNKNOWN_ERROR,
       message: options.message,
       code: options.code || RESPONSE_CODES.INTERNAL_SERVER_ERROR.code,
       statusCode: options.statusCode || RESPONSE_CODES.INTERNAL_SERVER_ERROR.defaultStatus || HTTP_STATUS.INTERNAL_SERVER_ERROR,
       errors: options.errors,
       metadata: options.metadata,
       requestId: options.requestId,
+    })
+  }
+
+  public static paginated<T>(options: {
+    data: T[]
+    total: number,
+    page: number,
+    limit: number,
+    message: string,
+    translationKey: TranslationKeys,
+    requestId?: string,
+  }): ApiResponse<T[]> {
+    const totalPages = options.limit > 0 ? Math.ceil(options.total / options.limit) : 1
+    
+    return ApiResponse.success({
+      translationKey: options.translationKey || TRANSLATION_KEYS.SUCCESS,
+      message: options.message || 'Successfully retrieved data',
+      data: options.data,
+      metadata: {
+        total: options.total,
+        totalPages,
+        page: options.page,
+        limit: options.limit,
+        hasNextPage: options.page < totalPages,
+        hasPreviousPage: options.page > 1,
+      }
     })
   }
 
@@ -114,7 +140,7 @@ export class ApiResponse<T> {
     return {
       status: this.status,  // 'success' or 'error'
       message: this.message,
-      messageKey: this.messageKey,  // Key for localization
+      translationKey: this.translationKey,  // Key for localization
       data: this.data,
       code: this.code,
       statusCode: this.statusCode,
@@ -140,7 +166,7 @@ export class ApiResponse<T> {
 //   // Example endpoint with success response
 //   app.get('/api/success', (req: Request, res: Response, next: NextFunction) => {
 //     const response = ApiResponse.success({
-//       messageKey: MESSAGES.SUCCESS,
+//       translationKey: TRANSLATION_KEYS.SUCCESS,
 //       message: 'Successfully retrieved data', // Translated message from service (example)
 //       data: {
 //         version: '1.0.0',
@@ -160,7 +186,7 @@ export class ApiResponse<T> {
 //   // Example endpoint with error response
 //   app.get('/api/error', (req: Request, res: Response) => {
 //     const response = ApiResponse.error({
-//       messageKey: MESSAGES.VALIDATION_ERROR,
+//       translationKey: TRANSLATION_KEYS.VALIDATION_ERROR,
 //       message: 'Validation failed for input data',  // Translated message (example)
 //       errors: {
 //         username: { 

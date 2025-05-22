@@ -2,13 +2,14 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-05-03 23:22:37
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-04 10:35:48
+ * @LastEditTime  : 2025-05-13 16:33:02
  * @FilePath      : /server/src/infrastructure/i18n/i18n.interface.ts
  * @Description   : Interface for i18n (internationalization) service
  */
 
 import { Request } from 'express'
 import { TFunction } from 'i18next'
+import { TranslationKeys } from '~/shared/types'
 
 /**
  * Type definition for interpolation values used in translations
@@ -90,4 +91,29 @@ export interface II18nService {
    * This affects all future translations until changed again.
    */
   changeLanguage(language: string): Promise<void>
+
+  /**
+   * Resolves a message using translation key or fallback to provided message
+   * @param {Object} options - Options for resolving the message
+   * @param {TranslationKeys} options.translationKey - Key to use for translation lookup
+   * @param {string} [options.message] - Optional fallback message if translation fails
+   * @param {Request} [options.req] - Optional Express request object for language detection
+   * @param {string} [options.defaultMessage] - Optional default message if both translation and message fail
+   * @param {InterpolationValues} [options.interpolationValues] - Optional values for interpolation within the translation
+   * @param {boolean} [options.prioritizeTranslated=true] - Whether to prioritize translated text over provided message
+   * @returns {string} Resolved message in appropriate language
+   * @description
+   * Resolves messages using a flexible priority system. If prioritizeTranslated is true,
+   * it first attempts to find a translation, then falls back to the provided message,
+   * and finally to the default message. If prioritizeTranslated is false, it uses the 
+   * provided message first, then attempts translation, and finally falls back to the default.
+   */
+  resolveMessage(options: {
+    translationKey: TranslationKeys
+    message?: string
+    req?: Request
+    defaultMessage?: string
+    interpolationValues?: InterpolationValues
+    prioritizeTranslated?: boolean
+  }): string
 }

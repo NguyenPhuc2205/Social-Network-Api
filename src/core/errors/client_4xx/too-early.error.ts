@@ -10,7 +10,7 @@
 import { injectable } from 'inversify'
 import { AppError } from '~/core/errors'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
-import { MessageKeys, MESSAGES } from '~/shared/types'
+import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Too Early Error (425)
@@ -30,16 +30,15 @@ import { MessageKeys, MESSAGES } from '~/shared/types'
  * ```
  */
 @injectable()
-export class TooEarlyError extends AppError {
-  constructor(options: {
+export class TooEarlyError extends AppError {  constructor(options: {
     message: string,
-    messageKey?: MessageKeys,
+    translationKey?: TranslationKeys,
     code?: string,
     metadata?: Record<string, any>,
     requestId?: string
   }) {
     super({
-      messageKey: options.messageKey || MESSAGES.TOO_EARLY || 'common:TOO_EARLY',
+      translationKey: options.translationKey || TRANSLATION_KEYS.TOO_EARLY || 'common:TOO_EARLY',
       message: options.message,
       statusCode: HTTP_STATUS.TOO_EARLY,
       code: options.code || 'TOO_EARLY',

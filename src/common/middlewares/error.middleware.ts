@@ -15,7 +15,7 @@ import { ApiResponse } from '~/core/response/api.response'
 import { II18nService } from '~/infrastructure/i18n'
 import { ILogContext, IWinstonLoggerService } from '~/infrastructure/loggers'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
-import { MESSAGES } from '~/shared/types'
+import { TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Global error handler middleware for Express applications
@@ -63,7 +63,7 @@ export class ErrorHandlerMiddleware {
     if (error instanceof AppError) {
       const response = ApiResponse.error({
         message: error.message,
-        messageKey: error.messageKey,
+        translationKey: error.translationKey,
         code: error.code,
         statusCode: error.statusCode,
         requestId,
@@ -80,7 +80,7 @@ export class ErrorHandlerMiddleware {
     try {
       // Attempt to translate the error message using i18n
       translatedMessage = this.i18nService.translate(
-        MESSAGES.INTERNAL_SERVER_ERROR, 
+        TRANSLATION_KEYS.INTERNAL_SERVER_ERROR, 
         req
       )
     } catch (err) {
@@ -104,7 +104,7 @@ export class ErrorHandlerMiddleware {
     // Create generic error response
     const response = ApiResponse.error({
       message: translatedMessage,
-      messageKey: MESSAGES.INTERNAL_SERVER_ERROR,
+      translationKey: TRANSLATION_KEYS.INTERNAL_SERVER_ERROR,
       code: RESPONSE_CODES.INTERNAL_SERVER_ERROR.code,
       statusCode: HTTP_STATUS.INTERNAL_SERVER_ERROR,
       requestId,
@@ -162,7 +162,7 @@ export class ErrorHandlerMiddleware {
         requestId,
         metadata: {
           statusCode: HTTP_STATUS.INTERNAL_SERVER_ERROR,
-          code: MESSAGES.INTERNAL_SERVER_ERROR,
+          code: TRANSLATION_KEYS.INTERNAL_SERVER_ERROR,
           metadata: error.metadata,
           timestamp: error.timestamp, // Ensure consistent casing
         },
@@ -211,12 +211,12 @@ export class ErrorHandlerMiddleware {
 //   app.get('/bad-request', (req: Request, res: Response, next: NextFunction) => {
 //     const error = new AppError({
 //       message: i18nService.resolveMessage({
-//         messageKey: MESSAGES.BAD_REQUEST,
+//         translationKey: TRANSLATIONS.BAD_REQUEST,
 //         req,
 //         defaultMessage: 'Bad request',
 //       }),
 //       statusCode: HTTP_STATUS.BAD_REQUEST,
-//       messageKey: MESSAGES.BAD_REQUEST,
+//       translationKey: TRANSLATIONS.BAD_REQUEST,
 //       code: RESPONSE_CODES.BAD_REQUEST.code,
 //       metadata: { 
 //         requestParams: req.query,
@@ -231,7 +231,7 @@ export class ErrorHandlerMiddleware {
 //     const validationErrors = {
 //       username: {
 //         message: 'Username must be at least 3 characters',
-//         messageKey: MESSAGES.USERNAME_LENGTH,
+//         translationKey: TRANSLATION_KEYS.USERNAME_LENGTH,
 //         path: ['username'],
 //         code: 'MIN_LENGTH',
 //         location: 'body' as RequestSource,
@@ -239,7 +239,7 @@ export class ErrorHandlerMiddleware {
 //       },
 //       email: {
 //         message: 'Invalid email format',
-//         messageKey: MESSAGES.EMAIL_INVALID,
+//         translationKey: TRANSLATION_KEYS.EMAIL_INVALID,
 //         path: ['email'],
 //         code: 'INVALID_FORMAT',
 //         location: 'body' as RequestSource,
@@ -249,7 +249,7 @@ export class ErrorHandlerMiddleware {
     
 //     const error = new ValidationError({
 //       message: 'Validation failed',
-//       messageKey: MESSAGES.VALIDATION_ERROR,
+//       translationKey: TRANSLATION_KEYS.VALIDATION_ERROR,
 //       errors: validationErrors,
 //       metadata: { fields: Object.keys(validationErrors) }
 //     })
@@ -281,7 +281,7 @@ export class ErrorHandlerMiddleware {
 //     const error = new AppError({
 //       message: 'You do not have permission to access this resource',
 //       statusCode: HTTP_STATUS.FORBIDDEN,
-//       messageKey: MESSAGES.FORBIDDEN,
+//       translationKey: TRANSLATION_KEYS.FORBIDDEN,
 //       code: RESPONSE_CODES.FORBIDDEN.code,
 //       metadata: { 
 //         requiredRole: 'admin',
@@ -296,7 +296,7 @@ export class ErrorHandlerMiddleware {
 //     const error = new AppError({
 //       message: 'Resource not found',
 //       statusCode: HTTP_STATUS.NOT_FOUND,
-//       messageKey: MESSAGES.NOT_FOUND,
+//       translationKey: TRANSLATION_KEYS.NOT_FOUND,
 //       code: RESPONSE_CODES.NOT_FOUND.code,
 //       metadata: { 
 //         resourceId: req.query.id || 'unknown'
@@ -310,7 +310,7 @@ export class ErrorHandlerMiddleware {
 //     const error = new AppError({
 //       message: 'Internal server error occurred',
 //       statusCode: HTTP_STATUS.INTERNAL_SERVER_ERROR,
-//       messageKey: MESSAGES.INTERNAL_SERVER_ERROR,
+//       translationKey: TRANSLATION_KEYS.INTERNAL_SERVER_ERROR,
 //       code: RESPONSE_CODES.INTERNAL_SERVER_ERROR.code,
 //       metadata: { 
 //         cause: 'Server configuration issue',
@@ -335,7 +335,7 @@ export class ErrorHandlerMiddleware {
 //     const error = new AppError({
 //       message: `Route ${req.method} ${req.originalUrl} not found`,
 //       statusCode: HTTP_STATUS.NOT_FOUND,
-//       messageKey: MESSAGES.NOT_FOUND,
+//       translationKey: TRANSLATION_KEYS.NOT_FOUND,
 //       code: RESPONSE_CODES.NOT_FOUND.code,
 //       metadata: { 
 //         method: req.method,

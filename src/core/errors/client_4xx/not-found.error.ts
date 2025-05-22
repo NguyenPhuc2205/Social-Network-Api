@@ -10,7 +10,7 @@
 import { injectable } from 'inversify'
 import { AppError } from '~/core/errors'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
-import { MessageKeys, MESSAGES } from '~/shared/types'
+import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Not Found Error (404)
@@ -33,14 +33,14 @@ import { MessageKeys, MESSAGES } from '~/shared/types'
 export class NotFoundError extends AppError {
   constructor(options: {
     message: string,
-    messageKey?: MessageKeys,
+    translationKey?: TranslationKeys,
     code?: string,
     metadata?: Record<string, any>,
     requestId?: string
   }) {
     super({
       message: options.message,
-      messageKey: MESSAGES.NOT_FOUND || options.messageKey || 'common:NOT_FOUND',
+      translationKey: TRANSLATION_KEYS.NOT_FOUND || options.translationKey || 'common:NOT_FOUND',
       statusCode: HTTP_STATUS.NOT_FOUND,
       code: options.code || RESPONSE_CODES.NOT_FOUND.code || 'NOT_FOUND',
       metadata: options.metadata,

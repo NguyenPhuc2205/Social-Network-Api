@@ -7,8 +7,7 @@
  * @Description   : API response interface for standardizing API responses and API response services
  */
 
-import { Request } from 'express'
-import { MessageKeys } from '~/shared/types'
+import { TranslationKeys } from '~/shared/types'
 
 /**
  * Interface for API response metadata
@@ -46,7 +45,7 @@ export interface IApiErrorDetails {
  * @interface IApiResponseOptions
  * @template T - Type of data returned in the response
  * @property {'success' | 'error'} status - Response status indicating success or failure
- * @property {MessageKeys} messageKey - Key for message localization/internationalization
+ * @property {TranslationKeys} translationKey - Key for message localization/internationalization
  * @property {string} message - Human-readable message describing the response
  * @property {T} [data] - Response payload data (typically present in success responses)
  * @property {string} [code] - Custom code for identifying specific response types
@@ -58,7 +57,7 @@ export interface IApiErrorDetails {
  */
 export interface IApiResponseOptions<T> {
   status: 'success' | 'error'
-  messageKey: MessageKeys
+  translationKey: TranslationKeys
   message: string
   data?: T
   code?: string

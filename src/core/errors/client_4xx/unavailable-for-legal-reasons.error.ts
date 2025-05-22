@@ -10,7 +10,7 @@
 import { injectable } from 'inversify'
 import { AppError } from '~/core/errors'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
-import { MessageKeys, MESSAGES } from '~/shared/types'
+import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Unavailable For Legal Reasons Error (451)
@@ -32,16 +32,15 @@ import { MessageKeys, MESSAGES } from '~/shared/types'
  * ```
  */
 @injectable()
-export class UnavailableForLegalReasonsError extends AppError {
-  constructor(options: {
+export class UnavailableForLegalReasonsError extends AppError {  constructor(options: {
     message: string,
-    messageKey?: MessageKeys,
+    translationKey?: TranslationKeys,
     code?: string,
     metadata?: Record<string, any>,
     requestId?: string
   }) {
     super({
-      messageKey: options.messageKey || MESSAGES.UNAVAILABLE_FOR_LEGAL_REASONS || 'common:UNAVAILABLE_FOR_LEGAL_REASONS',
+      translationKey: options.translationKey || TRANSLATION_KEYS.UNAVAILABLE_FOR_LEGAL_REASONS || 'common:UNAVAILABLE_FOR_LEGAL_REASONS',
       message: options.message,
       statusCode: HTTP_STATUS.UNAVAILABLE_FOR_LEGAL_REASONS,
       code: options.code || 'UNAVAILABLE_FOR_LEGAL_REASONS',

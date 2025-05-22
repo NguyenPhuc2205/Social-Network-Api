@@ -2,15 +2,22 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-05-03 23:22:37
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-07 00:17:20
+ * @LastEditTime  : 2025-05-14 22:54:28
  * @FilePath      : /server/src/infrastructure/i18n/i18n.service.ts
  * @Description   : Implementation of the I18n service for internationalization
  */
 
 import { Request } from 'express'
+import { stat } from 'fs'
 import i18next, { TFunction } from 'i18next'
-import { injectable } from 'inversify'
+import { inject, injectable } from 'inversify'
+import { getCallerLocation } from '~/common/helpers'
+import { AppError } from '~/core/errors'
+import { DI_TYPES } from '~/core/providers'
 import { II18nService, InterpolationValues } from '~/infrastructure/i18n/i18n.interface'
+import { IWinstonLoggerService } from '~/infrastructure/loggers'
+import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
+import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Service implementation for internationalization (i18n)
@@ -34,6 +41,39 @@ export class I18nService implements II18nService {
    * Falls back to this language when language detection fails or language is not specified
    */
   private defaultLanguage: string = 'en'
+
+  /**
+   * Default message to use when no message is available
+   * 
+   * @private
+   * @static
+   * @type {string}
+   * @default 'Default message'
+   * @description
+   * Used as a last resort fallback when no translation and no provided message is available
+   */
+  private static DEFAULT_MESSAGE: string = 'Default message'
+
+  /**
+   * Constructor for the I18nService
+   * 
+   * @constructor
+   * @throws {AppError} Throws an error if i18next is not initialized
+   * @description
+   * Validates that i18next is properly initialized before allowing the service to be used.
+   * This prevents unexpected behavior that would occur if translations were attempted
+   * before the i18next library was ready.
+   */
+  constructor() {
+    if (!i18next.isInitialized) {
+      throw new AppError({
+        translationKey: TRANSLATION_KEYS.INTERNAL_SERVER_ERROR,
+        message: 'i18next is not initialized.',
+        statusCode: 500,
+        code: 'I18N_NOT_INITIALIZED',
+      })
+    }
+  }
 
   /**
    * Gets a translation function (t) for the specified request and language
@@ -121,10 +161,110 @@ export class I18nService implements II18nService {
     const supportedLanguages = i18next.options.supportedLngs
     
     if (!Array.isArray(supportedLanguages) || !supportedLanguages.includes(language)) {
-      throw new Error(`Language ${language} is not supported`)
+      throw new AppError({
+        translationKey: TRANSLATION_KEYS.BAD_REQUEST,
+        message: `Language ${language} is not supported`,
+        statusCode: HTTP_STATUS.BAD_REQUEST,
+        code: RESPONSE_CODES.BAD_REQUEST.code,
+      })
     }
-    
-    await i18next.changeLanguage(language)
+
+    try {
+      await i18next.changeLanguage(language)
+    } catch (error) {
+      throw new AppError({
+        translationKey: TRANSLATION_KEYS.INTERNAL_SERVER_ERROR,
+        message: `Failed to change language`,
+        statusCode: HTTP_STATUS.INTERNAL_SERVER_ERROR,
+        code: RESPONSE_CODES.INTERNAL_SERVER_ERROR.code,
+      })
+    }
+  }
+
+  /**
+   * Resolves a message using translation key or fallback to provided message
+   * 
+   * @param {Object} options - Options for resolving the message
+   * @param {TranslationKeys} options.translationKey - Key to use for translation lookup
+   * @param {string} [options.message] - Optional fallback message if translation fails
+   * @param {Request} [options.req] - Optional Express request object for language detection
+   * @param {string} [options.defaultMessage=DEFAULT_MESSAGE] - Optional default message if both translation and message fail
+   * @param {InterpolationValues} [options.interpolationValues] - Optional values for interpolation within the translation
+   * @param {boolean} [options.prioritizeTranslated=true] - Whether to prioritize translated text over provided message
+   * @returns {string} Resolved message in appropriate language
+   * @description
+   * Resolves messages using a flexible priority system based on available translations and preferences.
+   * This is particularly useful for error messages that may have both system-defined translations
+   * and custom overrides from API handlers.
+   * 
+   * @example
+   * return new ApiResponse({
+   *   code: RESPONSE_CODES.SUCCESS.code,
+   *   message: i18nService.resolveMessage({
+   *     translationKey: TRANSLATION_KEYS.USER_CREATED,
+   *     message: 'User profile created successfully',
+   *     req: req,
+   *     interpolationValues: { username: user.username }
+   *   })
+   * })
+   * 
+   * throw new AppError({
+   *   translationKey: TRANSLATION_KEYS.VALIDATION_ERROR,
+   *   message: 'Email format is invalid',
+   *   prioritizeTranslated: false
+   * })
+   */
+  public resolveMessage(options: {
+    translationKey: TranslationKeys,
+    message?: string,
+    req?: Request,
+    defaultMessage?: string,
+    interpolationValues?: InterpolationValues,
+    prioritizeTranslated?: boolean
+  }): string {
+    const {
+      translationKey,
+      message,
+      req,
+      defaultMessage = I18nService.DEFAULT_MESSAGE,
+      interpolationValues,
+      prioritizeTranslated = true
+    } = options
+
+    if (!translationKey) {
+      return message?.trim() || defaultMessage
+    }
+
+    /**
+     * Internal helper function to safely attempt translation
+     * 
+     * @returns {string|null} Translated message or null if translation failed
+     * @description
+     * Attempts to translate the provided key and returns the result if successful.
+     * Returns null if translation fails or if the key was returned unchanged
+     * (indicating i18next didn't find a matching translation).
+     */
+    const translateMessage = (): string | null => {
+      try {
+        // Translate the message key using translate method
+        const translatedMessage = this.translate(translationKey, req, interpolationValues)
+        // If i18next doesn't find a translation, it returns the key unchanged
+        return translatedMessage !== translationKey ? translatedMessage : null
+      } catch (error) {
+        // Gracefully handle any translation errors
+        return null
+      }
+    }
+
+    if (prioritizeTranslated) {
+      const translatedMessage = translateMessage();
+      if (translatedMessage) return translatedMessage;
+      return message?.trim() || defaultMessage;
+    } else {
+      if (message?.trim()) return message;
+      const translatedMessage = translateMessage();
+      return translatedMessage || defaultMessage;
+    }
   }
 }
 

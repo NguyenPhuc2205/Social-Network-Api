@@ -10,7 +10,7 @@
 import { injectable } from 'inversify'
 import { AppError } from '~/core/errors/app.error'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
-import { MessageKeys, MESSAGES } from '~/shared/types'
+import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Service Unavailable Error (503)
@@ -40,14 +40,14 @@ import { MessageKeys, MESSAGES } from '~/shared/types'
 export class ServiceUnavailableError extends AppError {
   constructor(options: {
     message: string,
-    messageKey?: MessageKeys,
+    translationKey?: TranslationKeys,
     code?: string,
     metadata?: Record<string, any>,
     requestId?: string
   }) {
     super({
       message: options.message,
-      messageKey: options.messageKey || MESSAGES.SERVICE_UNAVAILABLE || 'common:SERVICE_UNAVAILABLE',
+      translationKey: options.translationKey || TRANSLATION_KEYS.SERVICE_UNAVAILABLE || 'common:SERVICE_UNAVAILABLE',
       statusCode: HTTP_STATUS.SERVICE_UNAVAILABLE,
       code: options.code || RESPONSE_CODES.SERVICE_UNAVAILABLE.code || 'SERVICE_UNAVAILABLE',
       metadata: options.metadata,

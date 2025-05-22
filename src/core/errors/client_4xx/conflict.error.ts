@@ -10,7 +10,7 @@
 import { injectable } from 'inversify'
 import { AppError } from '~/core/errors'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
-import { MessageKeys, MESSAGES } from '~/shared/types'
+import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Conflict Error (409)
@@ -33,13 +33,13 @@ import { MessageKeys, MESSAGES } from '~/shared/types'
 export class ConflictError extends AppError {
   constructor(options: {
     message: string,
-    messageKey?: MessageKeys,
+    translationKey?: TranslationKeys,
     code?: string,
     metadata?: Record<string, any>,
     requestId?: string
   }) {
     super({
-      messageKey: options.messageKey || MESSAGES.CONFLICT || 'common:CONFLICT',
+      translationKey: options.translationKey || TRANSLATION_KEYS.CONFLICT || 'common:CONFLICT',
       message: options.message,
       statusCode: HTTP_STATUS.CONFLICT,
       code: options.code || RESPONSE_CODES.CONFLICT.code || 'CONFLICT',

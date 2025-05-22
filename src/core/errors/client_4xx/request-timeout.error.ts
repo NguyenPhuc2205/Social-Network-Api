@@ -10,7 +10,7 @@
 import { injectable } from 'inversify'
 import { AppError } from '~/core/errors'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
-import { MessageKeys, MESSAGES } from '~/shared/types'
+import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Request Timeout Error (408)
@@ -32,13 +32,13 @@ import { MessageKeys, MESSAGES } from '~/shared/types'
 export class RequestTimeoutError extends AppError {
   constructor(options: {
     message: string,
-    messageKey?: MessageKeys,
+    translationKey?: TranslationKeys,
     code?: string,
     metadata?: Record<string, any>,
     requestId?: string
   }) {
     super({
-      messageKey: options.messageKey || MESSAGES.REQUEST_TIMEOUT || 'common:REQUEST_TIMEOUT',
+      translationKey: options.translationKey || TRANSLATION_KEYS.REQUEST_TIMEOUT || 'common:REQUEST_TIMEOUT',
       message: options.message,
       statusCode: HTTP_STATUS.REQUEST_TIMEOUT,
       code: options.code || 'REQUEST_TIMEOUT',

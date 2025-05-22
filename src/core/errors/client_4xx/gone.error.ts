@@ -10,7 +10,7 @@
 import { injectable } from 'inversify'
 import { AppError } from '~/core/errors'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
-import { MessageKeys, MESSAGES } from '~/shared/types'
+import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Gone Error (410)
@@ -32,13 +32,13 @@ import { MessageKeys, MESSAGES } from '~/shared/types'
 export class GoneError extends AppError {
   constructor(options: {
     message: string,
-    messageKey?: MessageKeys,
+    translationKey?: TranslationKeys,
     code?: string,
     metadata?: Record<string, any>,
     requestId?: string
   }) {
     super({
-      messageKey: options.messageKey || MESSAGES.GONE || 'common:GONE',
+      translationKey: options.translationKey || TRANSLATION_KEYS.GONE || 'common:GONE',
       message: options.message,
       statusCode: HTTP_STATUS.GONE,
       code: options.code || 'GONE',

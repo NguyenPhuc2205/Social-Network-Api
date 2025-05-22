@@ -10,7 +10,7 @@
 import { injectable } from 'inversify'
 import { AppError } from '~/core/errors'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
-import { MessageKeys, MESSAGES } from '~/shared/types'
+import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Forbidden Error (403)
@@ -38,14 +38,14 @@ import { MessageKeys, MESSAGES } from '~/shared/types'
 export class ForbiddenError extends AppError {
   constructor(options: {
     message: string,
-    messageKey?: MessageKeys,
+    translationKey?: TranslationKeys,
     code?: string,
     metadata?: Record<string, any>,
     requestId?: string
   }) {
     super({
       message: options.message,
-      messageKey: MESSAGES.FORBIDDEN || options.messageKey || 'common:FORBIDDEN',
+      translationKey: TRANSLATION_KEYS.FORBIDDEN || options.translationKey || 'common:FORBIDDEN',
       statusCode: HTTP_STATUS.FORBIDDEN,
       code: options.code || RESPONSE_CODES.FORBIDDEN.code || 'FORBIDDEN',
       metadata: options.metadata,

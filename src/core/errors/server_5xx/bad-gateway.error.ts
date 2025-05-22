@@ -10,7 +10,7 @@
 import { injectable } from 'inversify'
 import { AppError } from '~/core/errors'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
-import { MessageKeys, MESSAGES } from '~/shared/types'
+import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Bad Gateway Error (502)
@@ -33,16 +33,15 @@ import { MessageKeys, MESSAGES } from '~/shared/types'
  * ```
  */
 @injectable()
-export class BadGatewayError extends AppError {
-  constructor(options: {
+export class BadGatewayError extends AppError {  constructor(options: {
     message: string,
-    messageKey?: MessageKeys,
+    translationKey?: TranslationKeys,
     code?: string,
     metadata?: Record<string, any>,
     requestId?: string
   }) {
     super({
-      messageKey: options.messageKey || MESSAGES.BAD_GATEWAY || 'common:BAD_GATEWAY',
+      translationKey: options.translationKey || TRANSLATION_KEYS.BAD_GATEWAY || 'common:BAD_GATEWAY',
       message: options.message,
       statusCode: HTTP_STATUS.BAD_GATEWAY,
       code: options.code || 'BAD_GATEWAY',

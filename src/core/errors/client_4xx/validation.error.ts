@@ -11,7 +11,7 @@ import { injectable } from 'inversify'
 import { AppError } from '~/core/errors'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
 import { IValidationErrorDetail } from '~/shared/interfaces'
-import { MessageKeys, MESSAGES } from '~/shared/types'
+import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Validation Error (422)
@@ -29,11 +29,11 @@ import { MessageKeys, MESSAGES } from '~/shared/types'
  *   errors: {
  *     email: {
  *       message: 'Invalid email format',
- *       messageKey: 'common:INVALID_EMAIL',
+ *       translationKey: 'common:INVALID_EMAIL',
  *     },
  *     age: {
  *       message: 'Age must be at least 18',
- *       messageKey: 'common:AGE_TOO_LOW',
+ *       translationKey: 'common:AGE_TOO_LOW',
  *     }
  *   }
  * })
@@ -45,7 +45,7 @@ export class ValidationError extends AppError {
 
   constructor(options: {
     message: string,
-    messageKey?: MessageKeys,
+    translationKey?: TranslationKeys,
     errors: Record<string, IValidationErrorDetail>,
     code?: string,
     metadata?: Record<string, any>,
@@ -53,7 +53,7 @@ export class ValidationError extends AppError {
   }) {
     super({
       message: options.message,
-      messageKey: MESSAGES.VALIDATION_ERROR || options.messageKey || 'common:VALIDATION_ERROR',
+      translationKey: TRANSLATION_KEYS.VALIDATION_ERROR || options.translationKey || 'common:VALIDATION_ERROR',
       statusCode: HTTP_STATUS.UNPROCESSABLE_ENTITY,
       code: RESPONSE_CODES.VALIDATION_ERROR.code || options.code || 'VALIDATION_ERROR',
       metadata: options.metadata,

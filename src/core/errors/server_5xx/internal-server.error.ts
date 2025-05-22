@@ -10,7 +10,7 @@
 import { injectable } from 'inversify'
 import { AppError } from '~/core/errors/app.error'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
-import { MessageKeys, MESSAGES } from '~/shared/types'
+import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Internal Server Error (500)
@@ -37,14 +37,14 @@ import { MessageKeys, MESSAGES } from '~/shared/types'
 export class InternalServerError extends AppError {
   constructor(options: {
     message: string,
-    messageKey?: MessageKeys,
+    translationKey?: TranslationKeys,
     code?: string,
     metadata?: Record<string, any>,
     requestId?: string
   }) {
     super({
       message: options.message,
-      messageKey: options.messageKey || MESSAGES.INTERNAL_SERVER_ERROR,
+      translationKey: options.translationKey || TRANSLATION_KEYS.INTERNAL_SERVER_ERROR,
       statusCode: HTTP_STATUS.INTERNAL_SERVER_ERROR,
       code: options.code || RESPONSE_CODES.INTERNAL_SERVER_ERROR.code || 'INTERNAL_SERVER_ERROR',
       metadata: options.metadata,

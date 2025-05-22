@@ -8,7 +8,7 @@
  */
 
 import { injectable } from 'inversify'
-import { MessageKeys } from '~/shared/types'
+import { TranslationKeys } from '~/shared/types'
 
 /**
  * Interface defining the options for creating an application error
@@ -17,7 +17,7 @@ import { MessageKeys } from '~/shared/types'
  * @description Standardized structure for all error options throughout the application
  */
 export interface IErrorOptions {
-  messageKey: MessageKeys // Intermediary key for localization
+  translationKey: TranslationKeys // Intermediary key for localization
   message: string // Human-readable error message
   statusCode: number // HTTP status code associated with this error
   code?: string
@@ -46,8 +46,8 @@ export interface IErrorOptions {
  */
 @injectable()
 export class AppError extends Error {
-  /** The message key for internationalization */
-  public readonly messageKey: MessageKeys
+  /** The translation key for internationalization */
+  public readonly translationKey: TranslationKeys
   /** HTTP status code to be returned in the response */
   public readonly statusCode: number
   /** Custom error code for application-specific error handling */
@@ -70,7 +70,7 @@ export class AppError extends Error {
   constructor(options: IErrorOptions) {
     super(options.message)
     this.name = this.constructor.name
-    this.messageKey = options.messageKey
+    this.translationKey = options.translationKey
     this.statusCode = options.statusCode
     this.code = options.code
     this.metadata = options.metadata
@@ -95,7 +95,7 @@ export class AppError extends Error {
     return {
       name: this.name,
       message: this.message,
-      messageKey: this.messageKey,
+      translationKey: this.translationKey,
       statusCode: this.statusCode,
       code: this.code,
       metadata: this.metadata,

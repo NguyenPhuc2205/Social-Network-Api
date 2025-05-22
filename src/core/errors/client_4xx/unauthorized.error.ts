@@ -10,7 +10,7 @@
 import { injectable } from 'inversify'
 import { AppError } from '~/core/errors'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
-import { MessageKeys, MESSAGES } from '~/shared/types'
+import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Unauthorized Error (401)
@@ -36,13 +36,13 @@ import { MessageKeys, MESSAGES } from '~/shared/types'
 export class UnauthorizedError extends AppError {
   constructor(options: {
     message: string;
-    messageKey?: MessageKeys;
+    translationKey?: TranslationKeys;
     code?: string;
     metadata?: Record<string, any>;
     requestId?: string;
   }) {
     super({
-      messageKey: options.messageKey || MESSAGES.UNAUTHORIZED,
+      translationKey: options.translationKey || TRANSLATION_KEYS.UNAUTHORIZED,
       message: options.message,
       statusCode: HTTP_STATUS.UNAUTHORIZED,
       code: options.code || RESPONSE_CODES.UNAUTHORIZED.code,
