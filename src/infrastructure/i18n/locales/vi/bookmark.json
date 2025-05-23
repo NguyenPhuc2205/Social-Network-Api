@@ -1,0 +1,26 @@
+{
+  "BOOKMARK_ADDED": "Bài viết đã được thêm vào danh sách đánh dấu",
+  "BOOKMARK_REMOVED": "Bài viết đã được xóa khỏi danh sách đánh dấu",
+  "BOOKMARK_ALREADY_EXISTS": "Bài viết này đã có trong danh sách đánh dấu của bạn",
+  "BOOKMARK_NOT_FOUND": "Không tìm thấy đánh dấu",
+  "BOOKMARKS_CLEARED": "Tất cả đánh dấu đã được xóa",
+  "BOOKMARK_LIST_FETCHED": "Lấy danh sách đánh dấu thành công",
+  "BOOKMARK_LIMIT_REACHED": "Đã đạt đến giới hạn số lượng đánh dấu tối đa (tối đa {{limit}})",
+  
+  "POST_ID_IS_REQUIRED": "ID bài viết không được để trống",
+  "POST_ID_MUST_BE_STRING": "ID bài viết phải là chuỗi văn bản",
+  "INVALID_POST_ID": "Định dạng ID bài viết không hợp lệ",
+  "POST_NOT_FOUND": "Không tìm thấy bài viết",
+  "POST_DELETED": "Bài viết này đã bị xóa",
+  
+  "COLLECTION_CREATED": "Bộ sưu tập đánh dấu đã được tạo",
+  "COLLECTION_UPDATED": "Bộ sưu tập đánh dấu đã được cập nhật",
+  "COLLECTION_DELETED": "Bộ sưu tập đánh dấu đã được xóa",
+  "COLLECTION_NOT_FOUND": "Không tìm thấy bộ sưu tập đánh dấu",
+  "COLLECTION_NAME_REQUIRED": "Tên bộ sưu tập là bắt buộc",
+  "COLLECTION_NAME_TOO_LONG": "Tên bộ sưu tập quá dài (tối đa {{max}} ký tự)",
+  "COLLECTION_LIMIT_REACHED": "Đã đạt đến số lượng bộ sưu tập tối đa",
+  "BOOKMARK_ADDED_TO_COLLECTION": "Đánh dấu đã được thêm vào bộ sưu tập",
+  "BOOKMARK_REMOVED_FROM_COLLECTION": "Đánh dấu đã được xóa khỏi bộ sưu tập",
+  "DUPLICATE_COLLECTION_NAME": "Tên bộ sưu tập đã tồn tại"
+}

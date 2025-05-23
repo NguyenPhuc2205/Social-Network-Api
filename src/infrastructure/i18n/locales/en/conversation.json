@@ -1,0 +1,46 @@
+{
+  "CREATED": "Conversation created successfully",
+  "UPDATED": "Conversation updated successfully",
+  "DELETED": "Conversation deleted successfully",
+  "NOT_FOUND": "Conversation not found",
+  "MARKED_READ": "Conversation marked as read",
+  "MARKED_UNREAD": "Conversation marked as unread",
+  "MUTED": "Conversation muted",
+  "UNMUTED": "Conversation unmuted",
+  "PINNED": "Conversation pinned",
+  "UNPINNED": "Conversation unpinned",
+  "ARCHIVED": "Conversation archived",
+  "UNARCHIVED": "Conversation unarchived",
+  "LIMIT_REACHED": "You have reached the maximum number of conversations",
+  "PARTICIPANTS_LIMIT_REACHED": "Maximum number of participants reached ({{limit}})",
+  "CANNOT_ADD_BLOCKED_USER": "Cannot add blocked user to conversation",
+  "CANNOT_MESSAGE_USER": "You cannot message this user",
+
+  "USER_ACTION": {
+    "LEFT": "{{username}} left the conversation",
+    "ADDED": "{{username}} added to the conversation",
+    "REMOVED": "{{username}} removed from the conversation",
+    "ALREADY_IN": "{{username}} is already in this conversation",
+    "NOT_IN": "{{username}} is not in this conversation"
+  },
+  
+  "GROUP": {
+    "CREATED": "Group chat created",
+    "NAME_UPDATED": "Group chat name updated",
+    "AVATAR_UPDATED": "Group chat avatar updated",
+    "DESCRIPTION_UPDATED": "Group chat description updated",
+    "ADMIN_ADDED": "{{username}} has been added as an admin",
+    "ADMIN_REMOVED": "{{username}} has been removed as an admin",
+    "MEMBER_BANNED": "{{username}} has been banned from the group chat",
+    "MEMBER_UNBANNED": "{{username}} has been unbanned from the group chat",
+    "LEAVE_ERROR_LAST_ADMIN": "Cannot leave the group as you are the last admin"
+  },
+  
+  "INVITATION": {
+    "SENT": "Conversation invitation sent",
+    "ACCEPTED": "Conversation invitation accepted",
+    "REJECTED": "Conversation invitation rejected",
+    "EXPIRED": "Conversation invitation expired",
+    "CANCELLED": "Conversation invitation cancelled"
+  }
+}

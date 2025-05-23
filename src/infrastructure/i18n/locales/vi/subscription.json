@@ -1,0 +1,56 @@
+{
+  "SUBSCRIPTION_CREATED": "Đăng ký gói dịch vụ thành công",
+  "SUBSCRIPTION_ACTIVATED": "Gói dịch vụ đã được kích hoạt",
+  "SUBSCRIPTION_RENEWED": "Gói dịch vụ đã được gia hạn",
+  "SUBSCRIPTION_CANCELLED": "Gói dịch vụ đã bị hủy",
+  "SUBSCRIPTION_EXPIRED": "Gói dịch vụ đã hết hạn",
+  "SUBSCRIPTION_PENDING_CANCELLATION": "Gói dịch vụ sẽ bị hủy vào cuối kỳ thanh toán",
+  "SUBSCRIPTION_REACTIVATED": "Gói dịch vụ đã được kích hoạt lại",
+  "SUBSCRIPTION_UPGRADED": "Gói dịch vụ đã được nâng cấp",
+  "SUBSCRIPTION_DOWNGRADED": "Gói dịch vụ đã được hạ cấp",
+  
+  "PLAN_CHANGED": "Đã đổi sang gói dịch vụ {{planName}}",
+  "BILLING_CYCLE_CHANGED": "Đã đổi chu kỳ thanh toán sang {{cycle}}",
+  "AUTO_RENEW_ENABLED": "Đã bật tự động gia hạn",
+  "AUTO_RENEW_DISABLED": "Đã tắt tự động gia hạn",
+  
+  "TRIAL_STARTED": "Gói dùng thử đã được bắt đầu",
+  "TRIAL_ENDED": "Gói dùng thử đã kết thúc",
+  "TRIAL_CONVERTED": "Gói dùng thử đã được chuyển đổi thành gói đăng ký",
+  "TRIAL_REMINDER": "Gói dùng thử của bạn sẽ kết thúc sau {{days}} ngày",
+  "TRIAL_ALREADY_USED": "Bạn đã sử dụng gói dùng thử trước đây",
+  
+  "PAYMENT_FAILED": "Thanh toán đăng ký thất bại",
+  "PAYMENT_METHOD_REQUIRED": "Vui lòng thêm phương thức thanh toán",
+  "PAYMENT_METHOD_EXPIRED": "Phương thức thanh toán của bạn đã hết hạn",
+  
+  "SUBSCRIPTION_NOT_FOUND": "Không tìm thấy thông tin đăng ký",
+  "NO_ACTIVE_SUBSCRIPTION": "Bạn không có gói đăng ký nào đang hoạt động",
+  "ALREADY_SUBSCRIBED": "Bạn đã đăng ký gói dịch vụ này",
+  "INSUFFICIENT_PERMISSIONS": "Tài khoản của bạn không đủ quyền để thực hiện thao tác này",
+  
+  "BENEFITS_UNLOCKED": "Các tính năng mới đã được mở khóa",
+  "REMINDER_RENEWAL": "Gói dịch vụ của bạn sẽ được tự động gia hạn vào ngày {{date}}",
+  "REMINDER_EXPIRATION": "Gói dịch vụ của bạn sẽ hết hạn vào ngày {{date}}",
+  "FEATURE_NOT_AVAILABLE": "Tính năng này không khả dụng trong gói dịch vụ hiện tại của bạn",
+  "BILLING_INFORMATION_REQUIRED": "Vui lòng cập nhật thông tin thanh toán để tiếp tục gói dịch vụ",
+  "DISCOUNT_APPLIED": "Giảm giá {{discountAmount}} đã được áp dụng cho gói dịch vụ của bạn",
+  "LIMIT_EXCEEDED": "Bạn đã vượt quá giới hạn {{featureName}} cho gói dịch vụ của bạn",
+  "PLAN_NOT_FOUND": "Không tìm thấy gói dịch vụ",
+  "PRICE_CHANGE_NOTICE": "Giá gói dịch vụ của bạn sẽ thay đổi từ {{oldPrice}} thành {{newPrice}} vào ngày {{effectiveDate}}",
+
+  "ACCOUNT_TYPE": {
+    "FREE": "Miễn phí",
+    "PREMIUM": "Premium",
+    "VERIFIED": "Đã xác minh",
+    "BUSINESS": "Doanh nghiệp",
+    "CREATOR": "Người sáng tạo"
+  },
+  
+  "BILLING_CYCLE": {
+    "MONTHLY": "hàng tháng",
+    "QUARTERLY": "hàng quý",
+    "YEARLY": "hàng năm",
+    "LIFETIME": "trọn đời"
+  }
+}

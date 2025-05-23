@@ -1,0 +1,56 @@
+{
+  "SUBSCRIPTION_CREATED": "Subscription created successfully",
+  "SUBSCRIPTION_ACTIVATED": "Your subscription has been activated",
+  "SUBSCRIPTION_RENEWED": "Your subscription has been renewed",
+  "SUBSCRIPTION_CANCELLED": "Your subscription has been cancelled",
+  "SUBSCRIPTION_EXPIRED": "Your subscription has expired",
+  "SUBSCRIPTION_PENDING_CANCELLATION": "Your subscription will be cancelled at the end of the billing period",
+  "SUBSCRIPTION_REACTIVATED": "Your subscription has been reactivated",
+  "SUBSCRIPTION_UPGRADED": "Your subscription has been upgraded",
+  "SUBSCRIPTION_DOWNGRADED": "Your subscription has been downgraded",
+  
+  "PLAN_CHANGED": "Changed to {{planName}} subscription plan",
+  "BILLING_CYCLE_CHANGED": "Changed billing cycle to {{cycle}}",
+  "AUTO_RENEW_ENABLED": "Auto-renewal enabled",
+  "AUTO_RENEW_DISABLED": "Auto-renewal disabled",
+  
+  "TRIAL_STARTED": "Your trial has started",
+  "TRIAL_ENDED": "Your trial has ended",
+  "TRIAL_CONVERTED": "Your trial has been converted to a subscription",
+  "TRIAL_REMINDER": "Your trial will end in {{days}} days",
+  "TRIAL_ALREADY_USED": "You have already used a trial before",
+  
+  "PAYMENT_FAILED": "Subscription payment failed",
+  "PAYMENT_METHOD_REQUIRED": "Please add a payment method",
+  "PAYMENT_METHOD_EXPIRED": "Your payment method has expired",
+  
+  "SUBSCRIPTION_NOT_FOUND": "Subscription not found",
+  "NO_ACTIVE_SUBSCRIPTION": "You don't have any active subscription",
+  "ALREADY_SUBSCRIBED": "You are already subscribed to this plan",
+  "INSUFFICIENT_PERMISSIONS": "Your account doesn't have sufficient permissions for this operation",
+  
+  "BENEFITS_UNLOCKED": "New features have been unlocked",
+  "REMINDER_RENEWAL": "Your subscription will be automatically renewed on {{date}}",
+  "REMINDER_EXPIRATION": "Your subscription will expire on {{date}}",
+  "FEATURE_NOT_AVAILABLE": "This feature is not available in your current subscription plan",
+  "BILLING_INFORMATION_REQUIRED": "Please update your billing information to continue your subscription",
+  "DISCOUNT_APPLIED": "Discount of {{discountAmount}} applied to your subscription",
+  "LIMIT_EXCEEDED": "You have exceeded the {{featureName}} limit for your subscription plan",
+  "PLAN_NOT_FOUND": "Subscription plan not found",
+  "PRICE_CHANGE_NOTICE": "The price of your subscription plan will change from {{oldPrice}} to {{newPrice}} on {{effectiveDate}}",
+
+  "ACCOUNT_TYPE": {
+    "FREE": "Free",
+    "PREMIUM": "Premium",
+    "VERIFIED": "Verified",
+    "BUSINESS": "Business",
+    "CREATOR": "Creator"
+  },
+  
+  "BILLING_CYCLE": {
+    "MONTHLY": "monthly",
+    "QUARTERLY": "quarterly",
+    "YEARLY": "yearly",
+    "LIFETIME": "lifetime"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "HASHTAG_CREATED": "Hashtag đã được tạo",
+  "HASHTAG_UPDATED": "Hashtag đã được cập nhật",
+  "HASHTAG_DELETED": "Hashtag đã được xóa",
+  "HASHTAG_NOT_FOUND": "Không tìm thấy hashtag",
+  "HASHTAG_ALREADY_EXISTS": "Hashtag này đã tồn tại",
+  "HASHTAG_FOLLOWED": "Bạn đã theo dõi hashtag #{{hashtag}}",
+  "HASHTAG_UNFOLLOWED": "Bạn đã hủy theo dõi hashtag #{{hashtag}}",
+  "HASHTAG_ALREADY_FOLLOWED": "Bạn đã đang theo dõi hashtag #{{hashtag}}",
+  "HASHTAG_NOT_FOLLOWED": "Bạn chưa theo dõi hashtag #{{hashtag}}",
+  
+  "NAME_IS_REQUIRED": "Tên hashtag không được để trống",
+  "NAME_MUST_BE_STRING": "Tên hashtag phải là chuỗi văn bản",
+  "NAME_LENGTH": "Tên hashtag phải có độ dài từ 1 đến 50 ký tự",
+  "NAME_INVALID_FORMAT": "Tên hashtag chỉ được chứa chữ cái, số và gạch dưới",
+  
+  "HASHTAGS_FETCHED": "Lấy danh sách hashtag thành công",
+  "TRENDING_HASHTAGS_FETCHED": "Lấy danh sách hashtag thịnh hành thành công",
+  "RELATED_HASHTAGS_FETCHED": "Lấy danh sách hashtag liên quan thành công",
+  
+  "FOLLOWING_LIMIT_REACHED": "Bạn đã đạt giới hạn số hashtag có thể theo dõi",
+  "HASHTAG_BLOCKED": "Hashtag này đã bị chặn",
+  "HASHTAG_REPORTED": "Hashtag này đã bị báo cáo",
+  
+  "POSTS_FETCHED": "Lấy danh sách bài viết với hashtag này thành công",
+  "NO_POSTS_FOUND": "Không tìm thấy bài viết nào với hashtag này",
+  
+  "HASHTAG_CONTENT_FETCHED": "Lấy nội dung cho hashtag #{{hashtag}} thành công",
+  "HASHTAG_INVALID_FORMAT": "Định dạng hashtag không hợp lệ",
+  "HASHTAG_TOO_LONG": "Hashtag không được vượt quá {{maxLength}} ký tự",
+  "HASHTAG_BANNED": "Hashtag này đã bị cấm",
+  "TOO_MANY_HASHTAGS": "Không thể sử dụng nhiều hơn {{maxCount}} hashtag",
+  "NO_HASHTAGS_FOUND": "Không tìm thấy hashtag nào phù hợp với tiêu chí của bạn"
+}

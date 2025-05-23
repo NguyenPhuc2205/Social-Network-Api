@@ -1,0 +1,68 @@
+{
+  "SENT": "Notification sent successfully",
+  "DELETED": "Notification deleted successfully",
+  "READ": "Notification marked as read",
+  "UNREAD": "Notification marked as unread",
+  "CLEARED": "All notifications cleared",
+  "MARKED_READ": "All notifications marked as read",
+  "NOT_FOUND": "Notification not found",
+  "SETTINGS_UPDATED": "Notification settings updated successfully",
+  
+  "PUSH_ENABLED": "Push notifications enabled",
+  "PUSH_DISABLED": "Push notifications disabled",
+  "EMAIL_ENABLED": "Email notifications enabled",
+  "EMAIL_DISABLED": "Email notifications disabled",
+  "TYPE_ENABLED": "{{notificationType}} notifications enabled",
+  "TYPE_DISABLED": "{{notificationType}} notifications disabled",
+  
+  "DEVICE_REGISTERED": "Device registered for notifications",
+  "DEVICE_UNREGISTERED": "Device unregistered from notifications",
+  
+  "NEW_NOTIFICATION": "You have a new notification",
+  "NEW_FOLLOWER": "{{username}} started following you",
+  "NEW_LIKE": "{{username}} liked your {{contentType}}",
+  "NEW_COMMENT": "{{username}} commented on your {{contentType}}",
+  "NEW_MENTION": "{{username}} mentioned you in a {{contentType}}",
+  "NEW_SHARE": "{{username}} shared your {{contentType}}",
+  "NEW_QUOTE": "{{username}} quoted your {{contentType}}",
+  "NEW_MESSAGE": "You have a new message from {{username}}",
+  "FOLLOW_REQUEST": "{{username}} sent you a follow request",
+  
+  "GROUP_INVITE": "{{username}} invited you to join {{groupName}} group",
+  "GROUP_JOIN_REQUEST": "{{username}} has requested to join {{groupName}} group",
+  "GROUP_REQUEST_ACCEPTED": "Your request to join {{groupName}} group has been accepted",
+  "GROUP_REQUEST_REJECTED": "Your request to join {{groupName}} group has been rejected",
+  "GROUP_ROLE_CHANGED": "Your role in {{groupName}} group has been changed to {{role}}",
+  
+  "EVENT_INVITE": "{{username}} invited you to the event {{eventName}}",
+  "EVENT_UPDATE": "The event {{eventName}} has been updated",
+  "EVENT_CANCELLED": "The event {{eventName}} has been cancelled",
+  "EVENT_REMINDER": "The event {{eventName}} will start in {{time}}",
+  
+  "SYSTEM_ANNOUNCEMENT": "System announcement: {{message}}",
+  "ACCOUNT_WARNING": "Account warning: {{message}}",
+
+  "TYPES": {
+    "LIKE": "like",
+    "SHARE": "share",
+    "FOLLOW": "follow",
+    "MENTION": "mention",
+    "COMMENT": "comment",
+    "QUOTE": "quote",
+    "REPLY": "reply",
+    "MESSAGE": "message",
+    "GROUP_INVITE": "group invitation",
+    "GROUP_JOIN_REQUEST": "group join request",
+    "EVENT_INVITE": "event invitation",
+    "EVENT_UPDATE": "event update"
+  },
+
+  "CONTENT_TYPES": {
+    "POST": "post",
+    "COMMENT": "comment",
+    "PROFILE": "profile",
+    "STORY": "story",
+    "REEL": "reel",
+    "POLL": "poll"
+  }
+}

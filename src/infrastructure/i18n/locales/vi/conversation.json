@@ -1,0 +1,46 @@
+{
+  "CREATED": "Cuộc trò chuyện được tạo thành công",
+  "UPDATED": "Cuộc trò chuyện được cập nhật thành công",
+  "DELETED": "Cuộc trò chuyện được xóa thành công",
+  "NOT_FOUND": "Cuộc trò chuyện không tìm thấy",
+  "MARKED_READ": "Cuộc trò chuyện đã được đánh dấu là đã đọc",
+  "MARKED_UNREAD": "Cuộc trò chuyện đã được đánh dấu là chưa đọc",
+  "MUTED": "Cuộc trò chuyện đã được tắt thông báo",
+  "UNMUTED": "Cuộc trò chuyện đã được bật thông báo",
+  "PINNED": "Cuộc trò chuyện đã được ghim",
+  "UNPINNED": "Cuộc trò chuyện đã được bỏ ghim",
+  "ARCHIVED": "Cuộc trò chuyện đã được lưu trữ",
+  "UNARCHIVED": "Cuộc trò chuyện đã được khôi phục từ lưu trữ",
+  "LIMIT_REACHED": "Bạn đã đạt giới hạn số cuộc trò chuyện tối đa",
+  "PARTICIPANTS_LIMIT_REACHED": "Đã đạt số lượng người tham gia tối đa ({{limit}})",
+  "CANNOT_ADD_BLOCKED_USER": "Không thể thêm người dùng đã bị chặn vào cuộc trò chuyện",
+  "CANNOT_MESSAGE_USER": "Bạn không thể nhắn tin cho người dùng này",
+
+  "USER_ACTION": {
+    "LEFT": "{{username}} đã rời khỏi cuộc trò chuyện",
+    "ADDED": "{{username}} đã được thêm vào cuộc trò chuyện",
+    "REMOVED": "{{username}} đã bị xóa khỏi cuộc trò chuyện",
+    "ALREADY_IN": "{{username}} đã có trong cuộc trò chuyện này",
+    "NOT_IN": "{{username}} không có trong cuộc trò chuyện này"
+  },
+  
+  "GROUP": {
+    "CREATED": "Nhóm chat đã được tạo",
+    "NAME_UPDATED": "Tên nhóm chat đã được cập nhật",
+    "AVATAR_UPDATED": "Ảnh đại diện nhóm chat đã được cập nhật",
+    "DESCRIPTION_UPDATED": "Mô tả nhóm chat đã được cập nhật",
+    "ADMIN_ADDED": "{{username}} đã được thêm làm quản trị viên",
+    "ADMIN_REMOVED": "{{username}} đã bị xóa khỏi danh sách quản trị viên",
+    "MEMBER_BANNED": "{{username}} đã bị cấm khỏi nhóm chat",
+    "MEMBER_UNBANNED": "{{username}} đã được gỡ lệnh cấm khỏi nhóm chat",
+    "LEAVE_ERROR_LAST_ADMIN": "Không thể rời nhóm vì bạn là quản trị viên cuối cùng"
+  },
+  
+  "INVITATION": {
+    "SENT": "Lời mời tham gia cuộc trò chuyện đã được gửi",
+    "ACCEPTED": "Lời mời tham gia cuộc trò chuyện đã được chấp nhận",
+    "REJECTED": "Lời mời tham gia cuộc trò chuyện đã bị từ chối",
+    "EXPIRED": "Lời mời tham gia cuộc trò chuyện đã hết hạn",
+    "CANCELLED": "Lời mời tham gia cuộc trò chuyện đã bị hủy"
+  }
+}

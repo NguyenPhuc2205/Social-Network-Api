@@ -1,0 +1,36 @@
+{
+  "COMMENT_CREATED": "Comment created successfully",
+  "COMMENT_UPDATED": "Comment updated successfully",
+  "COMMENT_DELETED": "Comment deleted successfully",
+  "COMMENT_NOT_FOUND": "Comment not found",
+  "INVALID_COMMENT_CONTENT": "Invalid comment content",
+  
+  "CONTENT_IS_REQUIRED": "Comment content is required",
+  "CONTENT_MUST_BE_STRING": "Comment content must be a text string",
+  "CONTENT_LENGTH": "Comment content must be between 1 and 1000 characters",
+  
+  "COMMENT_ID_IS_REQUIRED": "Comment ID is required",
+  "COMMENT_ID_MUST_BE_STRING": "Comment ID must be a text string",
+  "INVALID_COMMENT_ID": "Invalid comment ID format",
+  
+  "PARENT_ID_INVALID": "Invalid parent comment ID",
+  "TOO_MANY_NESTED_COMMENTS": "Comments can only be nested up to 2 levels deep",
+  
+  "USER_NOT_AUTHORIZED": "You are not authorized to perform this action on this comment",
+  "COMMENT_ALREADY_DELETED": "This comment has already been deleted",
+  
+  "TWEET_ID_IS_REQUIRED": "Tweet ID is required",
+  "TWEET_ID_MUST_BE_STRING": "Tweet ID must be a text string",
+  "INVALID_TWEET_ID": "Invalid tweet ID format",
+  "TWEET_NOT_FOUND": "Tweet not found",
+  
+  "CANNOT_REPLY_TO_DELETED_COMMENT": "Cannot reply to a deleted comment",
+  "TOO_MANY_COMMENTS": "Too many comments on this tweet. Please try again later",
+  
+  "MEDIA_LENGTH_EXCEEDED": "Maximum number of media items exceeded",
+  "MEDIA_INVALID_FORMAT": "Invalid media format",
+  "MEDIA_SIZE_EXCEEDED": "Media file size exceeded",
+  
+  "COMMENT_EDITED": "Comment edited",
+  "COMMENT_REPORTED": "Comment reported successfully"
+}

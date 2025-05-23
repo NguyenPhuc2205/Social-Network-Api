@@ -1,0 +1,37 @@
+{
+  "REACTION_ADDED": "Bạn đã thả cảm xúc cho bài viết này",
+  "REACTION_REMOVED": "Bạn đã hủy cảm xúc cho bài viết này",
+  "REACTION_UPDATED": "Bạn đã thay đổi cảm xúc cho bài viết này",
+  "REACTION_ALREADY_EXISTS": "Bạn đã thả cảm xúc cho bài viết này rồi",
+  "REACTION_NOT_FOUND": "Không tìm thấy cảm xúc",
+  
+  "POST_ID_REQUIRED": "ID bài viết là bắt buộc",
+  "INVALID_POST_ID": "ID bài viết không hợp lệ",
+  "POST_NOT_FOUND": "Không tìm thấy bài viết",
+  "POST_DELETED": "Bài viết đã bị xóa",
+  
+  "REACTION_TYPE_REQUIRED": "Loại cảm xúc là bắt buộc",
+  "INVALID_REACTION_TYPE": "Loại cảm xúc không hợp lệ",
+  "REACTION_COUNT_LIMIT": "Đã đạt đến giới hạn số lượng cảm xúc cho bài viết này",
+  
+  "REACTORS_FETCHED": "Lấy danh sách người dùng đã thả cảm xúc thành công",
+  "NO_REACTIONS": "Chưa có ai thả cảm xúc cho bài viết này",
+  
+  "TYPES": {
+    "LIKE": "thích",
+    "LOVE": "yêu thích",
+    "HAHA": "haha",
+    "WOW": "wow",
+    "SAD": "buồn",
+    "ANGRY": "giận dữ"
+  },
+  
+  "NOTIFICATIONS": {
+    "LIKE": "{{username}} đã thích bài viết của bạn",
+    "LOVE": "{{username}} đã yêu thích bài viết của bạn",
+    "HAHA": "{{username}} đã haha bài viết của bạn",
+    "WOW": "{{username}} đã wow bài viết của bạn",
+    "SAD": "{{username}} đã buồn về bài viết của bạn",
+    "ANGRY": "{{username}} đã giận dữ về bài viết của bạn"
+  }
+}

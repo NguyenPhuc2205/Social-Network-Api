@@ -1,0 +1,66 @@
+{
+  "CREATED": "Bài viết đã được tạo",
+  "UPDATED": "Bài viết đã được cập nhật",
+  "DELETED": "Bài viết đã được xóa",
+  "ALREADY_DELETED": "Bài viết này đã bị xóa trước đó",
+  "PUBLISHED": "Bài viết đã được đăng",
+  "UNPUBLISHED": "Bài viết đã được lưu dưới dạng nháp",
+  "LIKED": "Bài viết đã được thích",
+  "UNLIKED": "Đã bỏ thích bài viết",
+  "SHARED": "Bài viết đã được chia sẻ",
+  "REPORTED": "Bài viết đã được báo cáo",
+  "BOOKMARKED": "Bài viết đã được đánh dấu",
+  "UNBOOKMARKED": "Đã bỏ đánh dấu bài viết",
+  
+  "TOO_MANY_TAGS": "Quá nhiều thẻ (tối đa {{max}})",
+  "CONTENT_TOO_LONG": "Nội dung quá dài (tối đa {{max}} ký tự)",
+  "DUPLICATE_CONTENT": "Nội dung trùng lặp",
+  "CONTENT_REQUIRED": "Nội dung bài viết là bắt buộc",
+  
+  "FETCHED": "Lấy danh sách bài viết thành công",
+  "VISIBILITY_UPDATED": "Chế độ hiển thị bài viết đã được cập nhật thành {{visibility}}",
+  "PINNED": "Bài viết đã được ghim vào hồ sơ của bạn",
+  "UNPINNED": "Bài viết đã được bỏ ghim khỏi hồ sơ của bạn",
+  "ALREADY_PINNED": "Bài viết này đã được ghim vào hồ sơ của bạn",
+  "MAX_PINNED_REACHED": "Bạn không thể ghim nhiều hơn {{maxPinned}} bài viết",
+  
+  "COMMENT_ADDED": "Bình luận đã được thêm",
+  "COMMENT_UPDATED": "Bình luận đã được cập nhật",
+  "COMMENT_DELETED": "Bình luận đã được xóa",
+  "COMMENT_NOT_FOUND": "Không tìm thấy bình luận",
+  
+  "MEDIA_REQUIRED": "Cần có ít nhất một media cho loại bài viết này",
+  "MEDIA_COUNT_EXCEEDED": "Số lượng media vượt quá giới hạn (tối đa {{max}})",
+  "MEDIA_SIZE_EXCEEDED": "Kích thước file vượt quá giới hạn (tối đa {{max}}MB)",
+  "MEDIA_TYPE_NOT_SUPPORTED": "Loại media không được hỗ trợ",
+  "MEDIA_UPLOAD_FAILED": "Tải lên media thất bại",
+  
+  "MENTIONS_LIMIT_EXCEEDED": "Số lượng đề cập vượt quá giới hạn (tối đa {{max}})",
+  "HASHTAGS_LIMIT_EXCEEDED": "Số lượng hashtag vượt quá giới hạn (tối đa {{max}})",
+  
+  "POLL_CREATED": "Cuộc thăm dò đã được tạo",
+  "POLL_ENDED": "Cuộc thăm dò đã kết thúc",
+  "POLL_VOTED": "Bình chọn đã được gửi thành công",
+  "POLL_VOTE_UPDATED": "Bình chọn đã được cập nhật",
+  "POLL_ALREADY_VOTED": "Bạn đã bình chọn rồi",
+  "POLL_ENDED_CANNOT_VOTE": "Cuộc thăm dò đã kết thúc, không thể bình chọn",
+  "POLL_OPTIONS_REQUIRED": "Cần ít nhất 2 lựa chọn cho cuộc thăm dò",
+  "POLL_TOO_MANY_OPTIONS": "Quá nhiều lựa chọn cho cuộc thăm dò (tối đa {{max}})",
+  "POLL_DURATION_INVALID": "Thời gian diễn ra cuộc thăm dò không hợp lệ",
+  
+  "POST_TYPES": {
+    "ORIGINAL": "bài viết gốc",
+    "SHARE": "chia sẻ",
+    "COMMENT": "bình luận",
+    "QUOTE": "trích dẫn",
+    "REPLY": "trả lời",
+    "STORY": "tin",
+    "REEL": "video ngắn",
+    "POLL": "thăm dò"
+  },
+  
+  "POST_AUDIENCE": {
+    "EVERYONE": "mọi người",
+    "CLOSE_CIRCLE": "chỉ bạn thân"
+  }
+}

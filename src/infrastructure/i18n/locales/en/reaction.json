@@ -1,0 +1,37 @@
+{
+  "REACTION_ADDED": "You reacted to this post",
+  "REACTION_REMOVED": "You removed your reaction from this post",
+  "REACTION_UPDATED": "You changed your reaction to this post",
+  "REACTION_ALREADY_EXISTS": "You already reacted to this post",
+  "REACTION_NOT_FOUND": "Reaction not found",
+  
+  "POST_ID_REQUIRED": "Post ID is required",
+  "INVALID_POST_ID": "Invalid post ID",
+  "POST_NOT_FOUND": "Post not found",
+  "POST_DELETED": "Post has been deleted",
+  
+  "REACTION_TYPE_REQUIRED": "Reaction type is required",
+  "INVALID_REACTION_TYPE": "Invalid reaction type",
+  "REACTION_COUNT_LIMIT": "Reaction limit reached for this post",
+  
+  "REACTORS_FETCHED": "Users who reacted retrieved successfully",
+  "NO_REACTIONS": "No one has reacted to this post yet",
+  
+  "TYPES": {
+    "LIKE": "like",
+    "LOVE": "love",
+    "HAHA": "haha",
+    "WOW": "wow",
+    "SAD": "sad",
+    "ANGRY": "angry"
+  },
+  
+  "NOTIFICATIONS": {
+    "LIKE": "{{username}} liked your post",
+    "LOVE": "{{username}} loved your post",
+    "HAHA": "{{username}} reacted with haha to your post",
+    "WOW": "{{username}} reacted with wow to your post",
+    "SAD": "{{username}} reacted with sad to your post",
+    "ANGRY": "{{username}} reacted with angry to your post"
+  }
+}

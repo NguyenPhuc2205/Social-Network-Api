@@ -1,0 +1,41 @@
+{
+  "FOLLOW_USER_SUCCESS": "You have successfully followed this user",
+  "FOLLOWED_USER": "You are already following this user",
+  "NOT_FOLLOWING_OR_ALREADY_UNFOLLOWED": "You are not following this user or have already unfollowed them",
+  "UNFOLLOW_SUCCESS": "You have successfully unfollowed this user",
+  
+  "USER_ID_IS_REQUIRED": "User ID is required",
+  "USER_ID_MUST_BE_STRING": "User ID must be a string",
+  "INVALID_USER_ID": "Invalid user ID format",
+  "USER_NOT_FOUND": "User not found",
+  "CANNOT_FOLLOW_YOURSELF": "You cannot follow yourself",
+  
+  "FOLLOWER_COUNT_LIMIT_REACHED": "You have reached the maximum number of users you can follow",
+  "USER_BLOCKED": "You cannot follow this user because they have blocked you",
+  "USER_DEACTIVATED": "This user account has been deactivated",
+  
+  "FOLLOW_REQUEST_SENT": "Your follow request has been sent and is pending approval",
+  "FOLLOW_REQUEST_ACCEPTED": "Follow request accepted",
+  "FOLLOW_REQUEST_REJECTED": "Follow request rejected",
+  "FOLLOW_REQUEST_CANCELLED": "Follow request cancelled",
+  
+  "FOLLOWER_NOT_FOUND": "Follower relationship not found",
+  "OPERATION_NOT_PERMITTED": "This operation is not permitted",
+  
+  "FOLLOWING_FETCHED": "Successfully retrieved list of users you are following",
+  "FOLLOWERS_FETCHED": "Successfully retrieved list of users following you",
+  "NO_FOLLOWERS": "This user has no followers yet",
+  "NO_FOLLOWING": "This user is not following anyone yet",
+  
+  "FOLLOW_REQUESTS_FETCHED": "Successfully retrieved list of follow requests",
+  "FOLLOW_REQUESTS_APPROVED": "Follow request approved",
+  "FOLLOW_REQUESTS_REJECTED": "Follow request rejected",
+  
+  "MUTE_USER_SUCCESS": "User successfully muted",
+  "UNMUTE_USER_SUCCESS": "User successfully unmuted",
+  "USER_ALREADY_MUTED": "This user is already muted",
+  "USER_NOT_MUTED": "This user is not muted",
+  
+  "MUTUAL_FOLLOWERS_FETCHED": "Successfully retrieved list of mutual followers",
+  "NO_MUTUAL_FOLLOWERS": "No mutual followers found"
+}

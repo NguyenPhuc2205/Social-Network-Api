@@ -1,0 +1,49 @@
+{
+  "REPORT_SUBMITTED": "Báo cáo của bạn đã được gửi và sẽ được xem xét",
+  "REPORT_UPDATED": "Báo cáo đã được cập nhật",
+  "REPORT_DELETED": "Báo cáo đã được xóa",
+  "REPORT_CLOSED": "Báo cáo đã được đóng lại",
+  "REPORT_REOPENED": "Báo cáo đã được mở lại",
+  "REPORT_NOT_FOUND": "Không tìm thấy báo cáo",
+  "REPORT_ALREADY_SUBMITTED": "Bạn đã báo cáo nội dung này trước đây",
+  
+  "REPORT_ACTION_TAKEN": "Đã thực hiện hành động đối với báo cáo của bạn",
+  "REPORT_ACTION_PENDING": "Báo cáo của bạn đang được xem xét",
+  "REPORT_ACTION_REJECTED": "Báo cáo của bạn đã bị từ chối",
+  
+  "REASON_REQUIRED": "Lý do báo cáo là bắt buộc",
+  "INVALID_REASON": "Lý do báo cáo không hợp lệ",
+  "DESCRIPTION_TOO_LONG": "Mô tả báo cáo quá dài (tối đa {{max}} ký tự)",
+  
+  "REPORTED_ITEM_REQUIRED": "Bạn phải chọn nội dung cần báo cáo",
+  "INVALID_REPORT_TARGET": "Đối tượng báo cáo không hợp lệ",
+  "ITEM_NOT_FOUND": "Không tìm thấy nội dung cần báo cáo",
+  "CANNOT_REPORT_OWN_CONTENT": "Bạn không thể báo cáo nội dung của chính mình",
+  
+  "REPORT_LIMIT_REACHED": "Bạn đã đạt đến giới hạn số lượng báo cáo trong một ngày",
+  "REPORT_COOLDOWN": "Vui lòng đợi {{time}} trước khi gửi báo cáo tiếp theo",
+  "THANK_YOU_FOR_REPORTING": "Cảm ơn bạn đã báo cáo nội dung này. Chúng tôi sẽ xem xét nó sớm",
+  "INAPPROPRIATE_CONTENT_REMOVED": "Nội dung được báo cáo đã bị xóa vì vi phạm nguyên tắc cộng đồng của chúng tôi",
+  
+  "REPORT_REASONS": {
+    "SPAM": "Spam hoặc nội dung rác",
+    "ABUSIVE": "Lạm dụng hoặc quấy rối",
+    "HARMFUL": "Nội dung có hại hoặc nguy hiểm",
+    "MISINFORMATION": "Thông tin sai lệch",
+    "OTHER": "Lý do khác"
+  },
+  
+  "STATUS": {
+    "PENDING": "Đang chờ xử lý",
+    "REVIEWED": "Đã xem xét",
+    "RESOLVED": "Đã giải quyết",
+    "REJECTED": "Đã từ chối"
+  },
+  
+  "ADMIN": {
+    "REPORT_ASSIGNED": "Báo cáo đã được gán cho bạn",
+    "REPORT_STATUS_UPDATED": "Trạng thái báo cáo đã được cập nhật",
+    "REPORTS_FETCHED": "Lấy danh sách báo cáo thành công",
+    "NOTE_ADDED": "Ghi chú đã được thêm vào báo cáo"
+  }
+}

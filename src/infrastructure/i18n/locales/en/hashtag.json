@@ -1,0 +1,34 @@
+{
+  "HASHTAG_CREATED": "Hashtag created successfully",
+  "HASHTAG_UPDATED": "Hashtag updated successfully",
+  "HASHTAG_DELETED": "Hashtag deleted successfully", 
+  "HASHTAG_NOT_FOUND": "Hashtag not found",
+  "HASHTAG_ALREADY_EXISTS": "Hashtag already exists",
+  "HASHTAG_FOLLOWED": "You are now following #{{hashtag}}",
+  "HASHTAG_UNFOLLOWED": "You have unfollowed #{{hashtag}}",
+  "HASHTAG_ALREADY_FOLLOWED": "You are already following #{{hashtag}}",
+  "HASHTAG_NOT_FOLLOWED": "You are not following #{{hashtag}}",
+  
+  "NAME_IS_REQUIRED": "Hashtag name is required",
+  "NAME_MUST_BE_STRING": "Hashtag name must be a string",
+  "NAME_LENGTH": "Hashtag name must be between 1 and 50 characters",
+  "NAME_INVALID_FORMAT": "Hashtag name can only contain letters, numbers and underscores",
+  
+  "HASHTAGS_FETCHED": "Hashtags retrieved successfully",
+  "TRENDING_HASHTAGS_FETCHED": "Trending hashtags retrieved successfully",
+  "RELATED_HASHTAGS_FETCHED": "Related hashtags retrieved successfully",
+  
+  "FOLLOWING_LIMIT_REACHED": "You have reached the maximum number of hashtags you can follow",
+  "HASHTAG_BLOCKED": "This hashtag has been blocked",
+  "HASHTAG_REPORTED": "This hashtag has been reported",
+  
+  "POSTS_FETCHED": "Posts with this hashtag retrieved successfully",
+  "NO_POSTS_FOUND": "No posts found with this hashtag",
+  
+  "HASHTAG_CONTENT_FETCHED": "Content for #{{hashtag}} fetched successfully",
+  "HASHTAG_INVALID_FORMAT": "Invalid hashtag format",
+  "HASHTAG_TOO_LONG": "Hashtag cannot exceed {{maxLength}} characters",
+  "HASHTAG_BANNED": "This hashtag has been banned",
+  "TOO_MANY_HASHTAGS": "Cannot use more than {{maxCount}} hashtags",
+  "NO_HASHTAGS_FOUND": "No hashtags found matching your criteria"
+}
