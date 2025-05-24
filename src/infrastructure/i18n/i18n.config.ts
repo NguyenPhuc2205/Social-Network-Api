@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-05-03 09:36:35
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-06 23:55:08
+ * @LastEditTime  : 2025-05-23 19:54:33
  * @FilePath      : /server/src/infrastructure/i18n/i18n.config.ts
  * @Description   : Configuration and Initialization for i18n (internationalization) in the application.
  */
@@ -18,24 +18,26 @@ import { join } from 'path'
  * @description Each namespace corresponds to a separate JSON translation file in the locales directory.
  */
 export const namespaces = [
-  'common',
-  'user',
   'auth',
-  'token',
-  'profile',
-  'notification',
-  'follow',
-  'tweet',
-  'message',
-  'reaction',
   'bookmark',
-  'hashtag',
-  'trend',
-  'subscription',
-  'payment',
-  'report',
   'comment',
+  'common',
   'conversation',
+  'follow',
+  'hashtag',
+  'message',
+  'notification',
+  'payment',
+  'post',
+  'profile',
+  'reaction',
+  'report',
+  'subscription',
+  'token',
+  'report',
+  'trend',
+  'user',
+  'validation',
 ] // List of namespaces
 
 /**

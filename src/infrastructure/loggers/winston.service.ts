@@ -1,10 +1,10 @@
 /*
- * @Author       : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @Date         : 2025-02-12 16:52:32
- * @LastEditors: Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime: 2025-05-03 09:15:22
- * @FilePath     : \server\src\infrastructure\loggers\winston.log.ts
- * @Description  : Create a logger using Winston with daily rotation and custom formatting
+ * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
+ * @Date          : 2025-02-12 16:52:32
+ * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
+ * @LastEditTime  : 2025-05-22 16:00:54
+ * @FilePath      : /server/src/infrastructure/loggers/winston.service.ts
+ * @Description   : Create a logger using Winston with daily rotation and custom formatting
  */
 
 import fs from 'fs'
@@ -194,8 +194,8 @@ export class WinstonLoggerService implements IWinstonLoggerService {
     const parts = []
     if (context.module) parts.push(context.module)
     if (context.method) parts.push(context.method)
-    if (context.action) parts.push(context.action)
     if (context.route) parts.push(context.route)
+    if (context.action) parts.push(context.action)
 
     return parts.length > 0 ? parts.join('::') : '-'
   }

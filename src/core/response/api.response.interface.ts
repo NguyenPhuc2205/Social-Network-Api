@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-05-11 14:23:08
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-14 00:20:33
+ * @LastEditTime  : 2025-05-22 16:06:54
  * @FilePath      : /server/src/core/response/api.response.interface.ts
  * @Description   : API response interface for standardizing API responses and API response services
  */

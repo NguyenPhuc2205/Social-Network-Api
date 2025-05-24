@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-02-12 16:52:32
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-16 08:59:40
+ * @LastEditTime  : 2025-05-24 11:18:35
  * @FilePath      : /server/src/common/middlewares/error.middleware.ts
  * @Description   : Default error handler middleware that handles all errors thrown in the application.
  */
@@ -32,11 +32,11 @@ export class ErrorHandlerMiddleware {
    * Creates an instance of the error handler middleware
    * 
    * @constructor
-   * @param {IWinstonLoggerService} logger - Logger service for recording error information
+   * @param {IWinstonLoggerService} loggerService - Logger service for recording error information
    * @param {II18nService} i18nService - Internationalization service for error message translation
    */
   constructor(
-    @inject(DI_TYPES.IWinstonLoggerService) private logger: IWinstonLoggerService,
+    @inject(DI_TYPES.IWinstonLoggerService) private loggerService: IWinstonLoggerService,
     @inject(DI_TYPES.II18nService) private i18nService: II18nService
   ) {}
 
@@ -88,7 +88,7 @@ export class ErrorHandlerMiddleware {
       translatedMessage = 'Internal server error'
 
       // Log translation failure
-      this.logger.warn({
+      this.loggerService.warn({
         message: `Translation failed for INTERNAL_SERVER_ERROR`,
         context: { 
           module: 'ErrorHandlerMiddleware',
@@ -142,7 +142,7 @@ export class ErrorHandlerMiddleware {
 
     if (error instanceof AppError && error.isOperational) {
       // Log operational errors as warnings
-      this.logger.warn({
+      this.loggerService.warn({
         message: `Operational error occurred: ${error.message}`,
         context: logContext,
         requestId,
@@ -156,7 +156,7 @@ export class ErrorHandlerMiddleware {
       })
     } else {
       // Log unexpected errors as errors with higher severity
-      this.logger.error({
+      this.loggerService.error({
         message: `Unexpected error occurred: ${errorMessage}`,
         context: logContext,
         requestId,
@@ -211,12 +211,12 @@ export class ErrorHandlerMiddleware {
 //   app.get('/bad-request', (req: Request, res: Response, next: NextFunction) => {
 //     const error = new AppError({
 //       message: i18nService.resolveMessage({
-//         translationKey: TRANSLATIONS.BAD_REQUEST,
+//         translationKey: TRANSLATION_KEYS.BAD_REQUEST,
 //         req,
 //         defaultMessage: 'Bad request',
 //       }),
 //       statusCode: HTTP_STATUS.BAD_REQUEST,
-//       translationKey: TRANSLATIONS.BAD_REQUEST,
+//       translationKey: TRANSLATION_KEYS.BAD_REQUEST,
 //       code: RESPONSE_CODES.BAD_REQUEST.code,
 //       metadata: { 
 //         requestParams: req.query,

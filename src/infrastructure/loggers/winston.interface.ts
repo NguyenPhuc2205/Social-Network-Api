@@ -1,10 +1,10 @@
 /*
- * @Author       : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @Date         : 2025-02-21 09:54:31
- * @LastEditors: Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime: 2025-05-03 01:22:17
- * @FilePath     : server/src/infrastructure/loggers/logger.interface.ts
- * @Description  : Interface for the Winston Logger
+ * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
+ * @Date          : 2025-02-21 09:54:31
+ * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
+ * @LastEditTime  : 2025-05-22 16:02:26
+ * @FilePath      : /server/src/infrastructure/loggers/winston.interface.ts
+ * @Description   : Interface for the Winston Logger
  */
 
 /**

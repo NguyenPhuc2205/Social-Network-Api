@@ -1,10 +1,10 @@
 /*
- * @Author       : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @Date         : 2025-02-12 16:52:32
- * @LastEditors  : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime : 2025-05-14 00:22:08
- * @FilePath     : /server/src/core/response/api.response.ts
- * @Description  : API response class for standardizing API responses
+ * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
+ * @Date          : 2025-02-12 16:52:32
+ * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
+ * @LastEditTime  : 2025-05-23 19:35:31
+ * @FilePath      : /server/src/core/response/api.response.ts
+ * @Description   : API response class for standardizing API responses
  */
 
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'

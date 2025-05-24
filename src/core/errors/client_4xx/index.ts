@@ -1,3 +1,12 @@
+/*
+ * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
+ * @Date          : 2025-05-06 21:43:17
+ * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
+ * @LastEditTime  : 2025-05-22 15:24:43
+ * @FilePath      : /project/server/src/core/errors/client_4xx/index.ts
+ * @Description   : Export all error classes and types from the client_4xx module
+ */
+
 export { BadRequestError } from '~/core/errors/client_4xx/bad-request.error'
 export { ConflictError } from '~/core/errors/client_4xx/conflict.error'
 export { ForbiddenError } from '~/core/errors/client_4xx/forbidden.error'

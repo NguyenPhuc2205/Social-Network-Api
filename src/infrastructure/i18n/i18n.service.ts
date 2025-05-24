@@ -2,20 +2,16 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-05-03 23:22:37
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-14 22:54:28
+ * @LastEditTime  : 2025-05-23 21:59:41
  * @FilePath      : /server/src/infrastructure/i18n/i18n.service.ts
  * @Description   : Implementation of the I18n service for internationalization
  */
 
 import { Request } from 'express'
-import { stat } from 'fs'
 import i18next, { TFunction } from 'i18next'
-import { inject, injectable } from 'inversify'
-import { getCallerLocation } from '~/common/helpers'
+import { injectable } from 'inversify'
 import { AppError } from '~/core/errors'
-import { DI_TYPES } from '~/core/providers'
 import { II18nService, InterpolationValues } from '~/infrastructure/i18n/i18n.interface'
-import { IWinstonLoggerService } from '~/infrastructure/loggers'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
 import { TranslationKeys, TRANSLATION_KEYS } from '~/shared/types'
 
@@ -273,6 +269,8 @@ export class I18nService implements II18nService {
 // import cookieParser from 'cookie-parser'
 // import { initializeI18n } from '~/infrastructure/i18n'
 // import i18nMiddleware from 'i18next-http-middleware'
+// import { Response, NextFunction } from 'express'
+// import { AuthTranslationKeys } from '~/modules/auth/constants/auth-translations.enum'
 // const runTestServer = async () => {
 //   const app = express()
 //   app.use(cookieParser())
@@ -285,21 +283,37 @@ export class I18nService implements II18nService {
 
 //   app.use(i18nMiddleware.handle(i18nInstance))
 
-//   app.get('/v1/api/test-i18n', (req, res, next) => {
+//   app.get('/v1/api/test1', (req, res, next) => {
 //     const t = i18nService.getTFunction(req)
 //     const greeting = t('common:GREETING', { name: 'Phuc' })
 //     const error = t('common:BAD_REQUEST')
 
 //     res.json({
+//       status: 'success',
+//       message: greeting,
 //       language: req.language,
-//       greeting,
 //       error
+//     })
+//   })
+
+//   app.get('/v1/api/test2/', (req: Request, res: Response, next: NextFunction) => {
+//     const validationMessage = i18nService.resolveMessage({
+//       translationKey: AuthTranslationKeys.TOKEN_REQUIRED,
+//       req,
+//       interpolationValues: { tokenType: "Verify Account Token" }
+//     })
+
+//     res.status(200).json({
+//       status: 'success',
+//       message: validationMessage,
+//       language: req.language,
 //     })
 //   })
 
 //   const PORT = 3001
 //   app.listen(PORT, () => {
-//     console.log(`Test server is running at http://localhost:${PORT}/v1/api/test-i18n?lang=vi`)
+//     console.log(`Test case 1 is running at http://localhost:${PORT}/v1/api/test1?lang=vi`)
+//     console.log(`Test case 2 is running at http://localhost:${PORT}/v1/api/test2?lang=en`)
 //   })
 // }
 // runTestServer()
