@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-02-12 16:52:32
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-24 11:18:35
+ * @LastEditTime  : 2025-05-26 00:19:09
  * @FilePath      : /server/src/common/middlewares/error.middleware.ts
  * @Description   : Default error handler middleware that handles all errors thrown in the application.
  */
@@ -15,7 +15,7 @@ import { ApiResponse } from '~/core/response/api.response'
 import { II18nService } from '~/infrastructure/i18n'
 import { ILogContext, IWinstonLoggerService } from '~/infrastructure/loggers'
 import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
-import { TRANSLATION_KEYS } from '~/shared/types'
+import { ErrorSeverity, TRANSLATION_KEYS } from '~/shared/types'
 
 /**
  * Global error handler middleware for Express applications
@@ -235,7 +235,9 @@ export class ErrorHandlerMiddleware {
 //         path: ['username'],
 //         code: 'MIN_LENGTH',
 //         location: 'body' as RequestSource,
-//         type: 'field'
+//         type: 'field',
+//         severity: 'low' as ErrorSeverity,
+//         suggestions: ['Ensure username is at least 3 characters long', 'Avoid special characters']
 //       },
 //       email: {
 //         message: 'Invalid email format',
@@ -243,7 +245,9 @@ export class ErrorHandlerMiddleware {
 //         path: ['email'],
 //         code: 'INVALID_FORMAT',
 //         location: 'body' as RequestSource,
-//         type: 'field'
+//         type: 'field',
+//         severity: 'medium' as ErrorSeverity,
+//         suggestions: ['Use a valid email format like']
 //       }
 //     }
     
