@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-05-03 23:22:37
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-23 21:59:41
+ * @LastEditTime  : 2025-05-26 15:03:02
  * @FilePath      : /server/src/infrastructure/i18n/i18n.service.ts
  * @Description   : Implementation of the I18n service for internationalization
  */
@@ -51,6 +51,30 @@ export class I18nService implements II18nService {
   private static DEFAULT_MESSAGE: string = 'Default message'
 
   /**
+   * Cache for storing translation results
+   * 
+   * @private
+   * @type {Map<string, string>}
+   * @description
+   * Stores translations keyed by language, translation key, and interpolation values hash.
+   * Improves performance by avoiding redundant translations of the same content.
+   * Cache entries follow format: `${language}_${key}:${valuesHash}`
+   */
+  private translationCache: Map<string, string> = new Map()
+
+  /**
+   * Cache for storing key existence check results
+   * 
+   * @private
+   * @type {Map<string, boolean>}
+   * @description
+   * Stores results of checks whether a translation key exists in a particular language.
+   * Improves performance by avoiding repeated existence checks for the same keys.
+   * Cache entries follow format: `${language}_${key}`
+   */
+  private keyExistsCache: Map<string, boolean> = new Map()
+
+  /**
    * Constructor for the I18nService
    * 
    * @constructor
@@ -59,6 +83,7 @@ export class I18nService implements II18nService {
    * Validates that i18next is properly initialized before allowing the service to be used.
    * This prevents unexpected behavior that would occur if translations were attempted
    * before the i18next library was ready.
+   * Also sets up automatic cache cleaning to prevent memory leaks in long-running applications.
    */
   constructor() {
     if (!i18next.isInitialized) {
@@ -69,6 +94,33 @@ export class I18nService implements II18nService {
         code: 'I18N_NOT_INITIALIZED',
       })
     }
+
+    // Set up periodic cache cleaning to prevent memory leaks
+    // Runs every hour (3600000ms) and limits each cache to 300 entries
+    setInterval(() => {
+      this.clearCaches(300)
+    }, 3600000) // Clear caches every hour
+  }
+
+  /**
+   * Generates a hash string from interpolation values for cache keys
+   * 
+   * @private
+   * @param {InterpolationValues} [values] - The interpolation values to hash
+   * @returns {string} A string representation of the values for use in cache keys
+   * @description
+   * Creates a deterministic hash string from interpolation values to use as part
+   * of cache keys. This ensures that the same values always produce the same hash,
+   * regardless of object property order.
+   */
+  private hashInterpolationValues(values?: InterpolationValues): string {
+    // { name: 'Phuc', count: 5 } => [['name', 'Phuc'], ['count', 5]] => [['count', 5], ['name', 'Phuc']] => 'count:5|name:Phuc'
+    if (!values) return ''
+    return Object
+      .entries(values)
+      .sort(([keyA], [keyB]) => keyA.localeCompare(keyB)) // Sort by keys to ensure consistent order
+      .map(([key, value]) => `${key}:${value}`)
+      .join('|')
   }
 
   /**
@@ -88,8 +140,25 @@ export class I18nService implements II18nService {
    * 
    * const vietnameseMessage = i18nService.getTFunction(req, 'vi')('common:BAD_REQUEST')
    */
+  /**
+   * Gets a translation function (t) for the specified request and language
+   * 
+   * @param {Request} req - Express request object containing language information
+   * @param {string} [language] - Optional override language code (e.g., 'en', 'vi')
+   * @returns {TFunction} Translation function bound to the specified language
+   * @description
+   * Creates a translation function bound to the specified language.
+   * 
+   * @example
+   * const t = i18nService.getTFunction(req)
+   * 
+   * const errorMessage = t('common:BAD_REQUEST')
+   * const welcomeMessage = t('user:WELCOME', { name: req.user.name })
+   * 
+   * const vietnameseMessage = i18nService.getTFunction(req, 'vi')('common:BAD_REQUEST')
+   */
   public getTFunction(req: Request, language?: string): TFunction {
-    const lng = language || req.language || this.defaultLanguage
+    const lng = this.getLanguageFromRequest(req, language)
     return i18next.getFixedT(lng) // Creates a translation function bound to the specified language
   }
 
@@ -115,8 +184,56 @@ export class I18nService implements II18nService {
    *   { name: 'Phuc', count: 5 }
    * ) // 'Hello, Phuc! You have 5 new messages."
    */
+  /**
+   * Translates a key into the corresponding text in the current language
+   * 
+   * @param {string} key - Translation key (e.g., 'common:not_found')
+   * @param {Request} [req] - Optional Express request object for language detection
+   * @param {InterpolationValues} [values] - Optional values for interpolation
+   * @param {string} [language] - Optional override language code (e.g., 'en', 'vi')
+   * @returns {string} Translated text
+   * @description
+   * Performs a one-time translation of the given key to text in the appropriate language.
+   * Uses caching to improve performance for frequently translated strings.
+   * 
+   * @example
+   * const errorMessage = i18nService.translate('common:BAD_REQUEST')
+   * 
+   * const welcomeMessage = i18nService.translate('user:WELCOME', req)
+   * 
+   * const notificationMessage = i18nService.translate(
+   *   'notification:NEW_MESSAGES', 
+   *   req, 
+   *   { name: 'Phuc', count: 5 }
+   * ) // 'Hello, Phuc! You have 5 new messages."
+   */
   public translate(key: string, req?: Request, values?: InterpolationValues, language?: string): string {
-    return i18next.t(key, { ...values, lng: language || req?.language || this.defaultLanguage })
+    // Get appropriate language based on priority
+    const lng = this.getLanguageFromRequest(req, language);
+    
+    // Generate cache key (format: language_key:valuesHash)
+    const valuesHash = this.hashInterpolationValues(values);
+    const cacheKey = `${lng}_${key}:${valuesHash}`;
+
+    // Check cache first for better performance
+    if (this.translationCache.has(cacheKey)) {
+      return this.translationCache.get(cacheKey)! as string;
+    }
+
+    // Perform actual translation via i18next
+    const translation = i18next.t(key, { ...values, lng });
+
+    // Cache management: prevent memory leaks by limiting cache size
+    if (this.translationCache.size >= 1000) {
+      // Remove oldest 100 entries when cache exceeds 1000 entries
+      const oldestKeys = Array.from(this.translationCache.keys()).slice(0, 100);
+      oldestKeys.forEach(k => this.translationCache.delete(k));
+    }
+    
+    // Store translation in cache for future use
+    this.translationCache.set(cacheKey, translation);
+
+    return translation;
   }
   
   /**
@@ -167,6 +284,10 @@ export class I18nService implements II18nService {
 
     try {
       await i18next.changeLanguage(language)
+
+      // Clear caches after changing language to avoid stale translations
+      this.translationCache.clear()
+      this.keyExistsCache.clear()
     } catch (error) {
       throw new AppError({
         translationKey: TRANSLATION_KEYS.INTERNAL_SERVER_ERROR,
@@ -177,6 +298,39 @@ export class I18nService implements II18nService {
     }
   }
 
+  /**
+   * Resolves a message using translation key or fallback to provided message
+   * 
+   * @param {Object} options - Options for resolving the message
+   * @param {TranslationKeys} options.translationKey - Key to use for translation lookup
+   * @param {string} [options.message] - Optional fallback message if translation fails
+   * @param {Request} [options.req] - Optional Express request object for language detection
+   * @param {string} [options.defaultMessage=DEFAULT_MESSAGE] - Optional default message if both translation and message fail
+   * @param {InterpolationValues} [options.interpolationValues] - Optional values for interpolation within the translation
+   * @param {boolean} [options.prioritizeTranslated=true] - Whether to prioritize translated text over provided message
+   * @returns {string} Resolved message in appropriate language
+   * @description
+   * Resolves messages using a flexible priority system based on available translations and preferences.
+   * This is particularly useful for error messages that may have both system-defined translations
+   * and custom overrides from API handlers.
+   * 
+   * @example
+   * return new ApiResponse({
+   *   code: RESPONSE_CODES.SUCCESS.code,
+   *   message: i18nService.resolveMessage({
+   *     translationKey: TRANSLATION_KEYS.USER_CREATED,
+   *     message: 'User profile created successfully',
+   *     req: req,
+   *     interpolationValues: { username: user.username }
+   *   })
+   * })
+   * 
+   * throw new AppError({
+   *   translationKey: TRANSLATION_KEYS.VALIDATION_ERROR,
+   *   message: 'Email format is invalid',
+   *   prioritizeTranslated: false
+   * })
+   */
   /**
    * Resolves a message using translation key or fallback to provided message
    * 
@@ -227,40 +381,124 @@ export class I18nService implements II18nService {
       prioritizeTranslated = true
     } = options
 
+    // If no translation key provided, return fallback message or default
     if (!translationKey) {
       return message?.trim() || defaultMessage
     }
 
-    /**
-     * Internal helper function to safely attempt translation
-     * 
-     * @returns {string|null} Translated message or null if translation failed
-     * @description
-     * Attempts to translate the provided key and returns the result if successful.
-     * Returns null if translation fails or if the key was returned unchanged
-     * (indicating i18next didn't find a matching translation).
-     */
-    const translateMessage = (): string | null => {
-      try {
-        // Translate the message key using translate method
-        const translatedMessage = this.translate(translationKey, req, interpolationValues)
-        // If i18next doesn't find a translation, it returns the key unchanged
-        return translatedMessage !== translationKey ? translatedMessage : null
-      } catch (error) {
-        // Gracefully handle any translation errors
-        return null
-      }
+    // Determines current language from request or default
+    const currentLanguage = req?.language || this.defaultLanguage
+
+    // Check if the translation key exists in the current language
+    // Note: This check appears to have a bug - it should check if this.hasTranslationKey(translationKey, currentLanguage)
+    // But it's checking the function itself instead
+    if (!this.hasTranslationKey(translationKey, currentLanguage)) {
+      return message?.trim() || defaultMessage
     }
 
-    if (prioritizeTranslated) {
-      const translatedMessage = translateMessage();
-      if (translatedMessage) return translatedMessage;
-      return message?.trim() || defaultMessage;
-    } else {
-      if (message?.trim()) return message;
-      const translatedMessage = translateMessage();
-      return translatedMessage || defaultMessage;
+    try {
+      // Translate the message using the translation key
+      const translatedMessage = this.translate(translationKey, req, interpolationValues)
+
+      // If we have a valid translation (not equal to the key itself)
+      if (translatedMessage && translatedMessage.trim() !== translationKey) {
+        return translatedMessage
+      }
+
+      // If we should prioritize the provided message over translation
+      if (!prioritizeTranslated && message?.trim()) {
+        return message
+      }
+
+      // Final fallback logic
+      return translatedMessage !== translationKey 
+        ? translatedMessage
+        : (message?.trim() || defaultMessage)
+    } catch (error) {
+      // Gracefully handle any unexpected translation errors
+      return message?.trim() || defaultMessage
     }
+  }
+
+  /**
+   * Checks if a translation key exists in the specified language
+   * 
+   * @param {TranslationKeys} key - The translation key to check for existence
+   * @param {string} [language] - Optional language code to check in (defaults to this.defaultLanguage)
+   * @returns {boolean} Whether the translation key exists in the specified language
+   * @description
+   * Determines if a translation key exists in the i18next resources for the specified language.
+   * Uses a cache to avoid repeated lookups of the same key. This is particularly useful for
+   * conditional rendering based on translation availability.
+   * 
+   * @example
+   * // Use a fallback UI if the welcome message isn't available in the user's language
+   * if (!i18nService.hasTranslationKey('welcome:GREETING', userLanguage)) {
+   *   // Show generic greeting instead
+   * }
+   */
+  public hasTranslationKey(key: TranslationKeys, language?: string): boolean {
+    const lng = language || this.defaultLanguage
+
+    // Generate cache key
+    const cacheKey = `${lng}_${key}`
+
+    // Check cache first
+    if (this.keyExistsCache.has(cacheKey)) {
+      return this.keyExistsCache.get(cacheKey)! as boolean
+    }
+
+    // Check if the key exists in i18next for the specified language
+    // Also check language base (e.g., 'en' for 'en-US') as a fallback
+    const exists = i18next.exists(key, { lng }) || i18next.exists(key, { lng: lng.split('-')[0] })
+  
+    // Store the result in cache for faster future lookups
+    this.keyExistsCache.set(cacheKey, exists)
+  
+    return exists
+  }
+
+  /**
+   * Clear caches when they grow too large to prevent memory leaks
+   * 
+   * @private
+   * @param {number} maxSize - Maximum allowed size for each cache
+   * @description
+   * Maintains cache size within limits by removing oldest entries when 
+   * cache size exceeds the specified maximum. This prevents unbounded
+   * growth of caches in long-running applications.
+   */
+  private clearCaches(maxSize: number = 500): void {
+    // Clear translation cache if too large
+    if (this.translationCache.size > maxSize) {
+      // Remove oldest entries first (FIFO approach)
+      const keysToDelete = Array.from(this.translationCache.keys()).slice(0, this.translationCache.size - maxSize);
+      keysToDelete.forEach(k => this.translationCache.delete(k));
+    }
+    
+    // Clear key exists cache if too large
+    if (this.keyExistsCache.size > maxSize) {
+      // Remove oldest entries first (FIFO approach)
+      const keysToDelete = Array.from(this.keyExistsCache.keys()).slice(0, this.keyExistsCache.size - maxSize);
+      keysToDelete.forEach(k => this.keyExistsCache.delete(k));
+    }
+  }
+
+  /**
+   * Lấy ngôn ngữ từ request hoặc fallback về ngôn ngữ mặc định
+   * 
+   * @private
+   * @param {Request} [req] - Express request object chứa thông tin ngôn ngữ 
+   * @param {string} [explicitLanguage] - Ngôn ngữ được chỉ định rõ ràng sẽ được ưu tiên
+   * @returns {string} Mã ngôn ngữ để sử dụng
+   * @description
+   * Trích xuất mã ngôn ngữ từ các nguồn với thứ tự ưu tiên:
+   * 1. Ngôn ngữ được cung cấp rõ ràng
+   * 2. Ngôn ngữ từ request.language (được thiết lập bởi i18next-http-middleware)
+   * 3. Ngôn ngữ mặc định
+   */
+  private getLanguageFromRequest(req?: Request, explicitLanguage?: string): string {
+    return explicitLanguage || req?.language || this.defaultLanguage;
   }
 }
 

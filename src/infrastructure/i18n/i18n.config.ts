@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-05-03 09:36:35
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-23 19:54:33
+ * @LastEditTime  : 2025-05-26 10:59:34
  * @FilePath      : /server/src/infrastructure/i18n/i18n.config.ts
  * @Description   : Configuration and Initialization for i18n (internationalization) in the application.
  */
@@ -34,10 +34,10 @@ export const namespaces = [
   'report',
   'subscription',
   'token',
-  'report',
   'trend',
   'user',
   'validation',
+  'suggestions',
 ] // List of namespaces
 
 /**
