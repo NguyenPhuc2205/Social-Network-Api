@@ -1,0 +1,127 @@
+{
+  "NOT_FOUND": "User not found",
+  "DELETED": "User has been deleted",
+  "CREATED": "User created successfully",
+  "UPDATED": "User information updated successfully",
+  "ACCOUNT_DEACTIVATED": "Account has been deactivated",
+  "ACCOUNT_REACTIVATED": "Account has been reactivated",
+  "PROFILE_UPDATED": "Profile updated successfully",
+  "PROFILE_RETRIEVED": "Profile information retrieved successfully",
+  "PROFILE_NOT_FOUND": "Profile not found",
+  "PROFILE_PICTURE_UPDATED": "Profile picture updated successfully",
+  "PROFILE_PICTURE_DELETED": "Profile picture has been deleted",
+  "COVER_PHOTO_UPDATED": "Cover photo updated successfully",
+  "COVER_PHOTO_DELETED": "Cover photo has been deleted",
+  "USERNAME_UPDATED": "Username updated successfully",
+  "USERNAME_UNAVAILABLE": "This username is not available",
+  "USERNAME_RESERVED": "This username is reserved",
+  "BIO_UPDATED": "Bio updated successfully",
+  "WEBSITE_UPDATED": "Website updated successfully",
+  "LOCATION_UPDATED": "Location updated successfully",
+  "PRIVACY_SETTINGS_UPDATED": "Privacy settings updated successfully",
+  "PROFILE_DEACTIVATED": "Profile has been successfully deactivated",
+  "PROFILE_REACTIVATED": "Profile has been successfully reactivated",
+  "PROFILE_VERIFICATION_REQUESTED": "Profile verification request has been sent",
+  "PROFILE_VERIFIED": "Profile has been successfully verified",
+  "PROFILE_VERIFICATION_REJECTED": "Profile verification request has been rejected",
+  "CANNOT_UPDATE_FIELD": "Cannot update {{field}} at this time",
+  "PROFILE_METRICS_RETRIEVED": "Profile metrics retrieved successfully",
+  "CANNOT_VIEW_PROFILE": "You cannot view this profile",
+  "ACCOUNT_PROTECTED": "This account is protected",
+  "EMAIL_CHANGED": "Email has been changed",
+  "PHONE_VERIFIED": "Phone number has been verified",
+  "PASSWORD_UPDATED": "Password updated successfully",
+  "EMAIL_UPDATED": "Email updated successfully",
+  "BLOCKED": "User {{username}} has been blocked",
+  "UNBLOCKED": "User {{username}} has been unblocked",
+  "FOLLOWED": "Following {{username}}",
+  "UNFOLLOWED": "Unfollowed {{username}}",
+  "FOLLOW_SUCCESS": "You have successfully followed this user",
+  "ALREADY_FOLLOWED": "You are already following this user",
+  "NOT_FOLLOWING": "You are not following or have already unfollowed this user",
+  "UNFOLLOW_SUCCESS": "You have successfully unfollowed this user",
+  "CANNOT_FOLLOW_YOURSELF": "You cannot follow yourself",
+  "FOLLOWER_COUNT_LIMIT_REACHED": "You have reached the maximum number of users you can follow",
+  "USER_BLOCKED": "You cannot follow this user because they have blocked you",
+  "USER_DEACTIVATED": "This user account has been deactivated",
+  "FOLLOW_REQUEST_SENT": "Your follow request has been sent and is pending approval",
+  "FOLLOW_REQUEST_ACCEPTED": "Follow request has been accepted",
+  "FOLLOW_REQUEST_REJECTED": "Follow request has been rejected",
+  "FOLLOWER_NOT_FOUND": "Follower relationship not found",
+  "OPERATION_NOT_PERMITTED": "This operation is not permitted",
+  
+  "FIELDS": {
+    "NAME": {
+      "REQUIRED": "Name is required",
+      "MUST_BE_STRING": "Name must be a text string",
+      "LENGTH": "Name must be between 2 and 50 characters"
+    },
+    "EMAIL": {
+      "REQUIRED": "Email address is required",
+      "MUST_BE_STRING": "Email must be a text string",
+      "INVALID": "Please enter a valid email address",
+      "ALREADY_EXISTS": "This email address is already registered",
+      "NOT_VERIFIED": "Email is not verified"
+    },
+    "PASSWORD": {
+      "REQUIRED": "Password is required",
+      "MUST_BE_STRING": "Password must be a text string",
+      "LENGTH": "Password must be between 8 and 100 characters",
+      "COMPLEXITY": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+      "CONFIRMATION_REQUIRED": "Password confirmation is required",
+      "CONFIRMATION_MUST_BE_STRING": "Password confirmation must be a text string",
+      "CONFIRMATION_LENGTH": "Password confirmation must be between 8 and 100 characters",
+      "CONFIRMATION_MISMATCH": "Passwords do not match",
+      "WEAK": "Password is too weak"
+    },
+    "DATE_OF_BIRTH": {
+      "REQUIRED": "Date of birth is required",
+      "INVALID": "Date of birth is invalid",
+      "TOO_YOUNG": "You must be at least 13 years old to register",
+      "TOO_OLD": "Invalid date of birth (maximum age is 120 years)",
+      "MUST_BE_ISO8601": "Date of birth must be in ISO8601 format (YYYY-MM-DD)"
+    },
+    "BIO": {
+      "REQUIRED": "Bio is required",
+      "MUST_BE_STRING": "Bio must be a text string",
+      "LENGTH": "Bio must be between 0 and 160 characters"
+    },
+    "WEBSITE": {
+      "REQUIRED": "Website is required",
+      "MUST_BE_STRING": "Website must be a text string",
+      "LENGTH": "Website URL is too long"
+    },
+    "USERNAME": {
+      "REQUIRED": "Username is required",
+      "MUST_BE_STRING": "Username must be a text string",
+      "LENGTH": "Username must be between 3 and 15 characters",
+      "ALREADY_EXISTS": "This username is already taken",
+      "INVALID_FORMAT": "Username can only contain letters, numbers, underscores, and dots"
+    },
+    "AVATAR": {
+      "REQUIRED": "Avatar is required",
+      "MUST_BE_STRING": "Avatar must be a text string",
+      "INVALID_FORMAT": "Avatar must be a valid image URL",
+      "SIZE": "Avatar file size is too large",
+      "LENGTH": "Avatar URL is too long"
+    },
+    "COVER": {
+      "REQUIRED": "Cover image is required",
+      "MUST_BE_STRING": "Cover image must be a text string",
+      "INVALID_FORMAT": "Cover image must be a valid image URL",
+      "SIZE": "Cover image file size is too large",
+      "LENGTH": "Cover image URL is too long"
+    },
+    "LOCATION": {
+      "REQUIRED": "Location is required",
+      "MUST_BE_STRING": "Location must be a text string",
+      "LENGTH": "Location must be between 0 and 30 characters"
+    },
+    "PHONE": {
+      "REQUIRED": "Phone number is required",
+      "MUST_BE_STRING": "Phone number must be a text string",
+      "INVALID_FORMAT": "Phone number format is invalid",
+      "ALREADY_EXISTS": "This phone number is already registered"
+    }
+  }
+}

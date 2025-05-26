@@ -1,0 +1,41 @@
+﻿{
+  "FOLLOW_USER_SUCCESS": "Bạn đã theo dõi người dùng này thành công",
+  "FOLLOWED_USER": "Bạn đã đang theo dõi người dùng này",
+  "NOT_FOLLOWING_OR_ALREADY_UNFOLLOWED": "Bạn không theo dõi người dùng này hoặc đã hủy theo dõi",
+  "UNFOLLOW_SUCCESS": "Bạn đã hủy theo dõi người dùng này thành công",
+  
+  "USER_ID_IS_REQUIRED": "ID người dùng không được để trống",
+  "USER_ID_MUST_BE_STRING": "ID người dùng phải là chuỗi văn bản",
+  "INVALID_USER_ID": "Định dạng ID người dùng không hợp lệ",
+  "USER_NOT_FOUND": "Không tìm thấy người dùng",
+  "CANNOT_FOLLOW_YOURSELF": "Bạn không thể tự theo dõi chính mình",
+  
+  "FOLLOWER_COUNT_LIMIT_REACHED": "Bạn đã đạt đến số lượng người dùng tối đa có thể theo dõi",
+  "USER_BLOCKED": "Bạn không thể theo dõi người dùng này vì họ đã chặn bạn",
+  "USER_DEACTIVATED": "Tài khoản người dùng này đã bị vô hiệu hóa",
+  
+  "FOLLOW_REQUEST_SENT": "Yêu cầu theo dõi của bạn đã được gửi và đang chờ phê duyệt",
+  "FOLLOW_REQUEST_ACCEPTED": "Yêu cầu theo dõi đã được chấp nhận",
+  "FOLLOW_REQUEST_REJECTED": "Yêu cầu theo dõi đã bị từ chối",
+  "FOLLOW_REQUEST_CANCELLED": "Yêu cầu theo dõi đã được hủy",
+  
+  "FOLLOWER_NOT_FOUND": "Không tìm thấy mối quan hệ theo dõi",
+  "OPERATION_NOT_PERMITTED": "Thao tác này không được phép",
+  
+  "FOLLOWING_FETCHED": "Lấy danh sách người dùng bạn đang theo dõi thành công",
+  "FOLLOWERS_FETCHED": "Lấy danh sách người dùng theo dõi bạn thành công",
+  "NO_FOLLOWERS": "Người dùng này chưa có người theo dõi",
+  "NO_FOLLOWING": "Người dùng này chưa theo dõi ai",
+  
+  "FOLLOW_REQUESTS_FETCHED": "Lấy danh sách yêu cầu theo dõi thành công",
+  "FOLLOW_REQUESTS_APPROVED": "Yêu cầu theo dõi đã được chấp nhận",
+  "FOLLOW_REQUESTS_REJECTED": "Yêu cầu theo dõi đã bị từ chối",
+  
+  "MUTE_USER_SUCCESS": "Tắt thông báo từ người dùng thành công",
+  "UNMUTE_USER_SUCCESS": "Bật thông báo từ người dùng thành công",
+  "USER_ALREADY_MUTED": "Người dùng này đã bị tắt thông báo",
+  "USER_NOT_MUTED": "Người dùng này chưa bị tắt thông báo",
+  
+  "MUTUAL_FOLLOWERS_FETCHED": "Lấy danh sách người theo dõi chung thành công",
+  "NO_MUTUAL_FOLLOWERS": "Không tìm thấy người theo dõi chung"
+}

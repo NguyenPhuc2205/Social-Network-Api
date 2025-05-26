@@ -1,0 +1,36 @@
+﻿{
+  "COMMENT_CREATED": "Bình luận đã được tạo thành công",
+  "COMMENT_UPDATED": "Bình luận đã được cập nhật thành công",
+  "COMMENT_DELETED": "Bình luận đã được xóa thành công",
+  "COMMENT_NOT_FOUND": "Không tìm thấy bình luận",
+  "INVALID_COMMENT_CONTENT": "Nội dung bình luận không hợp lệ",
+  
+  "CONTENT_IS_REQUIRED": "Nội dung bình luận không được để trống",
+  "CONTENT_MUST_BE_STRING": "Nội dung bình luận phải là chuỗi văn bản",
+  "CONTENT_LENGTH": "Nội dung bình luận phải có độ dài từ 1 đến 1000 ký tự",
+  
+  "COMMENT_ID_IS_REQUIRED": "ID bình luận không được để trống",
+  "COMMENT_ID_MUST_BE_STRING": "ID bình luận phải là chuỗi văn bản",
+  "INVALID_COMMENT_ID": "Định dạng ID bình luận không hợp lệ",
+  
+  "PARENT_ID_INVALID": "ID bình luận cha không hợp lệ",
+  "TOO_MANY_NESTED_COMMENTS": "Bình luận chỉ có thể lồng nhau tối đa 2 cấp",
+  
+  "USER_NOT_AUTHORIZED": "Bạn không có quyền thực hiện hành động này với bình luận này",
+  "COMMENT_ALREADY_DELETED": "Bình luận này đã bị xóa",
+  
+  "TWEET_ID_IS_REQUIRED": "ID tweet không được để trống",
+  "TWEET_ID_MUST_BE_STRING": "ID tweet phải là chuỗi văn bản",
+  "INVALID_TWEET_ID": "Định dạng ID tweet không hợp lệ",
+  "TWEET_NOT_FOUND": "Không tìm thấy tweet",
+  
+  "CANNOT_REPLY_TO_DELETED_COMMENT": "Không thể trả lời bình luận đã bị xóa",
+  "TOO_MANY_COMMENTS": "Quá nhiều bình luận trên bài đăng này. Vui lòng thử lại sau",
+  
+  "MEDIA_LENGTH_EXCEEDED": "Vượt quá số lượng tệp media tối đa",
+  "MEDIA_INVALID_FORMAT": "Định dạng media không hợp lệ",
+  "MEDIA_SIZE_EXCEEDED": "Kích thước tệp media vượt quá giới hạn",
+  
+  "COMMENT_EDITED": "Bình luận đã được chỉnh sửa",
+  "COMMENT_REPORTED": "Bình luận đã được báo cáo thành công"
+}

@@ -1,0 +1,66 @@
+{
+  "CREATED": "Post has been created",
+  "UPDATED": "Post has been updated",
+  "DELETED": "Post has been deleted",
+  "ALREADY_DELETED": "This post has already been deleted",
+  "PUBLISHED": "Post has been published",
+  "UNPUBLISHED": "Post has been saved as draft",
+  "LIKED": "Post has been liked",
+  "UNLIKED": "Post has been unliked",
+  "SHARED": "Post has been shared",
+  "REPORTED": "Post has been reported",
+  "BOOKMARKED": "Post has been bookmarked",
+  "UNBOOKMARKED": "Post has been unbookmarked",
+  
+  "TOO_MANY_TAGS": "Too many tags (maximum {{max}})",
+  "CONTENT_TOO_LONG": "Content is too long (maximum {{max}} characters)",
+  "DUPLICATE_CONTENT": "Duplicate content",
+  "CONTENT_REQUIRED": "Post content is required",
+  
+  "FETCHED": "Posts retrieved successfully",
+  "VISIBILITY_UPDATED": "Post visibility has been updated to {{visibility}}",
+  "PINNED": "Post has been pinned to your profile",
+  "UNPINNED": "Post has been unpinned from your profile",
+  "ALREADY_PINNED": "This post is already pinned to your profile",
+  "MAX_PINNED_REACHED": "You cannot pin more than {{maxPinned}} posts",
+  
+  "COMMENT_ADDED": "Comment has been added",
+  "COMMENT_UPDATED": "Comment has been updated",
+  "COMMENT_DELETED": "Comment has been deleted",
+  "COMMENT_NOT_FOUND": "Comment not found",
+  
+  "MEDIA_REQUIRED": "At least one media is required for this post type",
+  "MEDIA_COUNT_EXCEEDED": "Media count exceeds the limit (maximum {{max}})",
+  "MEDIA_SIZE_EXCEEDED": "File size exceeds the limit (maximum {{max}}MB)",
+  "MEDIA_TYPE_NOT_SUPPORTED": "Media type not supported",
+  "MEDIA_UPLOAD_FAILED": "Media upload failed",
+  
+  "MENTIONS_LIMIT_EXCEEDED": "Mentions count exceeds the limit (maximum {{max}})",
+  "HASHTAGS_LIMIT_EXCEEDED": "Hashtags count exceeds the limit (maximum {{max}})",
+  
+  "POLL_CREATED": "Poll has been created",
+  "POLL_ENDED": "Poll has ended",
+  "POLL_VOTED": "Vote submitted successfully",
+  "POLL_VOTE_UPDATED": "Vote has been updated",
+  "POLL_ALREADY_VOTED": "You have already voted",
+  "POLL_ENDED_CANNOT_VOTE": "Poll has ended, cannot vote",
+  "POLL_OPTIONS_REQUIRED": "At least 2 options are required for a poll",
+  "POLL_TOO_MANY_OPTIONS": "Too many options for poll (maximum {{max}})",
+  "POLL_DURATION_INVALID": "Invalid poll duration",
+  
+  "POST_TYPES": {
+    "ORIGINAL": "original post",
+    "SHARE": "share",
+    "COMMENT": "comment",
+    "QUOTE": "quote",
+    "REPLY": "reply",
+    "STORY": "story",
+    "REEL": "reel",
+    "POLL": "poll"
+  },
+  
+  "POST_AUDIENCE": {
+    "EVERYONE": "everyone",
+    "CLOSE_CIRCLE": "close friends only"
+  }
+}

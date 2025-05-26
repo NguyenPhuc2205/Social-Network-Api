@@ -19,7 +19,7 @@ export default [
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
       'prettier/prettier': [
-        'warn',
+        'off',
         {
           arrowParens: 'always',
           semi: false,
@@ -33,12 +33,12 @@ export default [
         }
       ],
 
-      'jsdoc/check-alignment': 'error',
-      'jsdoc/check-param-names': 'error',
-      'jsdoc/check-tag-names': 'error',
-      'jsdoc/check-types': 'error',
+      'jsdoc/check-alignment': 'off',
+      'jsdoc/check-param-names': 'off',
+      'jsdoc/check-tag-names': 'off',
+      'jsdoc/check-types': 'off',
       'jsdoc/require-jsdoc': [
-        'warn',
+        'off',
         {
           require: {
             FunctionDeclaration: true,
@@ -48,12 +48,12 @@ export default [
           }
         }
       ],
-      'jsdoc/require-param': 'warn',
-      'jsdoc/require-param-description': 'warn',
-      'jsdoc/require-param-type': 'warn',
-      'jsdoc/require-returns': 'warn',
-      'jsdoc/require-returns-description': 'warn',
-      'jsdoc/require-returns-type': 'warn'
+      'jsdoc/require-param': 'off',
+      'jsdoc/require-param-description': 'off',
+      'jsdoc/require-param-type': 'off',
+      'jsdoc/require-returns': 'off',
+      'jsdoc/require-returns-description': 'off',
+      'jsdoc/require-returns-type': 'off'
     }
   },
   {

@@ -1,0 +1,26 @@
+{
+  "BOOKMARK_ADDED": "Post added to bookmarks",
+  "BOOKMARK_REMOVED": "Post removed from bookmarks",
+  "BOOKMARK_ALREADY_EXISTS": "This post is already in your bookmarks",
+  "BOOKMARK_NOT_FOUND": "Bookmark not found",
+  "BOOKMARKS_CLEARED": "All bookmarks cleared",
+  "BOOKMARK_LIST_FETCHED": "Bookmarks retrieved successfully",
+  "BOOKMARK_LIMIT_REACHED": "Bookmark limit reached (maximum {{limit}})",
+  
+  "POST_ID_IS_REQUIRED": "Post ID is required",
+  "POST_ID_MUST_BE_STRING": "Post ID must be a string",
+  "INVALID_POST_ID": "Invalid post ID format",
+  "POST_NOT_FOUND": "Post not found",
+  "POST_DELETED": "This post has been deleted",
+  
+  "COLLECTION_CREATED": "Bookmark collection created",
+  "COLLECTION_UPDATED": "Bookmark collection updated",
+  "COLLECTION_DELETED": "Bookmark collection deleted",
+  "COLLECTION_NOT_FOUND": "Bookmark collection not found",
+  "COLLECTION_NAME_REQUIRED": "Collection name is required",
+  "COLLECTION_NAME_TOO_LONG": "Collection name is too long (maximum {{max}} characters)",
+  "COLLECTION_LIMIT_REACHED": "Maximum number of collections reached",
+  "BOOKMARK_ADDED_TO_COLLECTION": "Bookmark added to collection",
+  "BOOKMARK_REMOVED_FROM_COLLECTION": "Bookmark removed from collection",
+  "DUPLICATE_COLLECTION_NAME": "Collection name already exists"
+}

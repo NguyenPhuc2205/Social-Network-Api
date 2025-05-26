@@ -1,0 +1,102 @@
+{
+  "NOT_FOUND": "Người dùng không tìm thấy",
+  "DELETED": "Người dùng đã bị xóa",
+  "CREATED": "Người dùng được tạo thành công",
+  "UPDATED": "Thông tin người dùng được cập nhật thành công",
+  "ACCOUNT_DEACTIVATED": "Tài khoản đã được vô hiệu hóa",
+  "ACCOUNT_REACTIVATED": "Tài khoản đã được kích hoạt lại",
+  "PROFILE_UPDATED": "Hồ sơ được cập nhật thành công",
+  "PROFILE_RETRIEVED": "Lấy thông tin hồ sơ thành công",
+  "PROFILE_NOT_FOUND": "Hồ sơ không tìm thấy",
+  "PROFILE_PICTURE_UPDATED": "Ảnh đại diện được cập nhật thành công",
+  "PROFILE_PICTURE_DELETED": "Ảnh đại diện đã được xóa",
+  "COVER_PHOTO_UPDATED": "Ảnh bìa được cập nhật thành công",
+  "COVER_PHOTO_DELETED": "Ảnh bìa đã được xóa",
+  "USERNAME_UPDATED": "Tên người dùng được cập nhật thành công",
+  "USERNAME_UNAVAILABLE": "Tên người dùng này không khả dụng",
+  "USERNAME_RESERVED": "Tên người dùng này đã được đặt trước",
+  "BIO_UPDATED": "Tiểu sử được cập nhật thành công",
+  "WEBSITE_UPDATED": "Website được cập nhật thành công",
+  "LOCATION_UPDATED": "Vị trí được cập nhật thành công",
+  "PRIVACY_SETTINGS_UPDATED": "Cài đặt quyền riêng tư được cập nhật thành công",
+  "PROFILE_DEACTIVATED": "Hồ sơ đã được vô hiệu hóa thành công",
+  "PROFILE_REACTIVATED": "Hồ sơ đã được kích hoạt lại thành công",
+  "PROFILE_VERIFICATION_REQUESTED": "Yêu cầu xác minh hồ sơ đã được gửi",
+  "PROFILE_VERIFIED": "Hồ sơ đã được xác minh thành công",
+  "PROFILE_VERIFICATION_REJECTED": "Yêu cầu xác minh hồ sơ bị từ chối",
+  "CANNOT_UPDATE_FIELD": "Không thể cập nhật {{field}} vào lúc này",
+  "PROFILE_METRICS_RETRIEVED": "Dữ liệu phân tích hồ sơ được lấy thành công",
+  "CANNOT_VIEW_PROFILE": "Bạn không thể xem hồ sơ này",
+  "ACCOUNT_PROTECTED": "Tài khoản này được bảo vệ",
+  "EMAIL_CHANGED": "Email đã được thay đổi thành công",
+  "PHONE_VERIFIED": "Số điện thoại đã được xác thực",
+  "PASSWORD_UPDATED": "Mật khẩu đã được cập nhật thành công",
+  "EMAIL_UPDATED": "Email đã được cập nhật thành công",
+  "BLOCKED": "Người dùng {{username}} đã bị chặn",
+  "UNBLOCKED": "Người dùng {{username}} đã được bỏ chặn",
+  "FOLLOWED": "Đang theo dõi {{username}}",
+  "UNFOLLOWED": "Đã hủy theo dõi {{username}}",
+  "FOLLOW_SUCCESS": "Bạn đã theo dõi người dùng này thành công",
+  "ALREADY_FOLLOWED": "Bạn đã đang theo dõi người dùng này",
+  "NOT_FOLLOWING": "Bạn không theo dõi hoặc đã hủy theo dõi người dùng này",
+  "UNFOLLOW_SUCCESS": "Bạn đã hủy theo dõi người dùng này thành công",
+  "CANNOT_FOLLOW_YOURSELF": "Bạn không thể tự theo dõi chính mình",
+  "FOLLOWER_COUNT_LIMIT_REACHED": "Bạn đã đạt đến số lượng người dùng tối đa có thể theo dõi",
+  "USER_BLOCKED": "Bạn không thể theo dõi người dùng này vì họ đã chặn bạn",
+  "USER_DEACTIVATED": "Tài khoản người dùng này đã bị vô hiệu hóa",
+  "FOLLOW_REQUEST_SENT": "Yêu cầu theo dõi của bạn đã được gửi và đang chờ phê duyệt",
+  "FOLLOW_REQUEST_ACCEPTED": "Yêu cầu theo dõi đã được chấp nhận",
+  "FOLLOW_REQUEST_REJECTED": "Yêu cầu theo dõi đã bị từ chối",
+  "FOLLOWER_NOT_FOUND": "Không tìm thấy mối quan hệ theo dõi",
+  "OPERATION_NOT_PERMITTED": "Thao tác này không được phép",
+  
+  "FIELDS": {
+    "NAME": {
+      "REQUIRED": "Tên là bắt buộc",
+      "MUST_BE_STRING": "Tên phải là chuỗi văn bản",
+      "LENGTH": "Tên phải có độ dài từ 2 đến 50 ký tự"
+    },
+    "EMAIL": {
+      "REQUIRED": "Địa chỉ email là bắt buộc",
+      "MUST_BE_STRING": "Email phải là chuỗi văn bản",
+      "INVALID": "Vui lòng nhập một địa chỉ email hợp lệ",
+      "ALREADY_EXISTS": "Địa chỉ email này đã được đăng ký",
+      "NOT_VERIFIED": "Email chưa được xác thực"
+    },
+    "PASSWORD": {
+      "REQUIRED": "Mật khẩu là bắt buộc",
+      "MUST_BE_STRING": "Mật khẩu phải là chuỗi văn bản",
+      "LENGTH": "Mật khẩu phải có độ dài từ 8 đến 100 ký tự",
+      "COMPLEXITY": "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường, một số, và một ký tự đặc biệt",
+      "CONFIRMATION_REQUIRED": "Xác nhận mật khẩu là bắt buộc",
+      "CONFIRMATION_MUST_BE_STRING": "Xác nhận mật khẩu phải là chuỗi văn bản",
+      "CONFIRMATION_LENGTH": "Xác nhận mật khẩu phải có độ dài từ 8 đến 100 ký tự",
+      "CONFIRMATION_MISMATCH": "Mật khẩu không khớp",
+      "WEAK": "Mật khẩu quá yếu"
+    },
+    "DATE_OF_BIRTH": {
+      "REQUIRED": "Ngày sinh là bắt buộc",
+      "INVALID": "Ngày sinh không hợp lệ",
+      "TOO_YOUNG": "Bạn phải từ 13 tuổi trở lên để đăng ký",
+      "TOO_OLD": "Ngày sinh không hợp lệ (tuổi tối đa là 120 năm)",
+      "MUST_BE_ISO8601": "Ngày sinh phải có định dạng ISO8601 (YYYY-MM-DD)"
+    },
+    "BIO": {
+      "REQUIRED": "Tiểu sử là bắt buộc",
+      "MUST_BE_STRING": "Tiểu sử phải là chuỗi văn bản",
+      "LENGTH": "Tiểu sử phải có độ dài từ 0 đến 160 ký tự"
+    },
+    "WEBSITE": {
+      "REQUIRED": "Website là bắt buộc",
+      "MUST_BE_STRING": "Website phải là chuỗi văn bản",
+      "LENGTH": "URL website quá dài"
+    },
+    "USERNAME": {
+      "REQUIRED": "Tên người dùng là bắt buộc",
+      "MUST_BE_STRING": "Tên người dùng phải là chuỗi văn bản",
+      "LENGTH": "Tên người dùng phải có độ dài từ 3 đến 15 ký tự",
+      "ALREADY_EXISTS": "Tên người dùng này đã được sử dụng",
+      "INVALID_FORMAT": "Tên người dùng chỉ được chứa chữ cái, số, dấu gạch dưới và dấu chấm"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "SENT": "Message sent successfully",
+  "DELIVERED": "Message delivered",
+  "READ": "Message read",
+  "FAILED_TO_SEND": "Failed to send message",
+  "DELETED": "Message deleted",
+  "DELETED_FOR_EVERYONE": "Message deleted for everyone",
+  "EDITED": "Message edited",
+  "FORWARDED": "Message forwarded",
+  "REPLIED": "Message replied",
+  "REACTED": "Reacted to message",
+  "UNSENT": "Message unsent",
+  "CONTENT_REQUIRED": "Message content is required",
+  "EMPTY": "Message cannot be empty",
+  "TOO_LONG": "Message is too long (maximum {{max}} characters)",
+  "MEDIA_LIMIT": "You can only attach up to {{max}} media items",
+  "NOT_FOUND": "Message not found or has been deleted",
+  "ATTACHMENT_TOO_LARGE": "Attachment is too large",
+  "UNSUPPORTED_FILE_TYPE": "File type not supported",
+  "FAILED": "Failed to send message",
+  "CONVERSATION": {
+    "CREATED": "Conversation started",
+    "DELETED": "Conversation deleted",
+    "NOT_FOUND": "Conversation not found",
+    "LEAVE": "You left the conversation",
+    "MARKED_READ": "Conversation marked as read",
+    "MUTED": "Conversation muted",
+    "UNMUTED": "Conversation unmuted"
+  },
+  "PRIVACY": {
+    "BLOCKED_USER": "You cannot message this user",
+    "RESTRICTED": "This user only accepts messages from people they follow",
+    "NOT_ACCEPTING": "This user is not accepting messages right now",
+    "BLOCKED_BY_USER": "You cannot message this user because they have blocked you"
+  },
+  "MEDIA": {
+    "UPLOAD_SUCCESS": "Media uploaded successfully",
+    "UPLOAD_FAILED": "Failed to upload media",
+    "PROCESSING": "Media is being processed",
+    "TYPE_NOT_SUPPORTED": "This media type is not supported"
+  },  "ACTIONS": {
+    "FORWARD": "Message forwarded",
+    "COPY": "Message copied",
+    "REPORT": "Message reported"
+  },
+
+  "TYPING": {
+    "SINGLE": "{{name}} is typing...",
+    "MULTIPLE": "Several people are typing...",
+    "STOPPED": ""
+  },
+  
+  "GROUP_MESSAGE": {
+    "SENT": "Group message sent",
+    "BROADCAST": "{{name}} sent a message to all group members"
+  }
+}

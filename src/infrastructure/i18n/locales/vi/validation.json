@@ -1,0 +1,79 @@
+{
+  "REQUIRED": "Trường {{field}} là bắt buộc và không thể bỏ trống",
+  "INVALID": "Trường {{field}} không hợp lệ. Vui lòng kiểm tra và thử lại",
+  "MIN_LENGTH": "Trường {{field}} phải có ít nhất {{min}} ký tự",
+  "MAX_LENGTH": "Trường {{field}} không được vượt quá {{max}} ký tự",
+  "LENGTH_BETWEEN": "Trường {{field}} phải có độ dài từ {{min}} đến {{max}} ký tự",
+  "MIN_VALUE": "Trường {{field}} phải lớn hơn hoặc bằng {{min}}",
+  "MAX_VALUE": "Trường {{field}} phải nhỏ hơn hoặc bằng {{max}}",
+  "VALUE_BETWEEN": "Trường {{field}} phải nằm trong khoảng từ {{min}} đến {{max}}",
+  "FORMAT_INVALID": "Định dạng của trường {{field}} không chính xác",
+  "TYPE_MISMATCH": "Trường {{field}} phải là {{expected}}, nhưng nhận được {{received}}",
+  "MUST_BE_STRING": "{{field}} phải là chuỗi văn bản",
+  "MUST_BE_NUMBER": "{{field}} phải là số",
+  "MUST_BE_BOOLEAN": "{{field}} phải là boolean",
+  "MUST_BE_DATE": "{{field}} phải là ngày hợp lệ",
+  "MUST_BE_ARRAY": "{{field}} phải là mảng",
+  "MUST_BE_OBJECT": "{{field}} phải là object",
+  "MUST_BE_UNIQUE": "{{field}} phải là duy nhất",
+  "CANNOT_BE_EMPTY": "{{field}} không được để trống",
+  "MUST_BE_VALID_ID": "{{field}} phải là ID hợp lệ",
+  "ALREADY_EXISTS": "{{field}} đã tồn tại",
+  "NOT_FOUND": "{{field}} không tìm thấy",
+  "ENUM_INVALID": "{{field}} phải là một trong các giá trị được chấp nhận",
+  "UNEXPECTED_KEYS": "{{field}} chứa các thuộc tính không được phép: {{keys}}",
+  "LITERAL_MISMATCH": "{{field}} phải khớp với giá trị cụ thể",
+  "CUSTOM_VALIDATION": "{{field}} không hợp lệ theo quy tắc tùy chỉnh",
+  "UNKNOWN_VALIDATION": "{{field}} không hợp lệ (lỗi không xác định)",
+
+  "FORMATS": {
+    "EMAIL_INVALID": "Địa chỉ email không hợp lệ",
+    "URL_INVALID": "URL không hợp lệ",
+    "UUID_INVALID": "UUID không hợp lệ",
+    "CUID_INVALID": "CUID không hợp lệ",
+    "REGEX_INVALID": "Không khớp với biểu thức chính quy yêu cầu",
+    "DATE_INVALID": "Định dạng ngày không hợp lệ",
+    "NUMERIC_INVALID": "Chỉ được chứa số",
+    "ALPHANUMERIC_INVALID": "Chỉ được chứa chữ cái và số",
+    "PASSWORD_COMPLEXITY": "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường, một số và một ký tự đặc biệt",
+    "PASSWORD_CONFIRMATION_MISMATCH": "Mật khẩu xác nhận không khớp"
+  },
+
+  "FIELDS": {
+    "EMAIL": {
+      "INVALID_FORMAT": "Định dạng email không hợp lệ",
+      "NOT_VERIFIED": "Email chưa được xác thực"
+    },
+    "PASSWORD": {
+      "WEAK": "Mật khẩu quá yếu"
+    },
+    "USERNAME": {
+      "INVALID_FORMAT": "Tên người dùng chỉ được chứa chữ cái, số, gạch dưới và dấu chấm"
+    },
+    "PHONE": {
+      "INVALID_FORMAT": "Số điện thoại không đúng định dạng"
+    },
+    "DATE_OF_BIRTH": {
+      "INVALID_FORMAT": "Ngày sinh phải có định dạng ISO8601 (YYYY-MM-DD)",
+      "TOO_YOUNG": "Bạn phải từ 13 tuổi trở lên để đăng ký",
+      "TOO_OLD": "Ngày sinh không hợp lệ (tuổi tối đa là 120)"
+    },
+    "BIO": {
+      "LENGTH": "Tiểu sử phải từ 0 đến 160 ký tự"
+    },
+    "WEBSITE": {
+      "LENGTH": "URL website quá dài"
+    },
+    "LOCATION": {
+      "LENGTH": "Vị trí phải từ 0 đến 30 ký tự"
+    },
+    "AVATAR": {
+      "INVALID_FORMAT": "Ảnh đại diện phải là URL hình ảnh hợp lệ",
+      "SIZE": "Kích thước file ảnh đại diện quá lớn"
+    },
+    "COVER": {
+      "INVALID_FORMAT": "Ảnh bìa phải là URL hình ảnh hợp lệ",
+      "SIZE": "Kích thước file ảnh bìa quá lớn"
+    }
+  }
+}

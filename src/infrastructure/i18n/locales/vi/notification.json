@@ -1,0 +1,68 @@
+{
+  "SENT": "Thông báo đã được gửi",
+  "DELETED": "Thông báo đã được xóa",
+  "READ": "Thông báo được đánh dấu là đã đọc",
+  "UNREAD": "Thông báo được đánh dấu là chưa đọc",
+  "CLEARED": "Tất cả thông báo đã được xóa",
+  "MARKED_READ": "Tất cả thông báo được đánh dấu là đã đọc",
+  "NOT_FOUND": "Thông báo không tìm thấy",
+  "SETTINGS_UPDATED": "Cài đặt thông báo được cập nhật thành công",
+  
+  "PUSH_ENABLED": "Thông báo đẩy đã được bật",
+  "PUSH_DISABLED": "Thông báo đẩy đã được tắt",
+  "EMAIL_ENABLED": "Thông báo qua email đã được bật",
+  "EMAIL_DISABLED": "Thông báo qua email đã được tắt",
+  "TYPE_ENABLED": "Thông báo {{notificationType}} đã được bật",
+  "TYPE_DISABLED": "Thông báo {{notificationType}} đã được tắt",
+  
+  "DEVICE_REGISTERED": "Thiết bị đã được đăng ký nhận thông báo",
+  "DEVICE_UNREGISTERED": "Thiết bị đã được hủy đăng ký nhận thông báo",
+  
+  "NEW_NOTIFICATION": "Bạn có một thông báo mới",
+  "NEW_FOLLOWER": "{{username}} đã bắt đầu theo dõi bạn",
+  "NEW_LIKE": "{{username}} đã thích {{contentType}} của bạn",
+  "NEW_COMMENT": "{{username}} đã bình luận trên {{contentType}} của bạn",
+  "NEW_MENTION": "{{username}} đã nhắc đến bạn trong một {{contentType}}",
+  "NEW_SHARE": "{{username}} đã chia sẻ {{contentType}} của bạn",
+  "NEW_QUOTE": "{{username}} đã trích dẫn {{contentType}} của bạn",
+  "NEW_MESSAGE": "Bạn có tin nhắn mới từ {{username}}",
+  "FOLLOW_REQUEST": "{{username}} đã gửi yêu cầu theo dõi bạn",
+  
+  "GROUP_INVITE": "{{username}} đã mời bạn tham gia nhóm {{groupName}}",
+  "GROUP_JOIN_REQUEST": "{{username}} đã yêu cầu tham gia nhóm {{groupName}}",
+  "GROUP_REQUEST_ACCEPTED": "Yêu cầu tham gia nhóm {{groupName}} của bạn đã được chấp nhận",
+  "GROUP_REQUEST_REJECTED": "Yêu cầu tham gia nhóm {{groupName}} của bạn đã bị từ chối",
+  "GROUP_ROLE_CHANGED": "Vai trò của bạn trong nhóm {{groupName}} đã được thay đổi thành {{role}}",
+  
+  "EVENT_INVITE": "{{username}} đã mời bạn tham gia sự kiện {{eventName}}",
+  "EVENT_UPDATE": "Sự kiện {{eventName}} đã được cập nhật",
+  "EVENT_CANCELLED": "Sự kiện {{eventName}} đã bị hủy",
+  "EVENT_REMINDER": "Sự kiện {{eventName}} sẽ bắt đầu trong {{time}}",
+  
+  "SYSTEM_ANNOUNCEMENT": "Thông báo hệ thống: {{message}}",
+  "ACCOUNT_WARNING": "Cảnh báo tài khoản: {{message}}",
+
+  "TYPES": {
+    "LIKE": "thích",
+    "SHARE": "chia sẻ",
+    "FOLLOW": "theo dõi",
+    "MENTION": "đề cập",
+    "COMMENT": "bình luận",
+    "QUOTE": "trích dẫn",
+    "REPLY": "trả lời",
+    "MESSAGE": "tin nhắn",
+    "GROUP_INVITE": "lời mời nhóm",
+    "GROUP_JOIN_REQUEST": "yêu cầu tham gia nhóm",
+    "EVENT_INVITE": "lời mời sự kiện",
+    "EVENT_UPDATE": "cập nhật sự kiện"
+  },
+
+  "CONTENT_TYPES": {
+    "POST": "bài viết",
+    "COMMENT": "bình luận",
+    "PROFILE": "hồ sơ",
+    "STORY": "tin",
+    "REEL": "video ngắn",
+    "POLL": "thăm dò"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "SENT": "Tin nhắn đã được gửi",
+  "DELIVERED": "Tin nhắn đã được giao",
+  "READ": "Tin nhắn đã được đọc",
+  "FAILED_TO_SEND": "Gửi tin nhắn thất bại",
+  "DELETED": "Tin nhắn đã được xóa",
+  "DELETED_FOR_EVERYONE": "Tin nhắn đã được xóa cho mọi người",
+  "EDITED": "Tin nhắn đã được chỉnh sửa",
+  "FORWARDED": "Tin nhắn đã được chuyển tiếp",
+  "REPLIED": "Đã trả lời tin nhắn",
+  "REACTED": "Đã thả cảm xúc cho tin nhắn",
+  "UNSENT": "Tin nhắn đã được thu hồi",
+  "CONTENT_REQUIRED": "Nội dung tin nhắn là bắt buộc",
+  "EMPTY": "Tin nhắn không được để trống",
+  "TOO_LONG": "Tin nhắn quá dài (tối đa {{max}} ký tự)",
+  "MEDIA_LIMIT": "Bạn chỉ có thể đính kèm tối đa {{max}} mục media",
+  "NOT_FOUND": "Tin nhắn không tìm thấy hoặc đã bị xóa",
+  "ATTACHMENT_TOO_LARGE": "File đính kèm quá lớn",
+  "UNSUPPORTED_FILE_TYPE": "Loại file không được hỗ trợ",
+  "FAILED": "Không thể gửi tin nhắn",
+
+  "CONVERSATION": {
+    "CREATED": "Cuộc trò chuyện được tạo",
+    "DELETED": "Cuộc trò chuyện đã bị xóa",
+    "NOT_FOUND": "Không tìm thấy cuộc trò chuyện",
+    "LEAVE": "Bạn đã rời khỏi cuộc trò chuyện",
+    "MARKED_READ": "Cuộc trò chuyện đã được đánh dấu là đã đọc",
+    "MUTED": "Đã tắt thông báo cuộc trò chuyện",
+    "UNMUTED": "Đã bật thông báo cuộc trò chuyện"
+  },
+
+  "PRIVACY": {
+    "BLOCKED_USER": "Bạn không thể nhắn tin cho người dùng này",
+    "RESTRICTED": "Người dùng này chỉ chấp nhận tin nhắn từ những người họ theo dõi",
+    "NOT_ACCEPTING": "Người dùng này đang không chấp nhận tin nhắn vào lúc này",
+    "BLOCKED_BY_USER": "Bạn không thể nhắn tin cho người dùng này vì họ đã chặn bạn"
+  },
+
+  "MEDIA": {
+    "UPLOAD_SUCCESS": "Tải lên media thành công",
+    "UPLOAD_FAILED": "Tải lên media thất bại",
+    "PROCESSING": "Media đang được xử lý",
+    "TYPE_NOT_SUPPORTED": "Loại media này không được hỗ trợ"
+  },
+
+  "ACTIONS": {
+    "FORWARD": "Tin nhắn đã được chuyển tiếp",
+    "COPY": "Đã sao chép tin nhắn",
+    "REPORT": "Tin nhắn đã được báo cáo"
+  },
+  
+  "TYPING": {
+    "SINGLE": "{{name}} đang nhập...",
+    "MULTIPLE": "Nhiều người đang nhập...",
+    "STOPPED": ""
+  },
+  
+  "GROUP_MESSAGE": {
+    "SENT": "Tin nhắn nhóm đã được gửi",
+    "BROADCAST": "{{name}} đã gửi tin nhắn đến tất cả thành viên trong nhóm"
+  }
+}

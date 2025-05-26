@@ -1,0 +1,103 @@
+{
+  "SUCCESS": "Operation successful",
+  "FAILURE": "Operation failed. Please try again later",
+  "CREATED": "{{resource}} created successfully",
+  "UPDATED": "{{resource}} updated successfully",
+  "DELETED": "{{resource}} deleted successfully",
+  "ACCEPTED": "Your request has been accepted and is being processed",
+  "NO_CONTENT": "Operation completed with no content to return",
+  
+  "BAD_REQUEST": "Invalid request. Please check your input and try again",
+  "UNAUTHORIZED": "Authentication required. Please log in to continue",
+  "FORBIDDEN": "You don't have permission to access this resource",
+  "NOT_FOUND": "{{resource}} not found or has been removed",
+  "METHOD_NOT_ALLOWED": "The request method is not allowed for this resource",
+  "CONFLICT": "Request conflicts with existing data in the system",
+  "GONE": "Resource is no longer available and has been permanently removed",
+  "REQUEST_TIMEOUT": "Request timed out. Please try again",
+  "UNSUPPORTED_MEDIA_TYPE": "File format is not supported. Please use a different format",
+  "UNPROCESSABLE_ENTITY": "Unable to process request due to semantic errors",
+  "TOO_EARLY": "Request cannot be processed at this time. Please try again later",
+  "PRECONDITION_REQUIRED": "Request requires additional preconditions to proceed",
+  "VALIDATION_ERROR": "Validation failed. Please check your input",
+  "TOO_MANY_REQUESTS": "You've sent too many requests. Please try again in {{time}} seconds",
+  "UNAVAILABLE_FOR_LEGAL_REASONS": "Content unavailable for legal reasons",
+  
+  "INTERNAL_SERVER_ERROR": "An internal server error has occurred. We're working to fix this issue",
+  "NOT_IMPLEMENTED": "This feature is not yet implemented. Please try again later",
+  "BAD_GATEWAY": "Server received an invalid response. Please try again later",
+  "SERVICE_UNAVAILABLE": "Service is currently unavailable due to maintenance or overload",
+  "GATEWAY_TIMEOUT": "Server didn't receive a timely response. Please try again later",
+  "INSUFFICIENT_STORAGE": "Not enough storage space to complete the request",
+  
+  "USER_NOT_VERIFIED": "User account not verified",
+  "UNKNOWN_ERROR": "An unexpected error occurred",
+  
+  "GREETING": "Hello, {{name}}! Welcome to our service.",
+  
+  "MEDIA": {
+    "UPLOAD_SUCCESS": "Upload successful",
+    "UPLOAD_FAILED": "Upload failed",
+    "INVALID_TYPE": "Invalid file type",
+    "FILE_TOO_LARGE": "File size is too large",
+    "UNSUPPORTED_FORMAT": "Unsupported format",
+    "PROCESSING": "Processing",
+    "DELETED": "Deleted",
+    "NOT_FOUND": "File not found"
+  },
+  
+  "OPERATIONS": {
+    "CREATED": "Created",
+    "UPDATED": "Updated",
+    "DELETED": "Deleted",
+    "FETCHED": "Successfully retrieved",
+    "ACTIVATED": "Activated",
+    "DEACTIVATED": "Deactivated",
+    "ENABLED": "Enabled",
+    "DISABLED": "Disabled",
+    "SENT": "Sent",
+    "RECEIVED": "Received",
+    "PROCESSING": "Processing",
+    "COMPLETED": "Completed",
+    "FAILED": "Failed",
+    "CANCELLED": "Cancelled",
+    "PAUSED": "Paused",
+    "RESUMED": "Resumed"
+  },
+  
+  "TIME": {
+    "JUST_NOW": "Just now",
+    "SECONDS_AGO": "{{count}} seconds ago",
+    "MINUTE_AGO": "1 minute ago",
+    "MINUTES_AGO": "{{count}} minutes ago",
+    "HOUR_AGO": "1 hour ago",
+    "HOURS_AGO": "{{count}} hours ago",
+    "DAY_AGO": "1 day ago",
+    "DAYS_AGO": "{{count}} days ago",
+    "WEEK_AGO": "1 week ago",
+    "WEEKS_AGO": "{{count}} weeks ago",
+    "MONTH_AGO": "1 month ago",
+    "MONTHS_AGO": "{{count}} months ago",
+    "YEAR_AGO": "1 year ago",
+    "YEARS_AGO": "{{count}} years ago"
+  },
+  
+  "PAGINATION": {
+    "NEXT_PAGE": "Next page",
+    "PREVIOUS_PAGE": "Previous page",
+    "PAGE_X_OF_Y": "Page {{current}} of {{total}}",
+    "ITEMS_PER_PAGE": "{{count}} items per page",
+    "SHOWING_X_TO_Y_OF_Z_ITEMS": "Showing {{start}} to {{end}} of {{total}} items"
+  },
+  
+  "BOOLEAN": {
+    "TRUE": "True",
+    "FALSE": "False",
+    "YES": "Yes",
+    "NO": "No",
+    "ENABLED": "Enabled",
+    "DISABLED": "Disabled",
+    "ACTIVE": "Active",
+    "INACTIVE": "Inactive"
+  }
+}

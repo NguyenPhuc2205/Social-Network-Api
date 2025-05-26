@@ -1,0 +1,49 @@
+{
+  "REPORT_SUBMITTED": "Your report has been submitted and will be reviewed",
+  "REPORT_UPDATED": "Report has been updated",
+  "REPORT_DELETED": "Report has been deleted",
+  "REPORT_CLOSED": "Report has been closed",
+  "REPORT_REOPENED": "Report has been reopened",
+  "REPORT_NOT_FOUND": "Report not found",
+  "REPORT_ALREADY_SUBMITTED": "You have already reported this content",
+  
+  "REPORT_ACTION_TAKEN": "Action has been taken on your report",
+  "REPORT_ACTION_PENDING": "Your report is under review",
+  "REPORT_ACTION_REJECTED": "Your report has been rejected",
+  
+  "REASON_REQUIRED": "Report reason is required",
+  "INVALID_REASON": "Invalid report reason",
+  "DESCRIPTION_TOO_LONG": "Report description is too long (maximum {{max}} characters)",
+  
+  "REPORTED_ITEM_REQUIRED": "You must select the content to report",
+  "INVALID_REPORT_TARGET": "Invalid report target",
+  "ITEM_NOT_FOUND": "The content you are reporting was not found",
+  "CANNOT_REPORT_OWN_CONTENT": "You cannot report your own content",
+  
+  "REPORT_LIMIT_REACHED": "You have reached the maximum number of reports in a day",
+  "REPORT_COOLDOWN": "Please wait {{time}} before submitting another report",
+  "THANK_YOU_FOR_REPORTING": "Thank you for reporting this content. We will review it shortly",
+  "INAPPROPRIATE_CONTENT_REMOVED": "The reported content has been removed for violating our community guidelines",
+  
+  "REPORT_REASONS": {
+    "SPAM": "Spam or junk content",
+    "ABUSIVE": "Abusive or harassment",
+    "HARMFUL": "Harmful or dangerous content",
+    "MISINFORMATION": "Misinformation",
+    "OTHER": "Other reason"
+  },
+  
+  "STATUS": {
+    "PENDING": "Pending",
+    "REVIEWED": "Reviewed",
+    "RESOLVED": "Resolved",
+    "REJECTED": "Rejected"
+  },
+  
+  "ADMIN": {
+    "REPORT_ASSIGNED": "Report has been assigned to you",
+    "REPORT_STATUS_UPDATED": "Report status has been updated",
+    "REPORTS_FETCHED": "Reports list retrieved successfully",
+    "NOTE_ADDED": "Note added to report"
+  }
+}

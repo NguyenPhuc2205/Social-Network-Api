@@ -1,0 +1,103 @@
+{
+  "SUCCESS": "Thao tác thành công",
+  "FAILURE": "Thao tác thất bại. Vui lòng thử lại sau",
+  "CREATED": "{{resource}} đã được tạo thành công",
+  "UPDATED": "{{resource}} đã được cập nhật thành công",
+  "DELETED": "{{resource}} đã được xóa thành công",
+  "ACCEPTED": "Yêu cầu của bạn đã được chấp nhận và đang được xử lý",
+  "NO_CONTENT": "Thao tác hoàn tất và không có nội dung để trả về",
+  
+  "BAD_REQUEST": "Yêu cầu không hợp lệ. Vui lòng kiểm tra lại thông tin đã nhập",
+  "UNAUTHORIZED": "Yêu cầu cần được xác thực. Vui lòng đăng nhập để tiếp tục",
+  "FORBIDDEN": "Bạn không có quyền truy cập vào tài nguyên này",
+  "NOT_FOUND": "Không tìm thấy {{resource}} hoặc tài nguyên đã bị xóa",
+  "METHOD_NOT_ALLOWED": "Phương thức yêu cầu không được phép cho tài nguyên này",
+  "CONFLICT": "Yêu cầu xung đột với dữ liệu hiện có trong hệ thống",
+  "GONE": "Tài nguyên không còn khả dụng và đã bị xóa vĩnh viễn",
+  "REQUEST_TIMEOUT": "Yêu cầu đã hết thời gian xử lý. Vui lòng thử lại",
+  "UNSUPPORTED_MEDIA_TYPE": "Định dạng tệp không được hỗ trợ. Vui lòng sử dụng định dạng khác",
+  "UNPROCESSABLE_ENTITY": "Không thể xử lý yêu cầu do lỗi ngữ nghĩa",
+  "TOO_EARLY": "Yêu cầu không thể xử lý tại thời điểm này. Vui lòng thử lại sau",
+  "PRECONDITION_REQUIRED": "Yêu cầu cần thêm điều kiện tiên quyết để thực hiện",
+  "VALIDATION_ERROR": "Xác thực dữ liệu thất bại. Vui lòng kiểm tra lại thông tin",
+  "TOO_MANY_REQUESTS": "Bạn đã gửi quá nhiều yêu cầu. Vui lòng thử lại sau {{time}} giây",
+  "UNAVAILABLE_FOR_LEGAL_REASONS": "Nội dung không khả dụng vì lý do pháp lý",
+  
+  "INTERNAL_SERVER_ERROR": "Đã xảy ra lỗi máy chủ nội bộ. Chúng tôi đang khắc phục sự cố này",
+  "NOT_IMPLEMENTED": "Tính năng này chưa được triển khai. Vui lòng thử lại sau",
+  "BAD_GATEWAY": "Máy chủ nhận được phản hồi không hợp lệ. Vui lòng thử lại sau",
+  "SERVICE_UNAVAILABLE": "Dịch vụ hiện không khả dụng do bảo trì hoặc quá tải",
+  "GATEWAY_TIMEOUT": "Máy chủ không nhận được phản hồi kịp thời. Vui lòng thử lại sau",
+  "INSUFFICIENT_STORAGE": "Không đủ dung lượng lưu trữ để hoàn thành yêu cầu",
+  
+  "USER_NOT_VERIFIED": "Tài khoản người dùng chưa được xác minh",
+  "UNKNOWN_ERROR": "Đã xảy ra lỗi không mong muốn",
+  
+  "GREETING": "Xin chào, {{name}}! Chào mừng đến với dịch vụ của chúng tôi.",
+  
+  "MEDIA": {
+    "UPLOAD_SUCCESS": "Tải lên thành công",
+    "UPLOAD_FAILED": "Tải lên thất bại",
+    "INVALID_TYPE": "Loại tệp không hợp lệ",
+    "FILE_TOO_LARGE": "Kích thước tệp quá lớn",
+    "UNSUPPORTED_FORMAT": "Định dạng không được hỗ trợ",
+    "PROCESSING": "Đang xử lý",
+    "DELETED": "Đã xóa",
+    "NOT_FOUND": "Không tìm thấy tệp"
+  },
+  
+  "OPERATIONS": {
+    "CREATED": "Đã tạo",
+    "UPDATED": "Đã cập nhật",
+    "DELETED": "Đã xóa",
+    "FETCHED": "Đã lấy thành công",
+    "ACTIVATED": "Đã kích hoạt",
+    "DEACTIVATED": "Đã vô hiệu hóa",
+    "ENABLED": "Đã bật",
+    "DISABLED": "Đã tắt",
+    "SENT": "Đã gửi",
+    "RECEIVED": "Đã nhận",
+    "PROCESSING": "Đang xử lý",
+    "COMPLETED": "Đã hoàn thành",
+    "FAILED": "Đã thất bại",
+    "CANCELLED": "Đã hủy",
+    "PAUSED": "Đã tạm dừng",
+    "RESUMED": "Đã tiếp tục"
+  },
+  
+  "TIME": {
+    "JUST_NOW": "Vừa xong",
+    "SECONDS_AGO": "{{count}} giây trước",
+    "MINUTE_AGO": "1 phút trước",
+    "MINUTES_AGO": "{{count}} phút trước",
+    "HOUR_AGO": "1 giờ trước",
+    "HOURS_AGO": "{{count}} giờ trước",
+    "DAY_AGO": "1 ngày trước",
+    "DAYS_AGO": "{{count}} ngày trước",
+    "WEEK_AGO": "1 tuần trước",
+    "WEEKS_AGO": "{{count}} tuần trước",
+    "MONTH_AGO": "1 tháng trước",
+    "MONTHS_AGO": "{{count}} tháng trước",
+    "YEAR_AGO": "1 năm trước",
+    "YEARS_AGO": "{{count}} năm trước"
+  },
+  
+  "PAGINATION": {
+    "NEXT_PAGE": "Trang sau",
+    "PREVIOUS_PAGE": "Trang trước",
+    "PAGE_X_OF_Y": "Trang {{current}} của {{total}}",
+    "ITEMS_PER_PAGE": "{{count}} mục mỗi trang",
+    "SHOWING_X_TO_Y_OF_Z_ITEMS": "Hiển thị từ {{start}} đến {{end}} của {{total}} mục"
+  },
+  
+  "BOOLEAN": {
+    "TRUE": "Đúng",
+    "FALSE": "Sai",
+    "YES": "Có",
+    "NO": "Không",
+    "ENABLED": "Đã bật",
+    "DISABLED": "Đã tắt",
+    "ACTIVE": "Hoạt động",
+    "INACTIVE": "Không hoạt động"
+  }
+}

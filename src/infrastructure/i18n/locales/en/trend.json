@@ -1,0 +1,23 @@
+{
+  "TRENDING_TOPICS_FETCHED": "Trending topics retrieved successfully",
+  "TRENDING_HASHTAGS_FETCHED": "Trending hashtags retrieved successfully",
+  "TRENDING_USERS_FETCHED": "Trending users retrieved successfully",
+  "TRENDING_CONTENT_FETCHED": "Trending content retrieved successfully",
+  "TREND_NOT_FOUND": "Trend not found",
+  "TREND_DETAILS_FETCHED": "Details for {{trendName}} retrieved successfully",
+  "RELATED_TRENDS_FETCHED": "Related trends for {{trendName}} retrieved successfully",
+  "TREND_HISTORY_FETCHED": "Trend history retrieved successfully",
+  "LOCATION_BASED_TRENDS_FETCHED": "Trends in {{location}} retrieved successfully",
+  "TRENDS_FOR_CATEGORY_FETCHED": "Trends in {{category}} retrieved successfully",
+  "TREND_FOLLOWED": "You are now following {{trendName}}",
+  "TREND_UNFOLLOWED": "You have unfollowed {{trendName}}",
+  "TREND_ALREADY_FOLLOWED": "You are already following {{trendName}}",
+  "TREND_NOT_FOLLOWED": "You are not following {{trendName}}",
+  "NO_TRENDS_AVAILABLE": "No trends available at the moment",
+  "INVALID_TREND_PARAMETERS": "Invalid trend parameters",
+  "REFRESH_SUCCESSFUL": "Trends refreshed successfully",
+  "TREND_HIDDEN": "This trend has been hidden from your feed",
+  "TREND_UNHIDDEN": "This trend is now visible in your feed",
+  "PERSONALIZED_TRENDS_FETCHED": "Your personalized trends retrieved successfully",
+  "TREND_REPORTED": "Thank you for reporting this trend"
+}

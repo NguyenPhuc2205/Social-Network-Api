@@ -1,0 +1,79 @@
+{
+  "REQUIRED": "{{field}} is required and cannot be empty",
+  "INVALID": "{{field}} is invalid. Please check and try again",
+  "MIN_LENGTH": "{{field}} must be at least {{min}} characters",
+  "MAX_LENGTH": "{{field}} must not exceed {{max}} characters",
+  "LENGTH_BETWEEN": "{{field}} must be between {{min}} and {{max}} characters",
+  "MIN_VALUE": "{{field}} must be greater than or equal to {{min}}",
+  "MAX_VALUE": "{{field}} must be less than or equal to {{max}}",
+  "VALUE_BETWEEN": "{{field}} must be between {{min}} and {{max}}",
+  "FORMAT_INVALID": "{{field}} format is incorrect",
+  "TYPE_MISMATCH": "{{field}} must be {{expected}}, but received {{received}}",
+  "MUST_BE_STRING": "{{field}} must be a string",
+  "MUST_BE_NUMBER": "{{field}} must be a number",
+  "MUST_BE_BOOLEAN": "{{field}} must be a boolean",
+  "MUST_BE_DATE": "{{field}} must be a valid date",
+  "MUST_BE_ARRAY": "{{field}} must be an array",
+  "MUST_BE_OBJECT": "{{field}} must be an object",
+  "MUST_BE_UNIQUE": "{{field}} must be unique",
+  "CANNOT_BE_EMPTY": "{{field}} cannot be empty",
+  "MUST_BE_VALID_ID": "{{field}} must be a valid ID",
+  "ALREADY_EXISTS": "{{field}} already exists",
+  "NOT_FOUND": "{{field}} not found",
+  "ENUM_INVALID": "{{field}} must be one of the accepted values",
+  "UNEXPECTED_KEYS": "{{field}} contains disallowed properties: {{keys}}",
+  "LITERAL_MISMATCH": "{{field}} must match the specific value",
+  "CUSTOM_VALIDATION": "{{field}} is invalid according to custom rules",
+  "UNKNOWN_VALIDATION": "{{field}} is invalid (unknown error)",
+
+  "FORMATS": {
+    "EMAIL_INVALID": "Email address is invalid",
+    "URL_INVALID": "URL is invalid",
+    "UUID_INVALID": "UUID is invalid",
+    "CUID_INVALID": "CUID is invalid",
+    "REGEX_INVALID": "Does not match the required pattern",
+    "DATE_INVALID": "Date format is invalid",
+    "NUMERIC_INVALID": "Must contain only numbers",
+    "ALPHANUMERIC_INVALID": "Must contain only letters and numbers",
+    "PASSWORD_COMPLEXITY": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+    "PASSWORD_CONFIRMATION_MISMATCH": "Password confirmation does not match"
+  },
+
+  "FIELDS": {
+    "EMAIL": {
+      "INVALID_FORMAT": "Email format is invalid",
+      "NOT_VERIFIED": "Email is not verified"
+    },
+    "PASSWORD": {
+      "WEAK": "Password is too weak"
+    },
+    "USERNAME": {
+      "INVALID_FORMAT": "Username can only contain letters, numbers, underscores, and periods"
+    },
+    "PHONE": {
+      "INVALID_FORMAT": "Phone number format is invalid"
+    },
+    "DATE_OF_BIRTH": {
+      "INVALID_FORMAT": "Date of birth must be in ISO8601 format (YYYY-MM-DD)",
+      "TOO_YOUNG": "You must be at least 13 years old to register",
+      "TOO_OLD": "Invalid date of birth (maximum age is 120)"
+    },
+    "BIO": {
+      "LENGTH": "Bio must be between 0 and 160 characters"
+    },
+    "WEBSITE": {
+      "LENGTH": "Website URL is too long"
+    },
+    "LOCATION": {
+      "LENGTH": "Location must be between 0 and 30 characters"
+    },
+    "AVATAR": {
+      "INVALID_FORMAT": "Avatar must be a valid image URL",
+      "SIZE": "Avatar file size is too large"
+    },
+    "COVER": {
+      "INVALID_FORMAT": "Cover photo must be a valid image URL",
+      "SIZE": "Cover photo file size is too large"
+    }
+  }
+}
