@@ -2,8 +2,8 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-03-16 01:02:52
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-26 15:49:36
- * @FilePath      : /project/server/src/common/middlewares/validation.middleware.ts
+ * @LastEditTime  : 2025-05-26 20:41:59
+ * @FilePath      : /server/src/common/middlewares/validation.middleware.ts
  * @Description   : Validation Middleware using Zod for Express.js TypeScript (422 Unprocessable Entity Error)
  */
 
@@ -17,8 +17,8 @@ import { HTTP_STATUS, RESPONSE_CODES } from '~/shared/constants'
 import { StringValidation, ZodError, ZodIssue, ZodIssueCode, ZodSchema } from 'zod'
 import { NextFunction, Request, Response, RequestHandler } from 'express'
 import { AppError, ValidationError } from '~/core/errors'
-import { validateZodSchema, extractFieldValue, extractZodErrorDetails, generateErrorSummary } from '~/common/utils/zod-validator-core'
 import { SuggestionTranslationKeys, ValidationTranslationKeys } from '~/shared/enums'
+import { validateZodSchema } from '~/common/utils/zod-validator-core'
 
 @injectable()
 export class ValidationMiddleware {
@@ -129,6 +129,97 @@ export class ValidationMiddleware {
     @inject(DI_TYPES.IWinstonLoggerService) private loggerService: IWinstonLoggerService,
     @inject(DI_TYPES.II18nService) private i18nService: II18nService
   ) {}
+
+  /**
+   * Extracts additional details from a ZodIssue, excluding common properties.
+   * @param error - Zod issue object
+   * @returns Extracted details
+   */
+  public extractZodErrorDetails = (error: ZodIssue): Record<string, any> => {
+    const normalizeInterpolationKey: Record<string, string> = {
+      minimum: 'min',
+      maximum: 'max',
+    }
+    const { message, path, code, fatal, ...remainingDetails } = error
+    
+    const mappedDetails: Record<string, any> = {}
+
+    for (const [key, value] of Object.entries(remainingDetails)) {
+      const mappedKey = normalizeInterpolationKey[key] || key
+      mappedDetails[mappedKey] = value
+    }
+
+    return mappedDetails
+  }
+
+  /**
+   * Generates a comprehensive summary of validation errors
+   * @param errors - Record of validation error details keyed by field path
+   * @returns Object containing error statistics and analysis
+   */
+  public generateErrorSummary = (errors: Record<string, IValidationErrorDetail>): {
+    totalErrors: number,
+    fieldCount: number,
+    severityBreakdown: Record<string, number>
+    errorTypes: Record<string, number>
+    affectedFields: string[]
+  } => {
+    // Return array of key from errors => Get its length
+    const totalErrors = Object.keys(errors).length
+
+    // Create a Set of unique field paths to count distinct fields
+    const fields = new Set(Object.values(errors).map(e => e.path.join('.')))
+    const severityBreakdown: Record<string, number> = { high: 0, medium: 0, low: 0 }
+    const errorTypes = {} as Record<string, number>
+    const affectedFields: string[] = Array.from(fields)
+
+    // Analyze each error to build summary statistics
+    Object.values(errors).forEach(error => {
+      severityBreakdown[error.severity]++
+      errorTypes[error.code] = (errorTypes[error.code] || 0) + 1
+    })
+
+    return {
+      totalErrors,
+      fieldCount: fields.size,
+      severityBreakdown,
+      errorTypes,
+      affectedFields
+    }
+  }
+
+  /**
+   * Extracts relevant value from ZodIssue for display purposes
+   * @param error - The ZodIssue object containing error details
+   * @param originalData - The original data being validated (optional)
+   * @returns String representation of the field value for display
+   */
+  public extractFieldValue = (error: ZodIssue, originalData?: any): string => {
+    // originalData
+
+    // If error has no path (__root__ level from refine, superRefine), return 'N/A'
+    if (error.path.length === 0) return 'N/A'
+
+    // Try to get actual field value from original data if available
+    if (originalData) {
+      try {
+        let value = originalData
+        // Navigate through the path to get the actual value
+        for (const pathSegment of error.path) {
+          value = value?.[pathSegment]
+        }
+        // Return the actual value if found, otherwise fall back to path segment
+        if (value !== undefined && value !== null) {
+          return String(value)
+        }
+      } catch {
+        // Fall back to path segment if navigation fails
+      }
+    }
+
+    // Fallback: Get value from the last path segment
+    return String(error.path[error.path.length - 1])
+  }
 
   /**
    * Maps Zod error codes to ValidationTranslationKeys with field-specific overrides
@@ -399,9 +490,9 @@ export class ValidationMiddleware {
       // Prepare interpolation values for translation with rich context
       const interpolationValues = {
         field: pathKey,                                // Field name for error messages
-        value: extractFieldValue(err, originalData),   // Actual problematic value
+        value: this.extractFieldValue(err, originalData),   // Actual problematic value
         path: pathKey,                                 // Full path to the field
-        ...extractZodErrorDetails(err)                 // Additional error details from Zod
+        ...this.extractZodErrorDetails(err)                 // Additional error details from Zod
       }
 
       // Translate the error message with i18n support
@@ -420,7 +511,7 @@ export class ValidationMiddleware {
         code: err.code,                                // Original Zod error code
         location: source,                              // Where the error occurred (body, query, etc.)
         type: err.code,                                // Type of validation error
-        details: extractZodErrorDetails(err),          // Additional validation details
+        details: this.extractZodErrorDetails(err),          // Additional validation details
         severity: this.getErrorSeverity(err.code, err.path.map(String)),  // Error severity classification
         suggestions: this.getErrorSuggestions(err, err.path.map(String)), // Helpful suggestions for fixing
       }
@@ -430,7 +521,7 @@ export class ValidationMiddleware {
     return {
       message: this.i18nService.translate(TRANSLATION_KEYS.VALIDATION_ERROR, req),
       errors: formattedErrors,
-      summary: generateErrorSummary(formattedErrors),  // Statistical breakdown of errors
+      summary: this.generateErrorSummary(formattedErrors),  // Statistical breakdown of errors
     }
   }
 
