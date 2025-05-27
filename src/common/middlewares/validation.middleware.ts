@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-03-16 01:02:52
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-26 20:41:59
+ * @LastEditTime  : 2025-05-26 22:33:04
  * @FilePath      : /server/src/common/middlewares/validation.middleware.ts
  * @Description   : Validation Middleware using Zod for Express.js TypeScript (422 Unprocessable Entity Error)
  */
@@ -20,11 +20,27 @@ import { AppError, ValidationError } from '~/core/errors'
 import { SuggestionTranslationKeys, ValidationTranslationKeys } from '~/shared/enums'
 import { validateZodSchema } from '~/common/utils/zod-validator-core'
 
+/**
+ * Validation middleware for Express.js using Zod schemas
+ * 
+ * @class ValidationMiddleware
+ * @description 
+ * Provides comprehensive request data validation using Zod schemas.
+ * Features include internationalized error messages, field-specific validations,
+ * error severity classification, helpful user suggestions, and detailed error reporting.
+ * Supports validation of multiple request sources (body, query, params, etc.) in a single middleware.
+ */
 @injectable()
 export class ValidationMiddleware {
   /**
-    * Default validation options for Zod schema validation.
-    */
+   * Default validation options for Zod schema validation.
+   * 
+   * @private
+   * @readonly
+   * @type {IValidationOptions}
+   * @description
+   * Provides sensible defaults for Zod validation including error formatting and status codes.
+   */
   private readonly DEFAULT_VALIDATION_OPTIONS: IValidationOptions = {
     abortEarly: false,
     attachValidated: true,
@@ -36,7 +52,12 @@ export class ValidationMiddleware {
 
   /**
    * Field-specific validation mapping
-   * Highest priority - these mappings override general error code mappings
+   * 
+   * @private
+   * @readonly
+   * @type {Record<string, Record<string, ValidationTranslationKeys>>}
+   * @description
+   * Highest priority - these mappings override general error code mappings.
    * Structure: { fieldName: { zodErrorCode: translationKey } }
    */
   private readonly FIELD_SPECIFIC_MAP: Record<string, Record<string, ValidationTranslationKeys>> = {
@@ -82,7 +103,13 @@ export class ValidationMiddleware {
 
   /**
    * Mapping for invalid_string validation types.
-   * Maps specific string validation types to their corresponding translation keys
+   * 
+   * @private
+   * @readonly
+   * @type {Record<string, ValidationTranslationKeys>}
+   * @description
+   * Maps specific string validation types to their corresponding translation keys.
+   * Used for error message lookup when string validations fail.
    */
   private readonly INVALID_STRING_VALIDATION_MAP: Record<string, ValidationTranslationKeys> = {
     email: ValidationTranslationKeys.EMAIL_INVALID,
@@ -101,10 +128,16 @@ export class ValidationMiddleware {
     endsWith: ValidationTranslationKeys.FORMAT_INVALID,
     default: ValidationTranslationKeys.FORMAT_INVALID
   }
-  
+
   /**
    * Mapping for all Zod error codes to their corresponding translation keys.
-   * This serves as the fallback mapping when field-specific mappings are not found
+   * 
+   * @private
+   * @readonly
+   * @type {Record<ZodIssueCode, ValidationTranslationKeys>}
+   * @description
+   * This serves as the fallback mapping when field-specific mappings are not found.
+   * Provides a consistent way to translate Zod error codes to user-friendly messages.
    */
   private readonly ZOD_ERROR_CODE_MAP: Record<ZodIssueCode, ValidationTranslationKeys> = {
     invalid_type: ValidationTranslationKeys.TYPE_MISMATCH,
@@ -125,6 +158,13 @@ export class ValidationMiddleware {
     not_finite: ValidationTranslationKeys.NUMERIC_INVALID,
   }
 
+  /**
+   * Creates an instance of the validation middleware
+   * 
+   * @constructor
+   * @param {IWinstonLoggerService} loggerService - Logger service for recording validation issues
+   * @param {II18nService} i18nService - Internationalization service for error message translation
+   */
   constructor(
     @inject(DI_TYPES.IWinstonLoggerService) private loggerService: IWinstonLoggerService,
     @inject(DI_TYPES.II18nService) private i18nService: II18nService
@@ -132,8 +172,13 @@ export class ValidationMiddleware {
 
   /**
    * Extracts additional details from a ZodIssue, excluding common properties.
-   * @param error - Zod issue object
-   * @returns Extracted details
+   * 
+   * @public
+   * @param {ZodIssue} error - Zod issue object containing validation error details
+   * @returns {Record<string, any>} Extracted details for use in error messages
+   * @description
+   * Normalizes property names in error objects for consistent display and interpolation
+   * in localized error messages.
    */
   public extractZodErrorDetails = (error: ZodIssue): Record<string, any> => {
     const normalizeInterpolationKey: Record<string, string> = {
@@ -154,8 +199,13 @@ export class ValidationMiddleware {
 
   /**
    * Generates a comprehensive summary of validation errors
-   * @param errors - Record of validation error details keyed by field path
-   * @returns Object containing error statistics and analysis
+   * 
+   * @public
+   * @param {Record<string, IValidationErrorDetail>} errors - Record of validation error details keyed by field path
+   * @returns {Object} Object containing error statistics and analysis
+   * @description
+   * Analyzes a collection of validation errors to provide insights about their types,
+   * severity distribution, and affected fields.
    */
   public generateErrorSummary = (errors: Record<string, IValidationErrorDetail>): {
     totalErrors: number,
@@ -190,9 +240,14 @@ export class ValidationMiddleware {
 
   /**
    * Extracts relevant value from ZodIssue for display purposes
-   * @param error - The ZodIssue object containing error details
-   * @param originalData - The original data being validated (optional)
-   * @returns String representation of the field value for display
+   * 
+   * @public
+   * @param {ZodIssue} error - The ZodIssue object containing error details
+   * @param {any} [originalData] - The original data being validated (optional)
+   * @returns {string} String representation of the field value for display
+   * @description
+   * Safely extracts and formats field values from validation errors for
+   * consistent display in error messages.
    */
   public extractFieldValue = (error: ZodIssue, originalData?: any): string => {
     // originalData
@@ -223,11 +278,15 @@ export class ValidationMiddleware {
 
   /**
    * Maps Zod error codes to ValidationTranslationKeys with field-specific overrides
+   * 
+   * @public
+   * @param {ZodIssueCode} code - The Zod error code to map
+   * @param {string | StringValidation} [validation] - Optional validation type for specific string validations (email, url, etc.)
+   * @param {string[]} [fieldPath] - Optional field path array to enable field-specific mappings
+   * @returns {ValidationTranslationKeys} The corresponding ValidationTranslationKeys for the error
+   * @description
    * Uses a priority system: field-specific > validation-specific > general mapping
-   * @param code - The Zod error code to map
-   * @param validation - Optional validation type for specific string validations (email, url, etc.)
-   * @param fieldPath - Optional field path array to enable field-specific mappings
-   * @returns The corresponding ValidationTranslationKeys for the error
+   * to determine the most appropriate translation key for a validation error.
    */
   public mapZodErrorCodeToTranslationKey = (
     code: ZodIssueCode,
@@ -292,9 +351,14 @@ export class ValidationMiddleware {
 
   /**
    * Determines the severity of a validation error based on its code and field path.
-   * @param code - The Zod error code
-   * @param fieldPath - Array of field path segments
-   * @returns ErrorSeverity - 'high', 'medium', or 'low'
+   * 
+   * @public
+   * @param {ZodIssueCode} code - The Zod error code
+   * @param {string[]} fieldPath - Array of field path segments
+   * @returns {ErrorSeverity} Error severity level - 'high', 'medium', or 'low'
+   * @description
+   * Classifies validation errors by severity based on field type and error code.
+   * Critical fields like passwords and emails or type errors get higher severity.
    */
   public getErrorSeverity = (code: ZodIssueCode, fieldPath: string[]): ErrorSeverity => {
     // Get last field name from path
@@ -314,13 +378,18 @@ export class ValidationMiddleware {
     // Low severity: everything else
     return 'low' as ErrorSeverity
   }
-  
+
   /**
    * Generates contextual suggestions for validation errors based on field type and error code
-   * @param error - ZodIssue containing error details
-   * @param fieldPath - Array representing the path to the field that failed validation
-   * @param req - Optional Express request object for internationalization context
-   * @returns Array of localized suggestion strings to help users fix the validation error
+   * 
+   * @public
+   * @param {ZodIssue} error - ZodIssue containing error details
+   * @param {string[]} fieldPath - Array representing the path to the field that failed validation
+   * @param {Request} [req] - Optional Express request object for internationalization context
+   * @returns {string[]} Array of localized suggestion strings to help users fix the validation error
+   * @description
+   * Provides helpful, context-aware suggestions to guide users in correcting validation
+   * errors based on the field type, error code, and application-specific rules.
    */
   public getErrorSuggestions = (error: ZodIssue, fieldPath: string[], req?: Request): string[] => {
     const suggestions: string[] = []
@@ -437,20 +506,18 @@ export class ValidationMiddleware {
   }
 
   /**
-   * Formats a Zod error into a structured format. Include message, path, code, location, type, and details.
-   * @param error - Zod error object
-   * @param source - Source of the request data
-   * @param req - Optional Express request object for internationalization context
-   * @param originalData - Optional original data being validated for better error display
-   * @returns Formatted validation error
-   */
-  /**
-   * Formats a Zod error into a structured format. Include message, path, code, location, type, and details.
-   * @param error - Zod error object containing all validation issues
-   * @param source - Source of the request data (body, query, params, headers, cookies)
-   * @param req - Optional Express request object for internationalization context
-   * @param originalData - Optional original data being validated for better error display
-   * @returns Formatted validation error with structured organization and support for multiple errors per field
+   * Formats a Zod error into a structured format
+   * 
+   * @private
+   * @param {ZodError} error - Zod error object containing all validation issues
+   * @param {RequestSource} source - Source of the request data (body, query, params, headers, cookies)
+   * @param {Request} [req] - Optional Express request object for internationalization context
+   * @param {any} [originalData] - Optional original data being validated for better error display
+   * @returns {IFormattedValidationError} Formatted validation error with structured organization
+   * @description
+   * Transforms Zod validation errors into a consistent, detailed format with proper
+   * internationalization, severity levels, and helpful suggestions for users.
+   * Supports multiple errors per field and provides comprehensive error summaries.
    */
   formatZodError = (
     error: ZodError, 
@@ -524,15 +591,20 @@ export class ValidationMiddleware {
       summary: this.generateErrorSummary(formattedErrors),  // Statistical breakdown of errors
     }
   }
-
+  
   /**
-   * Middleware/ RequestHandler to validate request data against a Zod schema.
-   * @param schema - Zod schema to validate against
-   * @param source - Source of the request data (e.g., body, query)
-   * @param options - Validation options
-   * @returns Express request handler
-   * @throws {ValidationError} If validation fails, with detailed error information.
-   * @throws {ErrorWithStatus} For generic errors during validation.
+   * Middleware to validate request data against a Zod schema
+   * 
+   * @public
+   * @param {ZodSchema<any>} schema - Zod schema to validate against
+   * @param {RequestSource} source - Source of the request data (body, query, params, headers, cookies)
+   * @param {IValidationOptions} [options={}] - Validation options
+   * @returns {RequestHandler} Express request handler middleware
+   * @throws {ValidationError} If validation fails, with detailed error information
+   * @throws {AppError} For generic errors during validation
+   * @description
+   * Creates an Express middleware that validates incoming request data against a Zod schema,
+   * attaches validated data to the request object, and handles validation errors consistently.
    */
   public validate = (
     schema: ZodSchema<any>,
@@ -631,10 +703,17 @@ export class ValidationMiddleware {
   }
 
   /**
-   * Middleware to validate multiple sources of request data against Zod schemas.
-   * @param schemas - Object mapping sources to Zod schemas
-   * @param options - Validation options
-   * @returns Express request handler
+   * Middleware to validate multiple sources of request data against Zod schemas
+   * 
+   * @public
+   * @param {Partial<Record<RequestSource, ZodSchema<any>>>} schemas - Object mapping sources to Zod schemas
+   * @param {IValidationOptions} [options={}] - Validation options
+   * @returns {RequestHandler} Express request handler middleware
+   * @throws {ValidationError} If validation fails for any source
+   * @throws {AppError} For generic errors during validation
+   * @description
+   * Creates an Express middleware that validates multiple parts of a request
+   * (e.g., body, query, params) against different schemas in a single middleware.
    */
   public validateMultiple = (
     schemas: Partial<Record<RequestSource, ZodSchema<any>>>,
