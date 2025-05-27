@@ -2,7 +2,11 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-03-16 01:02:52
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-26 22:33:04
+<<<<<<<<< Temporary merge branch 1
+ * @LastEditTime  : 2025-05-27 23:22:41
+ * @FilePath      : /project/server/src/common/middlewares/validation.middleware.ts
+=========
+ * @LastEditTime  : 2025-05-26 20:41:59
  * @FilePath      : /server/src/common/middlewares/validation.middleware.ts
  * @Description   : Validation Middleware using Zod for Express.js TypeScript (422 Unprocessable Entity Error)
  */
