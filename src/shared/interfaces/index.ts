@@ -16,5 +16,4 @@ export {
 export {
   IEnvLoadingOptions,
   IEnvLoadingResult,
-  IEnvLoadingSummary,
-} from '~/shared/interfaces/env-config.interface'
+} from '~/shared/interfaces/env-loader.interface'
