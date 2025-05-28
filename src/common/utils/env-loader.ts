@@ -2,8 +2,8 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-02-12 16:52:32
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-28 10:49:33
- * @FilePath      : /project/server/src/common/utils/env.ts
+ * @LastEditTime  : 2025-05-28 11:24:30
+ * @FilePath      : /server/src/common/utils/env.ts
  * @Description   : Utility functions for loading and validating environment variables
  */
 
