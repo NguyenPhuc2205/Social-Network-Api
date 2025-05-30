@@ -2,12 +2,12 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-05-26 23:54:31
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-28 14:26:07
+ * @LastEditTime  : 2025-05-30 19:05:36
  * @FilePath      : /server/src/configs/config.interface.ts
  * @Description   : Configuration Service Interface Definition
  */
 
-import { MergedEnvSchema } from '~/configs/env-schemas'
+import { MergedEnvSchema } from '~/configs'
 import { IEnvLoadingOptions } from '~/shared/interfaces'
 
 /**

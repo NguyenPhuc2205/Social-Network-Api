@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-05-26 23:54:31
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-28 15:39:13
+ * @LastEditTime  : 2025-05-30 21:08:22
  * @FilePath      : /server/src/configs/config.service.ts
  * @Description   : Configuration Service with Environment Loading and Validation
  */
@@ -19,7 +19,7 @@ import { inject, injectable } from 'inversify'
 import { getCallerLocation } from '~/common/helpers'
 import { loadEnv, validateEnv } from '~/common/utils/env-loader'
 import { IConfigService } from '~/configs/config.interface'
-import { mergedEnvSchema, MergedEnvSchema } from '~/configs/env-schemas'
+import { mergedEnvSchema, MergedEnvSchema } from '~/configs'
 import { DI_TYPES } from '~/core/providers'
 import { bindWinstonLoggerModule, IWinstonLoggerService } from '~/infrastructure/loggers'
 import { IEnvLoadingOptions } from '~/shared/interfaces'
