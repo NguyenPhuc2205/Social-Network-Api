@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-02-12 16:52:32
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-22 16:00:54
+ * @LastEditTime  : 2025-05-31 13:27:31
  * @FilePath      : /server/src/infrastructure/loggers/winston.service.ts
  * @Description   : Create a logger using Winston with daily rotation and custom formatting
  */
@@ -13,6 +13,8 @@ import winston from 'winston'
 import DailyRotateFile from 'winston-daily-rotate-file'
 import { ILogContext, ILogParams, IWinstonLoggerService } from '~/infrastructure/loggers/winston.interface'
 import { v4 as uuidv4 } from 'uuid'
+import { injectable } from 'inversify'
+import util from 'util'
 
 const { createLogger, format, transports } = winston
 const { combine, timestamp, splat, colorize, uncolorize, printf, align, label, errors } = format
@@ -23,6 +25,7 @@ const { combine, timestamp, splat, colorize, uncolorize, printf, align, label, e
  * @implements {IWinstonLoggerService}
  * @description Provides structured logging capabilities with Winston transport
  */
+@injectable()
 export class WinstonLoggerService implements IWinstonLoggerService {
   private static instance: IWinstonLoggerService | null = null
   private logger: winston.Logger
@@ -90,11 +93,50 @@ export class WinstonLoggerService implements IWinstonLoggerService {
    * @returns {winston.Logger} Configured Winston logger instance
    */
   private createLogger(): winston.Logger {
-    // Define the custom log format
+    // Custom format function to handle metadata serialization
+    const formatFunction = format((info) => {
+      // info: Object containing log information
+      if (info.metadata) {
+        try {
+          info.metadata = JSON.parse(
+            // info.metadata => json string
+            JSON.stringify(info.metadata, (key, value) => {
+              if (typeof value === 'function') {
+                return value.name || 'anonymous'
+              }
+              return value
+            })
+          )
+
+          // After stringify, parse it back to ensure it's a valid object
+        } catch (error) {
+          info.metadata = { error: 'Failed to serialize metadata' }
+        }
+      }
+      return info
+    })
+
+    // Define the base log format
     const baseLogFormat = printf(({ level, message, context, requestId, timestamp, metadata, stack }) => {
       const formattedContext = context ? context.toString().trim() : '-'
       const formattedRequestId = requestId ? requestId.toString().trim() : 'unknown'
       const formattedMetadata = metadata ? JSON.stringify(metadata) : '-'
+
+      let logMessage = `${timestamp} | ${level.padEnd(7)} | ${formattedContext} | ${formattedRequestId} | ${message} | ${formattedMetadata}`
+
+      if (stack) {
+        logMessage += `\n${stack}`
+      }
+
+      return logMessage
+    })
+
+    // Define the console log format with colorization
+    // Use util.inspect to format metadata with depth and colors, avoid null value 
+    const consoleLogFormat = printf(({ level, message, context, requestId, timestamp, metadata, stack }) => {
+      const formattedContext = context ? context.toString().trim() : '-'
+      const formattedRequestId = requestId ? requestId.toString().trim() : 'unknown'
+      const formattedMetadata = metadata ? util.inspect(metadata, { depth: null, colors: true }) : {}
 
       let logMessage = `${ timestamp } | ${ level.padEnd(7) } | ${ formattedContext } | ${ formattedRequestId } | ${ message } | ${ formattedMetadata }`
 
@@ -120,7 +162,7 @@ export class WinstonLoggerService implements IWinstonLoggerService {
         new transports.Console({
           format: combine(
             colorize(),
-            baseLogFormat
+            consoleLogFormat
           )
         }),
 
@@ -136,7 +178,8 @@ export class WinstonLoggerService implements IWinstonLoggerService {
             timestamp({ format: 'YYYY-MM-DD HH:mm:ss A' }),
             align(),
             uncolorize(),
-            baseLogFormat
+            formatFunction(),
+            baseLogFormat,
           )
         }),
 
@@ -153,7 +196,8 @@ export class WinstonLoggerService implements IWinstonLoggerService {
             timestamp({ format: 'YYYY-MM-DD HH:mm:ss A' }),
             align(),
             uncolorize(),
-            baseLogFormat
+            formatFunction(),
+            baseLogFormat,
           )
         })
       ]
@@ -426,5 +470,5 @@ export class WinstonLoggerService implements IWinstonLoggerService {
 // logger.error('This is an error test message 8', contextArray, requestId, metadata, error)
 // logger.error(error)
 
-// logger.info('User logged in', { module: 'Auth', action: 'login' }, 'req-123', { userId: 123 });
-// logger.info({ message: 'User logged in', context: ['Auth', 'POST', '/login'], metadata: { userId: 123 } });
+// logger.info('User logged in', { module: 'Auth', action: 'login' }, 'req-123', { userId: 123 })
+// logger.info({ message: 'User logged in', context: ['Auth', 'POST', '/login'], metadata: { userId: 123 } })
