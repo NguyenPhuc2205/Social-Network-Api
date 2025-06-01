@@ -7,6 +7,8 @@
  * @Description   : Interface for the Winston Logger
  */
 
+import { ISerializeConfig } from '~/common/utils'
+
 /**
  * Interface for logging context information
  * @interface ILogContext
@@ -106,11 +108,37 @@ export interface IWinstonLoggerService {
   http(messageOrParams: string | ILogParams, context?: ILogContext | string | string[], requestId?: string, metadata?: any): void
 
   /**
-   * Reconfigure logger with new options
-   * @param {Object} options - Configuration options
+   * Reconfigure logger with new options at runtime
+   * @param {IWinstonLoggerConfig} options - Configuration options
    * @param {string} [options.logLevel] - New log level (e.g., 'debug', 'info', 'warn', 'error')
+   * @param {string} [options.logDir] - New directory for log files
+   * @param {ISerializeConfig} [options.serializeConfig] - Updated serialization configuration
+   * @param {Object} [options.fileRotation] - Updated file rotation settings
    * @returns {void}
    */
-  reconfigureLogger(options: { logLevel?: string }): void
+  reconfigureLogger(options: IWinstonLoggerConfig): void
 }
 
+/**
+ * Configuration interface for WinstonLoggerService
+ * @interface IWinstonLoggerConfig
+ * @property {string} [logLevel] - Log level ('error', 'warn', 'info', 'http', 'verbose', 'debug', 'silly')
+ * @property {string} [logDir] - Directory where log files will be stored
+ * @property {ISerializeConfig} [serializeConfig] - Configuration for metadata serialization
+ * @property {Object} [fileRotation] - Configuration for log file rotation
+ * @property {string} [fileRotation.datePattern] - Date pattern for rotation (e.g., 'YYYY-MM-DD-HH')
+ * @property {string} [fileRotation.maxSize] - Maximum size of log files before rotation (e.g., '10m')
+ * @property {string} [fileRotation.maxFiles] - Maximum number/age of files to keep (e.g., '14d', '10')
+ * @property {boolean} [fileRotation.zippedArchive] - Whether to compress rotated logs
+ */
+export interface IWinstonLoggerConfig {
+  logLevel?: string
+  logDir?: string
+  serializeConfig?: ISerializeConfig
+  fileRotation?: {
+    datePattern?: string
+    maxSize?: string
+    maxFiles?: string
+    zippedArchive?: boolean
+  }
+}

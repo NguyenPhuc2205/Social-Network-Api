@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-02-12 16:52:32
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-31 13:27:31
+ * @LastEditTime  : 2025-06-01 15:58:18
  * @FilePath      : /server/src/infrastructure/loggers/winston.service.ts
  * @Description   : Create a logger using Winston with daily rotation and custom formatting
  */
@@ -11,16 +11,18 @@ import fs from 'fs'
 import path from 'path'
 import winston from 'winston'
 import DailyRotateFile from 'winston-daily-rotate-file'
-import { ILogContext, ILogParams, IWinstonLoggerService } from '~/infrastructure/loggers/winston.interface'
+import { ILogContext, ILogParams, IWinstonLoggerConfig, IWinstonLoggerService } from '~/infrastructure/loggers/winston.interface'
 import { v4 as uuidv4 } from 'uuid'
 import { injectable } from 'inversify'
 import util from 'util'
+import { ISerializeConfig, safeSerialize } from '~/common/utils'
 
 const { createLogger, format, transports } = winston
 const { combine, timestamp, splat, colorize, uncolorize, printf, align, label, errors } = format
 
 /**
  * Winston implementation of the logger service
+ * 
  * @class WinstonLoggerService
  * @implements {IWinstonLoggerService}
  * @description Provides structured logging capabilities with Winston transport
@@ -29,20 +31,73 @@ const { combine, timestamp, splat, colorize, uncolorize, printf, align, label, e
 export class WinstonLoggerService implements IWinstonLoggerService {
   private static instance: IWinstonLoggerService | null = null
   private logger: winston.Logger
-  private readonly logDir: string = path.resolve('logs')
+  private logDir: string = path.resolve('logs')
   private logLevel: string = 'debug'
+  private serializeConfig: ISerializeConfig
+  private fileRotationConfig: Required<IWinstonLoggerConfig['fileRotation']>
+
+  /**
+   * Default configuration values
+   */
+  private static readonly DEFAULT_CONFIG: Required<IWinstonLoggerConfig> = {
+    logLevel: 'debug',
+    logDir: path.resolve('logs'),
+    serializeConfig: {
+      maxDepth: 3,
+      maxArrayLength: 5,
+      maxObjectKeys: 10,
+      maxStackLines: 3,
+    },
+    fileRotation: {
+      datePattern: 'YYYY-MM-DD-HH',
+      maxSize: '2m',
+      maxFiles: '14d',
+      zippedArchive: true,
+    }
+  }
+
+  /**
+   * Merges user-provided configuration with default values
+   * 
+   * @private
+   * @param {IWinstonLoggerConfig} config - User provided configuration
+   * @returns {Required<IWinstonLoggerConfig>} Complete configuration with all required fields
+   */
+  private mergeWithDefaults(config: IWinstonLoggerConfig): Required<IWinstonLoggerConfig> {
+    return {
+      logLevel: config.logLevel ?? WinstonLoggerService.DEFAULT_CONFIG.logLevel,
+      logDir: config.logDir ?? WinstonLoggerService.DEFAULT_CONFIG.logDir,
+      serializeConfig: { 
+        ...WinstonLoggerService.DEFAULT_CONFIG.serializeConfig, 
+        ...config.serializeConfig 
+      },
+      fileRotation: { 
+        ...WinstonLoggerService.DEFAULT_CONFIG.fileRotation, 
+        ...config.fileRotation 
+      } 
+    }
+  }
 
   /**
    * Creates a new Winston logger instance
    * @constructor
    */
-  constructor() {
+  constructor(config: IWinstonLoggerConfig = {}) {
+    // Merge config with defaults
+    const mergedConfig = this.mergeWithDefaults(config)
+
+    this.logLevel = mergedConfig.logLevel
+    this.logDir = mergedConfig.logDir
+    this.serializeConfig = mergedConfig.serializeConfig
+    this.fileRotationConfig = mergedConfig.fileRotation as Required<IWinstonLoggerConfig['fileRotation']>
+
     this.ensureLogDirectoryExists()
     this.logger = this.createLogger()
   }
 
   /**
    * Gets the singleton instance of the WinstonLoggerService
+   * 
    * @static
    * @returns {IWinstonLoggerService} The singleton instance of WinstonLoggerService
    */
@@ -55,6 +110,7 @@ export class WinstonLoggerService implements IWinstonLoggerService {
 
   /**
    * Ensures the log directory exists, creates it if not present
+   * 
    * @private
    * @returns {void}
    */
@@ -69,22 +125,94 @@ export class WinstonLoggerService implements IWinstonLoggerService {
   }
 
   /**
-   * Reconfigures the logger with new settings
-   * @param {Object} options - Configuration options
-   * @param {string} [options.logLevel] - New log level to apply
+   * Update serialize configuration at runtime
+   * 
+   * @param {Partial<ISerializeConfig>} newConfig - New serialization configuration to merge with existing config
    * @returns {void}
    */
-  public reconfigureLogger(options: { logLevel?: string}): void {
+  public updateSerializeConfig(newConfig: Partial<ISerializeConfig>): void {
+    this.serializeConfig = { ...this.serializeConfig, ...newConfig }
+  }
+
+  /**
+   * Get current serialize configuration
+   * 
+   * @returns {ISerializeConfig} A copy of the current serialization configuration
+   */
+  public getSerializeConfig(): ISerializeConfig {
+    return { ...this.serializeConfig }
+  }
+
+  /**
+   * Reconfigures the logger with new settings at runtime
+   * This allows dynamic adjustment of logging behavior without application restart
+   * 
+   * @param {IWinstonLoggerConfig} options - Configuration options
+   * @param {string} [options.logLevel] - New log level to apply (debug, info, warn, error)
+   * @param {string} [options.logDir] - New directory for log files
+   * @param {ISerializeConfig} [options.serializeConfig] - Updated serialization configuration
+   * @param {Object} [options.fileRotation] - Updated file rotation settings
+   * @returns {void}
+   */
+  public reconfigureLogger(options: IWinstonLoggerConfig): void {
     let needsRecreate = false
 
+    // Change log level if provided and different from current
     if (options.logLevel && options.logLevel !== this.logLevel) {
       this.logLevel = options.logLevel
-      needsRecreate = true
+      needsRecreate = true // Logger recreation needed for level change
     }
 
+    // Change log directory if provided and different from current
+    if (options.logDir && options.logDir !== this.logDir) {
+      this.logDir = options.logDir
+      this.ensureLogDirectoryExists() // Make sure the new directory exists
+      needsRecreate = true // Logger recreation needed for directory change
+    }
+
+    // Update serialization configuration if provided
+    if (options.serializeConfig) {
+      this.updateSerializeConfig(options.serializeConfig)
+    }
+
+    // Update file rotation settings if provided
+    if (options.fileRotation) {
+      this.fileRotationConfig = { ...this.fileRotationConfig, ...options.fileRotation } as Required<IWinstonLoggerConfig['fileRotation']>
+      needsRecreate = true // Logger recreation needed for rotation settings change
+    }
+
+    // Only recreate logger if necessary (performance optimization)
     if (needsRecreate) {
       this.logger = this.createLogger()
     }
+  }
+
+  /**
+   * Safely serialize metadata, avoiding logging the logger itself
+   * Prevents circular references that would crash the logger by detecting Winston loggers
+   * and replacing them with a simplified representation.
+   * 
+   * @private
+   * @param {any} metadata - Metadata to serialize
+   * @returns {any} Safely serialized metadata without circular references
+   */
+  private safeSerializeMetadata(metadata: any): any {
+    if (!metadata) return {}
+
+    // If metadata is an object with a logger property, serialize it safely
+    if (metadata.logger && typeof metadata.logger === 'object' && metadata.logger.level) {
+      return {
+        ...safeSerialize(metadata, this.serializeConfig),
+        logger: `[Winston Logger: level=${metadata.logger.level}]`
+      }
+    }
+
+    // If metadata is a Winston logger instance, return a safe string representation
+    if (metadata.level && metadata._readableState && metadata._writableState) {
+      return `[Winston Logger: level=${metadata.level}]`
+    }
+
+    return safeSerialize(metadata, this.serializeConfig)
   }
 
   /**
@@ -93,34 +221,20 @@ export class WinstonLoggerService implements IWinstonLoggerService {
    * @returns {winston.Logger} Configured Winston logger instance
    */
   private createLogger(): winston.Logger {
-    // Custom format function to handle metadata serialization
-    const formatFunction = format((info) => {
-      // info: Object containing log information
-      if (info.metadata) {
-        try {
-          info.metadata = JSON.parse(
-            // info.metadata => json string
-            JSON.stringify(info.metadata, (key, value) => {
-              if (typeof value === 'function') {
-                return value.name || 'anonymous'
-              }
-              return value
-            })
-          )
-
-          // After stringify, parse it back to ensure it's a valid object
-        } catch (error) {
-          info.metadata = { error: 'Failed to serialize metadata' }
-        }
-      }
-      return info
-    })
-
-    // Define the base log format
+    // Define the base log format for file output
     const baseLogFormat = printf(({ level, message, context, requestId, timestamp, metadata, stack }) => {
       const formattedContext = context ? context.toString().trim() : '-'
       const formattedRequestId = requestId ? requestId.toString().trim() : 'unknown'
-      const formattedMetadata = metadata ? JSON.stringify(metadata) : '-'
+      let formattedMetadata = '-'
+
+      if (metadata) {
+        try {
+          // Safely serialize metadata to prevent circular references
+          formattedMetadata = JSON.stringify(this.safeSerializeMetadata(metadata))
+        } catch (error) {
+          formattedMetadata = `[Serialization Error]`          
+        }
+      }
 
       let logMessage = `${timestamp} | ${level.padEnd(7)} | ${formattedContext} | ${formattedRequestId} | ${message} | ${formattedMetadata}`
 
@@ -132,11 +246,10 @@ export class WinstonLoggerService implements IWinstonLoggerService {
     })
 
     // Define the console log format with colorization
-    // Use util.inspect to format metadata with depth and colors, avoid null value 
     const consoleLogFormat = printf(({ level, message, context, requestId, timestamp, metadata, stack }) => {
       const formattedContext = context ? context.toString().trim() : '-'
       const formattedRequestId = requestId ? requestId.toString().trim() : 'unknown'
-      const formattedMetadata = metadata ? util.inspect(metadata, { depth: null, colors: true }) : {}
+      const formattedMetadata = metadata ? util.inspect(metadata, { depth: 2, colors: true }) : {}
 
       let logMessage = `${ timestamp } | ${ level.padEnd(7) } | ${ formattedContext } | ${ formattedRequestId } | ${ message } | ${ formattedMetadata }`
 
@@ -170,33 +283,31 @@ export class WinstonLoggerService implements IWinstonLoggerService {
         new DailyRotateFile({
           dirname: this.logDir,
           filename: 'application-%DATE%.log',
-          datePattern: 'YYYY-MM-DD-HH',
-          zippedArchive: true, // Compress old log files
-          maxSize: '2m',
-          maxFiles: '14d', // Retain logs for 14 days
+          datePattern: 'YYYY-MM-DD-HH', // Date format in filename for hourly rotation
+          zippedArchive: true, // Compress old log files to save space
+          maxSize: '2m', // Maximum log file size before rotation (2MB)
+          maxFiles: '14d', // Keep logs for 14 days
           format: combine(
             timestamp({ format: 'YYYY-MM-DD HH:mm:ss A' }),
             align(),
             uncolorize(),
-            formatFunction(),
             baseLogFormat,
           )
         }),
 
-        // DailyRotateFile transport for error logs
+        // DailyRotateFile transport for error logs only
         new DailyRotateFile({
           dirname: this.logDir,
-          filename: `$error-%DATE%.log`,
+          filename: `error-%DATE%.log`,
           datePattern: 'YYYY-MM-DD-HH',
-          level: 'error',
+          level: 'error', // Only capture error level logs in this transport
           zippedArchive: true,
           maxSize: '2m',
-          maxFiles: '14d',
+          maxFiles: '14d', // Retain error logs for 14 days
           format: combine(
             timestamp({ format: 'YYYY-MM-DD HH:mm:ss A' }),
             align(),
             uncolorize(),
-            formatFunction(),
             baseLogFormat,
           )
         })
