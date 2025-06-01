@@ -17,11 +17,11 @@
 
 import { inject, injectable } from 'inversify'
 import { getCallerLocation } from '~/common/helpers'
-import { loadEnv, validateEnv } from '~/common/utils/env-loader'
+import { loadEnv, validateEnv } from '~/common/utils'
 import { IConfigService } from '~/configs/config.interface'
 import { mergedEnvSchema, MergedEnvSchema } from '~/configs'
 import { DI_TYPES } from '~/core/providers'
-import { bindWinstonLoggerModule, IWinstonLoggerService } from '~/infrastructure/loggers'
+import { IWinstonLoggerService } from '~/infrastructure/loggers'
 import { IEnvLoadingOptions } from '~/shared/interfaces'
 
 /**
@@ -96,7 +96,7 @@ export class ConfigService implements IConfigService {
       this.loggerService.info({
         message: 'ConfigService is already being initialized. Waiting for completion...',
         context: { 
-          module: 'Config', 
+          module: 'ConfigService', 
           method: 'initialized', 
           route: getCallerLocation(), 
           action: 'WAIT_FOR_INITIALIZATION'
@@ -132,7 +132,7 @@ export class ConfigService implements IConfigService {
       this.loggerService.info({
         message: 'Starting ConfigService initialization...',
         context: { 
-          module: 'Config',
+          module: 'ConfigService',
           method: 'performInitialization',
           route: getCallerLocation(), 
           action: 'START_INITIALIZATION'
@@ -154,7 +154,7 @@ export class ConfigService implements IConfigService {
       this.loggerService.info({
         message: 'ConfigService initialized successfully',
         context: { 
-          module: 'Config',
+          module: 'ConfigService',
           method: 'performInitialization',
           route: getCallerLocation(), 
           action: 'INITIALIZATION_SUCCESS'
@@ -167,7 +167,7 @@ export class ConfigService implements IConfigService {
       this.loggerService.error({
         message: 'Failed to initialize ConfigService',
         context: { 
-          module: 'Config', 
+          module: 'ConfigService', 
           method: 'performInitialization', 
           route: getCallerLocation(), 
           action: 'INITIALIZATION_ERROR' 
@@ -197,7 +197,7 @@ export class ConfigService implements IConfigService {
       this.loggerService.error({
         message: errorMessage,
         context: {
-          module: 'Config',
+          module: 'ConfigService',
           method: 'getConfig',
           route: getCallerLocation(),
           action: 'GET_INVALID_CONFIG'
@@ -237,7 +237,7 @@ export class ConfigService implements IConfigService {
       this.loggerService.warn({
         message: `Environment variable "${key}" is not defined`,
         context: {
-          module: 'Config',
+          module: 'ConfigService',
           method: 'getRawConfigValue',
           route: getCallerLocation(),
           action: 'GET_UNDEFINED_ENV_VAR'
@@ -283,7 +283,7 @@ export class ConfigService implements IConfigService {
         this.loggerService.warn({
           message: 'Initialization failed while waiting',
           context: {
-            module: 'Config',
+            module: 'ConfigService',
             method: 'waitForInitialization',
             route: getCallerLocation(),
             action: 'WAIT_INITIALIZATION_FAILED'
@@ -307,7 +307,7 @@ export class ConfigService implements IConfigService {
     this.loggerService.info({
       message: 'Resetting ConfigService',
       context: {
-        module: 'Config',
+        module: 'ConfigService',
         method: 'reset',
         route: getCallerLocation(),
         action: 'RESET_SERVICE'
@@ -331,7 +331,7 @@ export class ConfigService implements IConfigService {
     this.loggerService.info({
       message: 'Reinitializing ConfigService',
       context: {
-        module: 'Config',
+        module: 'ConfigService',
         method: 'reinitialize',
         route: getCallerLocation(),
         action: 'REINITIALIZE_SERVICE'
@@ -350,6 +350,7 @@ export class ConfigService implements IConfigService {
 // Example usage
 // import { bindConfigsModule } from '~/configs/config.module'
 // import { DIContainer } from '~/core/providers/di.container'
+// import { bindWinstonLoggerModule } from '~/infrastructure/loggers/winston.module'
 // async function testConfigService() {
 //   const container = DIContainer.getInstance()
 //   container.registerModule(bindConfigsModule)
