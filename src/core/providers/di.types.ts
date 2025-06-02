@@ -4,7 +4,7 @@ import { IOAuthConfig } from './../../configs/oauth/oauth.config';
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-02-12 16:52:32
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-30 22:54:48
+ * @LastEditTime  : 2025-06-02 15:49:41
  * @FilePath      : /server/src/core/providers/di.types.ts
  * @Description   : Dependency Injection Types for InversifyJS
  */
@@ -64,6 +64,7 @@ export const DI_TYPES = Object.freeze({
   IUserService: Symbol.for('IUserService'), // Manages User operations
   IAuthService: Symbol.for('IAuthService'), // Handles authentication and authorization
   ITweetService: Symbol.for('ITweetService'), // Manages Tweet (Post) operations
+  IPostService: Symbol.for('IPostService'), // Manages Post operations
   IMediaService: Symbol.for('IMediaService'), // Manages Media operations
   ICommentService: Symbol.for('ICommentService'), // Manages Comment operations
   IHashtagService: Symbol.for('IHashtagService'), // Manages Hashtag operations
@@ -75,9 +76,10 @@ export const DI_TYPES = Object.freeze({
   INotificationService: Symbol.for('INotificationService'), // Manages Notification operations
   IConversationService: Symbol.for('IConversationService'), // Manages Conversation operations
   IMessageService: Symbol.for('IMessageService'), // Manages Message operations
+  IGroupService: Symbol.for('IGroupService'), // Manages Group operations
+  IReportService: Symbol.for('IReportService'), // Manages Report operations
   IAccountSubscriptionService: Symbol.for('IAccountSubscriptionService'), // Manages AccountSubscription operations
   IPaymentService: Symbol.for('IPaymentService'), // Manages Payment operations
-  IReportService: Symbol.for('IReportService'), // Manages Report operations
   IRoleService: Symbol.for('IRoleService'), // Manages Role operations
   IPermissionService: Symbol.for('IPermissionService'), // Manages Permission operations
   IRolePermissionService: Symbol.for('IRolePermissionService'), // Manages Role-Permission relationships
@@ -92,6 +94,7 @@ export const DI_TYPES = Object.freeze({
    */
   IUserRepository: Symbol.for('IUserRepository'), // Data access for User
   ITweetRepository: Symbol.for('ITweetRepository'), // Data access for Tweet
+  IPostRepository: Symbol.for('IPostRepository'), // Data access for Post
   IMediaRepository: Symbol.for('IMediaRepository'), // Data access for Media
   ICommentRepository: Symbol.for('ICommentRepository'), // Data access for Comment
   IHashtagRepository: Symbol.for('IHashtagRepository'), // Data access for Hashtag
@@ -99,13 +102,19 @@ export const DI_TYPES = Object.freeze({
   ITrendRepository: Symbol.for('ITrendRepository'), // Data access for Trend
   IReactionRepository: Symbol.for('IReactionRepository'), // Data access for Reaction
   IBookmarkRepository: Symbol.for('IBookmarkRepository'), // Data access for Bookmark
+  IBookmarkCollectionRepository: Symbol.for('IBookmarkCollectionRepository'), // Data access for BookmarkCollection
   IFollowerRepository: Symbol.for('IFollowerRepository'), // Data access for Follower
   INotificationRepository: Symbol.for('INotificationRepository'), // Data access for Notification
   IConversationRepository: Symbol.for('IConversationRepository'), // Data access for Conversation
+  IConversationMemberRepository: Symbol.for('IConversationMemberRepository'), // Data access for ConversationMember
   IMessageRepository: Symbol.for('IMessageRepository'), // Data access for Message
+  IGroupRepository: Symbol.for('IGroupRepository'), // Data access for Group
+  IGroupMemberRepository: Symbol.for('IGroupMemberRepository'), // Data access for GroupMember
+  IReportRepository: Symbol.for('IReportRepository'), // Data access for Report
+  IPostLikeRepository: Symbol.for('IPostLikeRepository'), // Data access for PostLike
+  IPostCommentRepository: Symbol.for('IPostCommentRepository'), // Data access for PostComment
   IAccountSubscriptionRepository: Symbol.for('IAccountSubscriptionRepository'), // Data access for AccountSubscription
   IPaymentRepository: Symbol.for('IPaymentRepository'), // Data access for Payment
-  IReportRepository: Symbol.for('IReportRepository'), // Data access for Report
   IRoleRepository: Symbol.for('IRoleRepository'), // Data access for Role
   IPermissionRepository: Symbol.for('IPermissionRepository'), // Data access for Permission
   IRolePermissionRepository: Symbol.for('IRolePermissionRepository'), // Data access for RolePermission
@@ -134,6 +143,7 @@ export const DI_TYPES = Object.freeze({
   IUserController: Symbol.for('IUserController'), // Handles User APIs
   IAuthController: Symbol.for('IAuthController'), // Handles authentication APIs
   ITweetController: Symbol.for('ITweetController'), // Handles Tweet APIs
+  IPostController: Symbol.for('IPostController'), // Handles Post APIs
   IMediaController: Symbol.for('IMediaController'), // Handles Media APIs
   ICommentController: Symbol.for('ICommentController'), // Handles Comment APIs
   IHashtagController: Symbol.for('IHashtagController'), // Handles Hashtag APIs
@@ -145,9 +155,10 @@ export const DI_TYPES = Object.freeze({
   INotificationController: Symbol.for('INotificationController'), // Handles Notification APIs
   IConversationController: Symbol.for('IConversationController'), // Handles Conversation APIs
   IMessageController: Symbol.for('IMessageController'), // Handles Message APIs
+  IGroupController: Symbol.for('IGroupController'), // Handles Group APIs
+  IReportController: Symbol.for('IReportController'), // Handles Report APIs
   IAccountSubscriptionController: Symbol.for('IAccountSubscriptionController'), // Handles AccountSubscription APIs
   IPaymentController: Symbol.for('IPaymentController'), // Handles Payment APIs
-  IReportController: Symbol.for('IReportController'), // Handles Report APIs
   IRoleController: Symbol.for('IRoleController'), // Handles Role APIs
   IPermissionController: Symbol.for('IPermissionController'), // Handles Permission APIs
   IRolePermissionController: Symbol.for('IRolePermissionController'), // Handles RolePermission APIs
