@@ -22,7 +22,7 @@ import { StringValidation, ZodError, ZodIssue, ZodIssueCode, ZodSchema } from 'z
 import { NextFunction, Request, Response, RequestHandler } from 'express'
 import { AppError, ValidationError } from '~/core/errors'
 import { SuggestionTranslationKeys, ValidationTranslationKeys } from '~/shared/enums'
-import { validateZodSchema } from '~/common/utils/zod-validator-core'
+import { validateZodSchema } from '~/common/utils/zod-validator-core.util'
 
 /**
  * Validation middleware for Express.js using Zod schemas

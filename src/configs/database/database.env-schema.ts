@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-05-27 23:23:26
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-31 00:33:30
+ * @LastEditTime  : 2025-06-02 11:45:19
  * @FilePath      : /server/src/configs/database/database.env-schema.ts
  * @Description   : Schema for validating database environment variables
  */
@@ -13,7 +13,7 @@ import z from 'zod'
  */
 export const databaseEnvSchema = z.object({
   // MongoDB configuration
-  MONGODB_NAME: z.string().trim().default('twitter'),
+  MONGODB_NAME: z.string().trim().default('Spheria'),
   MONGODB_USERNAME: z.string().trim().optional(),
   MONGODB_PASSWORD: z.string().trim().optional(),
   MONGODB_HOST: z.string().trim().default('localhost'),

@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-02-12 16:52:32
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-31 00:32:47
+ * @LastEditTime  : 2025-06-02 12:06:49
  * @FilePath      : /server/src/configs/database/database.config.ts
  * @Description   : Database configuration interface and implementation
  */
@@ -158,18 +158,29 @@ export class DatabaseConfig implements IDatabaseConfig {
    */
   getMongoDBConnectionString(): string {
     const config = this.loadConfig()
-    
+
+    // If full URI is provided, use it (with password replacement if needed)
     if (config.MONGODB_URI) {
       return config.MONGODB_URI.replace('<db_password>', config.MONGODB_PASSWORD || '')
     }
 
-    const auth = config.MONGODB_USERNAME && config.MONGODB_PASSWORD 
-      ? `${config.MONGODB_USERNAME}:${config.MONGODB_PASSWORD}@` 
+    // Build connection string from individual parts
+    const host = config.MONGODB_HOST || 'localhost:27017'
+    const dbName = config.MONGODB_NAME || 'test'
+    
+    // Handle authentication
+    const auth = config.MONGODB_USERNAME && config.MONGODB_PASSWORD
+      ? `${config.MONGODB_USERNAME}:${config.MONGODB_PASSWORD}@`
       : ''
-    
+
+    // Handle options
     const options = config.MONGODB_URI_OPTIONS ? `?${config.MONGODB_URI_OPTIONS}` : ''
+
+    // Determine protocol based on host (srv for Atlas, regular for localhost/custom)
+    const protocol = host.includes('.mongodb.net') ? 'mongodb+srv' : 'mongodb'
     
-    return `mongodb://${auth}${config.MONGODB_HOST}/${config.MONGODB_NAME}${options}`
+    // Build final connection string
+    return `${protocol}://${auth}${host}/${dbName}${options}`
   }
 
   /**
