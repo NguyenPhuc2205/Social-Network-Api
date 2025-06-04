@@ -29,3 +29,16 @@ export enum ReportReason {
   /** Reports that don't fit into the predefined categories */
   Other = 'Other'
 }
+
+/**
+ * Enumeration of statuses for content/user reports
+ * Used in Report table to track the status of a report
+ * 
+ * @enum {string}
+ */
+export enum ReportStatus {
+  Pending = 'pending', // Chờ xử lý
+  Reviewed = 'reviewed', // Đã xem xét
+  Resolved = 'resolved', // Đã giải quyết
+  Rejected = 'rejected' // Bị từ chối
+}

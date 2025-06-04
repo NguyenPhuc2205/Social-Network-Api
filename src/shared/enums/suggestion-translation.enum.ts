@@ -102,4 +102,9 @@ export enum SuggestionTranslationKeys {
    * Custom validation suggestions
    */
   CUSTOM_VALIDATION_FAILED = 'suggestions:CUSTOM_VALIDATION_FAILED',
+
+  /**
+   * GeoJSON format suggestions
+   */
+  GEOJSON_FORMAT_HELP = 'suggestions:GEOJSON_FORMAT_HELP'
 }

@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-05-23 10:20:32
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-05-24 00:58:02
+ * @LastEditTime  : 2025-06-04 11:01:58
  * @FilePath      : /server/src/shared/enums/validation-translation.enum.ts
  * @Description   : Validation translation keys enum
  */
@@ -96,5 +96,8 @@ export enum ValidationTranslationKeys {
   AVATAR_INVALID_FORMAT = 'validation:FIELDS.AVATAR.INVALID_FORMAT',
   AVATAR_SIZE = 'validation:FIELDS.AVATAR.SIZE',
   COVER_INVALID_FORMAT = 'validation:FIELDS.COVER.INVALID_FORMAT',
-  COVER_SIZE = 'validation:FIELDS.COVER.SIZE'
+  COVER_SIZE = 'validation:FIELDS.COVER.SIZE',
+
+  // GeoJSON
+  GEOJSON_INVALID = 'validation:FORMATS.GEOJSON_INVALID',
 }

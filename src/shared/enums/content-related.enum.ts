@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-02-12 16:52:32
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-06-04 00:20:08
+ * @LastEditTime  : 2025-06-04 10:39:23
  * @FilePath      : /server/src/shared/enums/content-related.enum.ts
  * @Description   : Enums related to media types, post audiences, and post types
  */
@@ -71,4 +71,29 @@ export enum PostType {
 
   /** Post containing a voting poll */
   Poll = 'Poll'
+}
+
+/**
+ * Enumeration of reasons for deleting content
+ * Used in Post and Message tables to specify why content was deleted
+ * 
+ * @enum {string}
+ */
+export enum DeleteReason {
+  UserRequest = 'user_request', // User request
+  PolicyViolation = 'policy_violation',
+  AdminAction = 'admin_action', // Admin or moderator delete
+  Other = 'other' // Other reasons
+}
+
+/**
+ * Enumeration of content types for posts
+ * Used to differentiate between short and long content
+ * 
+ * @enum {string}
+ * 
+ */
+export enum ContentType {
+  Short = 'short',  // Short content, typically under 500 characters
+  Long = 'long' // Long content, typically max 5000 characters
 }
