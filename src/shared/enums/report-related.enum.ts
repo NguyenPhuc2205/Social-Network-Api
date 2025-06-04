@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-06-04 00:25:00
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-06-04 00:25:00
+ * @LastEditTime  : 2025-06-04 22:15:09
  * @FilePath      : /server/src/shared/enums/report-related.enum.ts
  * @Description   : Enumerations related to content and user reporting
  */
@@ -37,8 +37,15 @@ export enum ReportReason {
  * @enum {string}
  */
 export enum ReportStatus {
-  Pending = 'pending', // Chờ xử lý
-  Reviewed = 'reviewed', // Đã xem xét
-  Resolved = 'resolved', // Đã giải quyết
-  Rejected = 'rejected' // Bị từ chối
+  /** Awaiting review */
+  Pending = 'pending',
+
+  /** Report has been reviewed by moderators */
+  Reviewed = 'reviewed',
+
+  /** Report has been resolved, action taken if necessary */
+  Resolved = 'resolved',
+
+  /** Report has been rejected, no action executed */
+  Rejected = 'rejected'
 }

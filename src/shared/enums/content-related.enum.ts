@@ -80,9 +80,16 @@ export enum PostType {
  * @enum {string}
  */
 export enum DeleteReason {
-  UserRequest = 'user_request', // User request
+  /** User initiated deletion request */
+  UserRequest = 'user_request',
+
+  /** Content was deleted due to a violation of community guidelines */
   PolicyViolation = 'policy_violation',
-  AdminAction = 'admin_action', // Admin or moderator delete
+
+  /** Content was deleted due to spam or unwanted repetitive content */
+  AdminAction = 'admin_action',
+
+  /** Content was deleted due to a technical issue or error */
   Other = 'other' // Other reasons
 }
 
@@ -94,6 +101,9 @@ export enum DeleteReason {
  * 
  */
 export enum ContentType {
-  Short = 'short',  // Short content, typically under 500 characters
-  Long = 'long' // Long content, typically max 5000 characters
+  /** Short content, typically under 500 characters  */
+  Short = 'short',
+
+  /** Long content, typically max 5000 characters */
+  Long = 'long'
 }
