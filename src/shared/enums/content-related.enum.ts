@@ -40,7 +40,10 @@ export enum PostAudience {
   Everyone = 'Everyone',
 
   /** Visible only to a user's close connections */
-  CloseCircle = 'CloseCircle'
+  CloseCircle = 'CloseCircle',
+
+  /** Visible only to the user's followers */
+  FollowersOnly = 'FollowersOnly',
 }
 
 /**
@@ -88,6 +91,9 @@ export enum DeleteReason {
 
   /** Content was deleted due to spam or unwanted repetitive content */
   AdminAction = 'admin_action',
+
+  /** Content was deleted due to expired */
+  Expired = 'expired',
 
   /** Content was deleted due to a technical issue or error */
   Other = 'other' // Other reasons

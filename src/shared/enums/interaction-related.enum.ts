@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-06-04 00:25:00
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-06-04 00:25:00
+ * @LastEditTime  : 2025-06-09 08:19:24
  * @FilePath      : /server/src/shared/enums/interaction-related.enum.ts
  * @Description   : Enumerations for user interactions like notifications and reactions
  */
@@ -48,7 +48,13 @@ export enum NotificationType {
   EventInvite = 'EventInvite',
   
   /** Notification when an event a user is attending is updated */
-  EventUpdate = 'EventUpdate'
+  EventUpdate = 'EventUpdate',
+
+  /** Notification when a user is tagged/mentioned in a comment */
+  Tag = 'Tag',
+
+  /** System-generated notifications, e.g., maintenance alerts */
+  System = 'System',
 }
 
 /**

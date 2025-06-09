@@ -23,6 +23,10 @@ export {
 } from '~/shared/interfaces/user-related.interface'
 
 export {
+  IConversationNickname
+} from '~/shared/interfaces/interaction-related.interface'
+
+export {
   IValidationOptions,
   IValidationErrorDetail,
   IFormattedValidationError
