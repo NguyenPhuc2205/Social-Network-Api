@@ -13,6 +13,11 @@
 .pnp.*
 
 node_modules/
+
 dist/
 
+logs/
+
 .env
+
+client_secret_*
