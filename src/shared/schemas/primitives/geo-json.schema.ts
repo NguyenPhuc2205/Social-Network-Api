@@ -29,12 +29,6 @@ export const GeoPointSchema = z.object({
   coordinates: CoordinatesSchema,
 })
 
-export const OptionalGeoPointSchema = GeoPointSchema.optional()
-
-export const NullableGeoPointSchema = GeoPointSchema.nullable()
-
-export const OptionalNullableGeoPointSchema = GeoPointSchema.nullable().optional()
-
 // ===========================
 // GEOJSON POLYGON: Collection of Coordinates (Make a closed ring)
 // ===========================

@@ -19,6 +19,7 @@ export const EmailSchema = z.string()
   .max(254) // RFC 5322 compliant
 
 export const OptionalEmailSchema = EmailSchema.optional()
+export const NullableEmailSchema = EmailSchema.nullable()
 
 // ===========================
 // PASSWORD VALIDATION
@@ -32,7 +33,9 @@ export const StrongPasswordSchema = z.string()
   .max(128)
   .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/) // At least one lowercase, one uppercase, one digit, and one special character
 
-export const HashedPasswordSchema = z.string().min(20).max(128)
+export const HashedPasswordSchema = z.string()
+  .min(20)
+  .max(128)
 
 // ===========================
 // TOKENS

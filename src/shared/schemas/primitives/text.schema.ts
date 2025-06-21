@@ -61,7 +61,9 @@ export const TrendNameSchema = z.string()
 // ===========================
 // CONTENT & DESCRIPTIONS
 // ===========================
-export const BioSchema = z.string().trim().max(500)
+export const BioSchema = z.string()
+  .trim()
+  .max(500)
 
 export const DescriptionSchema = z.string().trim().max(1000)
 

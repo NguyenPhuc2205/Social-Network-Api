@@ -2,23 +2,18 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-06-20 14:25:00
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-06-20 21:49:07
+ * @LastEditTime  : 2025-06-21 15:46:51
  * @FilePath      : /server/src/shared/schemas/primitives/dates.schema.ts
  * @Description   : Date and time-related schema validations
  */
 
 import { z } from 'zod'
+import { isValidAge } from '~/common/helpers'
 
 // ===========================
 // DATE & TIME
 // ===========================
 export const DateSchema = z.date()
-
-export const OptionalDateSchema = DateSchema.optional()
-
-export const NullableDateSchema = DateSchema.nullable()
-
-export const OptionalNullableDateSchema = DateSchema.nullable().optional()
 
 // ===========================
 // SPECIFIC DATE FIELDS
@@ -53,6 +48,16 @@ export const PaymentDateSchema = z.date()
 // USER SPECIFIC DATES
 // ===========================
 export const DateOfBirthSchema = z.date()
+  .nullable()
+  .refine((date) => {
+    try {
+      if (date === null) return true // Allow null values
+      return isValidAge(date) // Validate age based on the date of birth (13 -> 120)
+    } catch (error) {
+      return false
+    }
+  })
+  .default(null)
 
 // ===========================
 // EVENT SPECIFIC DATES

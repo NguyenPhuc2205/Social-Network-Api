@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-06-20 13:52:10
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-06-20 21:19:26
+ * @LastEditTime  : 2025-06-21 10:32:56
  * @FilePath      : /server/src/shared/schemas/primitives/base.schema.ts
  * @Description   : Base schema for all primitives used in the application.
  */
@@ -13,6 +13,7 @@ import { z } from 'zod'
 // ===========================
 // BASIC TYPES
 // ===========================
+/** z.instance(ObjectId) */
 export const ObjectIdSchema = z.instanceof(ObjectId)
 
 export const OptionalObjectIdSchema = ObjectIdSchema.optional()
@@ -20,8 +21,6 @@ export const OptionalObjectIdSchema = ObjectIdSchema.optional()
 export const NullableObjectIdSchema = ObjectIdSchema.nullable()
 
 export const OptionalNullableObjectIdSchema = ObjectIdSchema.optional().nullable()
-
-export const BooleanSchema = z.boolean()
 
 // ===========================
 // TIMESTAMPS
@@ -70,6 +69,8 @@ export const NullableDeletedAtSchema = DeletedAtSchema.nullable()
 
 export const OptionalNullableDeletedAtSchema = DeletedAtSchema.optional().nullable()
 
+export const DeleteForEveryoneSchema = z.boolean().default(false)
+
 // ===========================
 // ARRAYS
 // ===========================
@@ -78,6 +79,31 @@ export const ObjectIdArraySchema = z.array(ObjectIdSchema)
 export const StringArraySchema = z.array(z.string())
 
 export const NumberArraySchema = z.array(z.number())
+
+// ===========================
+// STATUS FLAGS
+// ===========================
+export const BooleanSchema = z.boolean()
+
+export const IsPrivateSchema = BooleanSchema
+
+export const IsActiveSchema = BooleanSchema
+
+export const IsPinnedSchema = BooleanSchema
+
+export const IsEditedSchema = BooleanSchema
+
+export const IsReadSchema = BooleanSchema
+
+export const IsOnlineSchema = BooleanSchema
+
+export const IsPublicSchema = BooleanSchema
+
+export const RequiresApprovalSchema = BooleanSchema
+
+export const IsCancelledSchema = BooleanSchema
+
+export const IsAutoRenewSchema = BooleanSchema
 
 // ===========================
 // TYPE EXPORTS

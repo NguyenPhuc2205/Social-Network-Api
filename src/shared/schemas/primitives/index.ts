@@ -7,6 +7,7 @@
  * @Description   : Export all primitive schemas
  */
 
+export * from '~/shared/schemas/primitives/auth.schema'
 export * from '~/shared/schemas/primitives/base.schema'
 export * from '~/shared/schemas/primitives/dates.schema'
 export * from '~/shared/schemas/primitives/device.schema'
