@@ -8,12 +8,21 @@
  */
 
 export * from '~/shared/schemas/primitives/auth.schema'
+
 export * from '~/shared/schemas/primitives/base.schema'
+
 export * from '~/shared/schemas/primitives/dates.schema'
+
 export * from '~/shared/schemas/primitives/device.schema'
+
 export * from '~/shared/schemas/primitives/enum.schema'
+
 export * from '~/shared/schemas/primitives/geo-json.schema'
+
 export * from '~/shared/schemas/primitives/json.schema'
-export * from '~/shared/schemas/primitives/media.schema'
+
+export * from '~/shared/schemas/primitives/media-related.schema'
+
 export * from '~/shared/schemas/primitives/numeric.schema'
+
 export * from '~/shared/schemas/primitives/text.schema'

@@ -2,8 +2,8 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-06-20 14:10:00
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-06-21 01:32:05
- * @FilePath      : /server/src/shared/schemas/primitives/media.schema.ts
+ * @LastEditTime  : 2025-06-22 20:39:05
+ * @FilePath      : /server/src/shared/schemas/primitives/media-related.schema.ts
  * @Description   : Media and file-related schema validations
  */
 
