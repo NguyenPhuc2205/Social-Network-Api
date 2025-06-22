@@ -57,7 +57,6 @@ export const DateOfBirthSchema = z.date()
       return false
     }
   })
-  .default(null)
 
 // ===========================
 // EVENT SPECIFIC DATES

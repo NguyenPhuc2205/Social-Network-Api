@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-06-20 14:00:00
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-06-21 01:29:50
+ * @LastEditTime  : 2025-06-21 20:41:52
  * @FilePath      : /server/src/shared/schemas/primitives/text.schema.ts
  * @Description   : Text-related schema validations
  */
@@ -143,6 +143,13 @@ export const CancelReasonSchema = z.string().trim().max(500)
 export const FailureReasonSchema = z.string().trim().max(500)
 
 export const RefundReasonSchema = z.string().trim().max(500)
+
+// ===========================
+// ROLES & PERMISSIONS
+// ===========================
+export const ResourceSchema = z.string().trim().min(1).max(50)
+
+export const ActionSchema = z.string().trim().min(1).max(50)
 
 // ===========================
 // PAYMENT & SUBSCRIPTION

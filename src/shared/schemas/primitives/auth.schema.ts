@@ -40,18 +40,18 @@ export const HashedPasswordSchema = z.string()
 // ===========================
 // TOKENS
 // ===========================
-export const TokenSchema = z.string().trim().min(1)
+export const TokenSchema = z.string().trim()
 
 export const JWTTokenSchema = z.string()
   .regex(/^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]*$/)
 
-export const RefreshTokenSchema = z.string().trim().min(1)
+export const RefreshTokenSchema = z.string().trim()
 
-export const EmailVerifyTokenSchema = z.string().trim().min(1)
+export const EmailVerifyTokenSchema = z.string().trim()
 
-export const ForgotPasswordTokenSchema = z.string().min(1)
+export const ForgotPasswordTokenSchema = z.string()
 
-export const AccessTokenSchema = z.string().min(1)
+export const AccessTokenSchema = z.string()
 
 // ===========================
 // OTP & VERIFICATION
