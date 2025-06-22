@@ -2,22 +2,19 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-02-12 16:52:32
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-06-09 18:50:57
- * @FilePath      : /server/src/infrastructure/database/schemas/group-related.schema.ts
- * @Description   : Group-related schemas for MongoDB Native Driver
+ * @LastEditTime  : 2025-06-22 21:22:34
+ * @FilePath      : /server/src/infrastructure/database/interfaces/group.interface.ts
+ * @Description   : Group interface for MongoDB Native Driver
  */
 
 import { ObjectId } from 'mongodb'
-import { BaseSchema } from '~/core/bases/base.schemas'
-import { 
-  GroupMemberRole,
-  GroupPrivacyType
-} from '~/shared/enums'
+import { BaseSchema } from '~/core/bases/base.schema'
+import { GroupPrivacyType } from '~/shared/enums'
 
 /**
- * Group schema for managing user groups and communities
+ * Group interface for managing user groups and communities
  * 
- * @interface IGroupSchema
+ * @interface IGroup
  * @extends BaseSchema
  * @property {string} name - Name of the group
  * @property {string} description - Optional detailed description of the group
@@ -35,7 +32,7 @@ import {
  * @property {boolean} is_deleted - Whether the group has been soft deleted
  * @property {Date} deleted_at - Optional timestamp when group was deleted
  */
-export interface IGroupSchema extends BaseSchema {
+export interface IGroup extends BaseSchema {
   /** Name of the group */
   name: string
   /** Optional detailed description of the group */
@@ -69,55 +66,4 @@ export interface IGroupSchema extends BaseSchema {
   is_deleted: boolean
   /** Optional timestamp when group was deleted */
   deleted_at?: Date
-}
-
-/**
- * Group member schema for tracking user membership in groups
- * 
- * @interface IGroupMemberSchema
- * @extends BaseSchema
- * @property {ObjectId} group_id - ID of the group
- * @property {ObjectId} user_id - ID of the member user
- * @property {GroupMemberRole} role - Member's role (Admin, Moderator, Member)
- * @property {ObjectId} invited_by - Optional ID of the user who invited this member
- * @property {boolean} is_active - Whether the membership is currently active
- * @property {Date} joined_at - Timestamp when user joined the group
- */
-export interface IGroupMemberSchema extends BaseSchema {
-  /** ID of the group */
-  group_id: ObjectId
-  /** ID of the member user */
-  user_id: ObjectId
-  /** Member's role (Admin, Moderator, Member) */
-  role: GroupMemberRole
-  /** Optional ID of the user who invited this member */
-  invited_by?: ObjectId
-  /** Whether the membership is currently active */
-  is_active: boolean
-  /** Timestamp when user joined the group */
-  joined_at: Date
-}
-
-/**
- * Group post schema for managing posts within groups
- * 
- * @interface IGroupPostSchema
- * @extends BaseSchema
- * @property {ObjectId} group_id - ID of the group containing the post
- * @property {ObjectId} post_id - ID of the post
- * @property {boolean} is_pinned - Whether the post is pinned at the top of the group
- * @property {Date} pinned_at - Optional timestamp when post was pinned
- * @property {ObjectId} pinned_by - Optional ID of the admin/moderator who pinned the post
- */
-export interface IGroupPostSchema extends BaseSchema {
-  /** ID of the group containing the post */
-  group_id: ObjectId
-  /** ID of the post */
-  post_id: ObjectId
-  /** Whether the post is pinned at the top of the group */
-  is_pinned: boolean
-  /** Optional timestamp when post was pinned */
-  pinned_at?: Date
-  /** Optional ID of the admin/moderator who pinned the post */
-  pinned_by?: ObjectId
 }

@@ -16,6 +16,8 @@ export * from '~/shared/schemas/collections/refresh-token.schema'
 // Content Management
 export * from '~/shared/schemas/collections/media.schema'
 export * from '~/shared/schemas/collections/post.schema'
+export * from '~/shared/schemas/collections/comment.schema'
+export * from '~/shared/schemas/collections/comment-reaction.schema'
 export * from '~/shared/schemas/collections/hashtag.schema'
 export * from '~/shared/schemas/collections/post-hashtag.schema'
 export * from '~/shared/schemas/collections/post-category.schema'
@@ -34,8 +36,26 @@ export * from '~/shared/schemas/collections/message.schema'
 
 // Groups
 export * from '~/shared/schemas/collections/group.schema'
+export * from '~/shared/schemas/collections/group-member.schema'
+export * from '~/shared/schemas/collections/group-post.schema'
+
+// Events
+export * from '~/shared/schemas/collections/event.schema'
+export * from '~/shared/schemas/collections/event-attendee.schema'
+
+// Polls
+export * from '~/shared/schemas/collections/poll.schema'
+export * from '~/shared/schemas/collections/poll-vote.schema'
+
+// Business/Payments
+export * from '~/shared/schemas/collections/account-subscription.schema'
+export * from '~/shared/schemas/collections/payment.schema'
 
 // Authorization
 export * from '~/shared/schemas/collections/role.schema'
 export * from '~/shared/schemas/collections/permission.schema'
+export * from '~/shared/schemas/collections/role-permision.schema'
+
+// Moderation
+export * from '~/shared/schemas/collections/report.schema'
 export * from '~/shared/schemas/collections/role-permision.schema'

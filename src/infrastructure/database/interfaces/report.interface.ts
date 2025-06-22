@@ -2,22 +2,22 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-02-12 16:52:32
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-06-09 17:59:39
- * @FilePath      : /server/src/infrastructure/database/schemas/report-related.schema.ts
- * @Description   : Moderation and reporting schemas for MongoDB Native Driver
+ * @LastEditTime  : 2025-06-22 21:37:29
+ * @FilePath      : /server/src/infrastructure/database/interfaces/report-related.interface.ts
+ * @Description   : Moderation and reporting interfaces for MongoDB Native Driver
  */
 
 import { ObjectId } from 'mongodb'
-import { BaseSchema } from '~/core/bases/base.schemas'
+import { BaseSchema } from '~/core/bases/base.schema'
 import { 
   ReportReason,
   ReportStatus
 } from '~/shared/enums'
 
 /**
- * Report schema for managing content moderation and user reports
+ * Report interface for managing content moderation and user reports
  * 
- * @interface IReportSchema
+ * @interface IReport
  * @extends BaseSchema
  * @property {ObjectId} reporter_id - ID of the user who submitted the report
  * @property {ObjectId} reported_user_id - Optional ID of the user being reported
@@ -36,7 +36,7 @@ import {
  * @property {number} priority - Priority level for report handling (1 for urgent, 5 for low)
  * @property {string} category - Optional category classification for the report
  */
-export interface IReportSchema extends BaseSchema {
+export interface IReport extends BaseSchema {
   /** ID of the user who submitted the report */
   reporter_id: ObjectId
   /** Optional ID of the user being reported */
