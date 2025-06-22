@@ -26,7 +26,8 @@ import {
   IsDeletedSchema,
   DeletedAtSchema,
   CreatedAtSchema,
-  UpdatedAtSchema
+  UpdatedAtSchema,
+  DeleteReasonSchema
 } from '~/shared/schemas/primitives'
 
 export const GroupBaseSchema = z.object({
@@ -77,6 +78,9 @@ export const GroupBaseSchema = z.object({
   /** Timestamp when group was soft deleted */
   deleted_at: DeletedAtSchema.nullable().default(null),
 
+  /** Delete reason when group was soft deleted */
+  delete_reason: DeleteReasonSchema.nullable().default(null),
+
   // Timestamps
   created_at: CreatedAtSchema.default(() => new Date()),
 
@@ -85,13 +89,14 @@ export const GroupBaseSchema = z.object({
 
 export const GroupSchema = GroupBaseSchema
   .refine((data) => {
+    // admin_ids must include owner_id
     return data.admin_ids.includes(data.owner_id)
   }, { path: ['admin_ids'] })
   .refine((data) => {
-    return !data.is_deleted || data.deleted_at
+    return !data.is_deleted || (data.deleted_at && data.delete_reason)
   }, { path: ['is_deleted'] })
   .refine((data) => {
-    return data.is_deleted || !data.deleted_at
+    return data.is_deleted || (!data.deleted_at && !data.delete_reason)
   }, { path: ['is_deleted'] })
 
 export const GroupCreateSchema = GroupBaseSchema.omit({

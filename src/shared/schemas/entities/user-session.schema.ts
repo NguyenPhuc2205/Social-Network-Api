@@ -51,28 +51,40 @@ import { BrowserSchema,
 export const UserSessionBaseSchema = z.object({
   _id: ObjectIdSchema,
 
+  /** ID of the user who owns this session */
   user_id: ObjectIdSchema,
   
+  /** Unique identifier for the device */
   device_id: DeviceIdSchema,
   
+  /** Additional device information and specifications */
   device_info: z.string().trim().max(500).default(''),
   
+  /** Human-readable device name */
   device_name: DeviceNameSchema.default('Unknown Device'),
   
+  /** Device platform (iOS, Android, Web, etc.) */
   platform: PlatformSchema.default('Unknown'),
   
+  /** Browser user agent string */
   user_agent: UserAgentSchema.default(''),
   
+  /** Browser name and version information */
   browser: BrowserSchema.default('Unknown'),
   
+  /** Operating system information */
   os: OSSchema.default('Unknown'),
   
+  /** IP address from which the session was created */
   ip_address: IPAddressSchema,
   
+  /** Whether the session is currently active */
   is_active: IsActiveSchema.default(true),
   
+  /** Timestamp of the last user activity */
   last_activity: LastActivitySchema.default(() => new Date()),
   
+  /** Array of login attempts and their results */
   login_history: LoginHistorySchema.default([]),
   
   created_at: CreatedAtSchema.default(() => new Date()),

@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-06-21 10:01:01
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-06-21 21:32:48
+ * @LastEditTime  : 2025-06-22 16:06:53
  * @FilePath      : /server/src/shared/schemas/entities/user-preferences.schema.ts
  * @Description   : User preferences schema validation for user-preferences entity
  */
@@ -18,7 +18,7 @@ import { ObjectIdSchema, DeviceIdSchema, ThemeSchema, LanguageSchema, TimezoneSc
  * 
  * @field _id - MongoDB ObjectId identifier for the preferences
  * @field user_id - ObjectId reference to the preference owner (required)
- * @field session_id - ObjectId reference to the associated session (required)
+ * @field session_id - ObjectId reference to the associated session (optional, null when logged out)
  * @field device_id - Device identifier for device-specific preferences (required)
  * @field theme - UI theme preference (default: "light")
  * @field language - Language preference (default: "en")
@@ -36,18 +36,25 @@ import { ObjectIdSchema, DeviceIdSchema, ThemeSchema, LanguageSchema, TimezoneSc
 export const UserPreferencesBaseSchema = z.object({
   _id: ObjectIdSchema,
 
+  /** ID of the user who owns these preferences */
   user_id: ObjectIdSchema,
   
-  session_id: ObjectIdSchema,
+  /** ID of the session associated with these preferences */
+  session_id: ObjectIdSchema.nullable().default(null),
   
+  /** Unique identifier for the device */
   device_id: DeviceIdSchema,
   
+  /** UI theme preference (light, dark, auto) */
   theme: ThemeSchema.default('light'),
   
+  /** Language preference for the interface */
   language: LanguageSchema.default('en'),
   
+  /** Timezone setting for date/time display */
   timezone: TimezoneSchema.default('UTC'),
   
+  /** Notification settings for various event types */
   notification_preferences: NotificationPreferencesSchema.default({
     push: true,
     email: true,
@@ -63,6 +70,7 @@ export const UserPreferencesBaseSchema = z.object({
     new_features: false
   }),
   
+  /** Privacy control settings for profile visibility */
   privacy_settings: PrivacySettingsSchema.default({
     direct_message: 'everyone',
     tag_permission: 'everyone',
@@ -70,12 +78,14 @@ export const UserPreferencesBaseSchema = z.object({
     discoverable_by_phone: false
   }),
   
+  /** Accessibility enhancement settings */
   accessibility_settings: AccessibilitySettingsSchema.default({
     font_size: 'medium',
     reduce_motion: false,
     high_contrast: false
   }),
   
+  /** Content filtering and personalization settings */
   content_preferences: ContentPreferencesSchema.default({
     sensitive_content: false,
     personalized_ads: true,
@@ -90,7 +100,7 @@ export const UserPreferencesBaseSchema = z.object({
 
 export const UserPreferencesSchema = UserPreferencesBaseSchema
   .refine((data) => {
-    return !data.session_id || data.device_id
+    return data.session_id === null || !!data.device_id
   }, { path: ['device_id'] })
   .refine((data) => {
     return data.timezone.includes('/')

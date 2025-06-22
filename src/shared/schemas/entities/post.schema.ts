@@ -35,28 +35,40 @@ import { PostAudience, PostType as PostTypeEnum, ContentType } from '~/shared/en
 export const PostBaseSchema = z.object({
   _id: ObjectIdSchema,
 
+  /** ID of the user who created the post */
   user_id: ObjectIdSchema,
+  /** Type of post (Original, Repost, Quote, Reply) */
   type: PostTypeSchema.default(PostTypeEnum.Original),
 
+  /** Visibility setting for the post (Everyone, Friends, Private) */
   audience: PostAudienceSchema.default(PostAudience.Everyone),
 
+  /** Text content of the post */
   content: ContentSchema.default(''),
 
+  /** Content type classification (Short, Long, Rich) */
   content_type: ContentTypeSchema.default(ContentType.Short),
 
+  /** ID of parent post for replies/reposts */
   parent_id: ObjectIdSchema.nullable().default(null),
 
+  /** Array of user IDs mentioned in the post (max 50) */
   mentions: ObjectIdArraySchema.max(50).default([]),
 
+  /** Array of media attachments (images, videos, etc.) */
   medias: MediaArraySchema.default([]),
 
   // Interaction counts
+  /** Number of views by non-authenticated users */
   guest_views: GuestViewsSchema.default(0),
 
+  /** Number of views by authenticated users */
   user_views: UserViewsSchema.default(0),
 
+  /** Total number of reactions */
   reaction_count: ReactionCountSchema.default(0),
 
+  /** Breakdown of reaction counts by type */
   reaction_counts: ReactionCountsSchema.default({
     Like: 0,
     Love: 0,
@@ -66,17 +78,23 @@ export const PostBaseSchema = z.object({
     Angry: 0
   }),
 
+  /** Number of times the post has been shared */
   share_count: ShareCountSchema.default(0),
 
+  /** Number of comments on the post */
   comment_count: CommentCountSchema.default(0),
 
+  /** Number of times the post has been bookmarked */
   bookmark_count: BookmarkCountSchema.default(0),
 
   // Soft delete
+  /** Whether the post has been soft deleted */
   is_deleted: IsDeletedSchema.default(false),
 
+  /** Timestamp when the post was deleted */
   deleted_at: DeletedAtSchema.nullable().default(null),
 
+  /** Reason for deleting the post */
   delete_reason: DeleteReasonSchema.nullable().default(null),
   // Timestamps
   created_at: CreatedAtSchema.default(() => new Date()),

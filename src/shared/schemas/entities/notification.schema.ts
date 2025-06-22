@@ -83,6 +83,9 @@ export const NotificationSchema = NotificationBaseSchema
   .refine((data) => {
     return !data.is_read || data.read_at
   }, { path: ['is_read'] })
+  .refine((data) => {
+    return data.is_read || !data.read_at
+  }, { path: ['is_read'] })
 
 /**
  * Notification Create Schema - For creating new notification documents

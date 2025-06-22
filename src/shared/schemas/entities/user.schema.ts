@@ -83,35 +83,49 @@ export const UserBaseSchema = z.object({
   _id: ObjectIdSchema,
   
   // Required fields
+  /** User's display name */
   name: NameSchema,
 
+  /** User's email address */
   email: EmailSchema,
   
+  /** User's unique username */
   username: UsernameSchema,
 
+  /** Hashed password for authentication */
   password: HashedPasswordSchema,
   
   // Optional fields - Has default values
+  /** User's date of birth */
   date_of_birth: DateOfBirthSchema.default(null),
 
+  /** User's biography or description */
   bio: BioSchema.default(''),
 
+  /** Geographic location coordinates */
   location: GeoPointSchema.nullable().default(null),
 
+  /** Array of user's website URLs */
   website: WebsiteArraySchema.default([]),
 
+  /** Profile picture URL */
   avatar: AvatarURLSchema.nullable().default(null),
 
+  /** Cover photo URL */
   cover_photo: CoverPhotoURLSchema.nullable().default(null),
 
   // Verification fields
+  /** Account verification status */
   verify_status: UserVerifyStatusSchema.default(UserVerifyStatus.Unverified),
 
+  /** Token for email verification */
   email_verify_token: EmailVerifyTokenSchema.nullable().default(null),
 
+  /** Token for password reset */
   forgot_password_token: ForgotPasswordTokenSchema.nullable().default(null),
 
   // Social fields with defaults
+  /** Array of ObjectIds for close friends (max 150, no duplicates) */
   close_circle: ObjectIdArraySchema
     .max(150)
     .refine((arr) => {
@@ -124,33 +138,47 @@ export const UserBaseSchema = z.object({
     })
     .default([]),
 
+  /** Count of users in close circle */
   close_circle_count: CloseCircleCountSchema.default(0),
 
+  /** Number of users following this user */
   followers_count: FollowersCountSchema.default(0),
 
+  /** Number of users this user follows */
   following_count: FollowingCountSchema.default(0),
 
+  /** Total number of posts created by user */
   post_count: PostCountSchema.default(0),
 
+  /** Count of unread notifications */
   unread_notification_count: UnreadNotificationCountSchema.default(0),
 
+  /** Count of unread messages */
   unread_message_count: UnreadMessageCountSchema.default(0),
 
   // Account settings with defaults
+  /** Type of user account (Free, Premium, etc.) */
   account_type: AccountTypeSchema.default(AccountType.Free),
   
+  /** Whether the account has been soft deleted */
   is_deleted: IsDeletedSchema.default(false),
   
+  /** Timestamp when account was deleted */
   deleted_at: DeletedAtSchema.nullable().default(null),
   
+  /** Reason for account deletion */
   delete_reason: DeleteReasonSchema.nullable().default(null),
   
+  /** Array of role ObjectIds assigned to user */
   roles: ObjectIdArraySchema.max(10).default([]),
   
+  /** Type of profile (Personal, Business, etc.) */
   profile_type: ProfileTypeSchema.default(ProfileType.Personal),
   
+  /** Privacy setting for user profile */
   is_private: IsPrivateSchema.default(false),
   
+  /** Age restriction level for content */
   age_restriction: AgeRestrictionSchema.default(AgeRestriction.None),
 
   // Timestamps
