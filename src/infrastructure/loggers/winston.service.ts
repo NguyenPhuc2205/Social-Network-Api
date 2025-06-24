@@ -2,7 +2,7 @@
  * @Author        : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
  * @Date          : 2025-02-12 16:52:32
  * @LastEditors   : Phuc Nguyen nguyenhuuphuc22052004@gmail.com
- * @LastEditTime  : 2025-06-01 15:58:18
+ * @LastEditTime  : 2025-06-24 21:34:01
  * @FilePath      : /server/src/infrastructure/loggers/winston.service.ts
  * @Description   : Create a logger using Winston with daily rotation and custom formatting
  */
@@ -223,58 +223,101 @@ export class WinstonLoggerService implements IWinstonLoggerService {
   private createLogger(): winston.Logger {
     // Define the base log format for file output
     const baseLogFormat = printf(({ level, message, context, requestId, timestamp, metadata, stack }) => {
-      const formattedContext = context ? context.toString().trim() : '-'
-      const formattedRequestId = requestId ? requestId.toString().trim() : 'unknown'
-      let formattedMetadata = '-'
+      const formattedContext = context 
+        ? context.toString().trim()
+        : '-'
 
-      if (metadata) {
+      const formattedRequestId = requestId 
+        ? requestId.toString().trim().slice(0,8) 
+        : 'unknown'
+
+      const levelUpper = level.toUpperCase().padEnd(7)
+
+      // Format metadata
+      let metadataLine = ''
+      if (metadata && Object.keys(metadata).length > 0) {
+        let formattedMetadata = '-'
         try {
-          // Safely serialize metadata to prevent circular references
-          formattedMetadata = JSON.stringify(this.safeSerializeMetadata(metadata))
+          // Create new object safe serialization to prevent circular references
+          const serializedMetadata = this.safeSerializeMetadata(metadata)
+
+          // Convert metadata to JSON string
+          formattedMetadata = JSON.stringify(serializedMetadata)
+
+          metadataLine = `\n└─ Metadata: ${formattedMetadata}`
         } catch (error) {
-          formattedMetadata = `[Serialization Error]`          
+          metadataLine = `\n└─ Metadata: [Error serializing metadata]`          
         }
       }
 
-      let logMessage = `${timestamp} | ${level.padEnd(7)} | ${formattedContext} | ${formattedRequestId} | ${message} | ${formattedMetadata}`
-
+      // Format stack trace
+      let stackLine = ''
       if (stack) {
-        logMessage += `\n${stack}`
+        stackLine = `\n└─ Stack: ${(stack as string).split('\n').slice(0, 5).join('\n')}`
       }
+
+      const logMessage = `${timestamp} | ${levelUpper} | ${formattedContext} | ${formattedRequestId} | ${message}${metadataLine}${stackLine}` + `\n`
 
       return logMessage
     })
 
     // Define the console log format with colorization
     const consoleLogFormat = printf(({ level, message, context, requestId, timestamp, metadata, stack }) => {
-      const formattedContext = context ? context.toString().trim() : '-'
-      const formattedRequestId = requestId ? requestId.toString().trim() : 'unknown'
-      const formattedMetadata = metadata ? util.inspect(metadata, { depth: 2, colors: true }) : {}
+      const formattedContext = context 
+        ? context.toString().trim()
+        : '-'
 
-      let logMessage = `${ timestamp } | ${ level.padEnd(7) } | ${ formattedContext } | ${ formattedRequestId } | ${ message } | ${ formattedMetadata }`
+      const formattedRequestId = requestId 
+        ? requestId.toString().trim().slice(0,8)
+        : 'unknown'
+      
+      const levelUpper = level.toUpperCase().padEnd(7)
+      
+      const formattedMetadata = metadata 
+        ? util.inspect(metadata, { depth: 2, colors: true })
+        : {}
 
-      if (stack) {
-        logMessage += `\n${stack}`
+      // Create colors
+      const colorizedContext = `\x1b[36m${formattedContext}\x1b[0m` // Cyan
+      const colorizedRequestId = `\x1b[33m${formattedRequestId}\x1b[0m` // Yellow
+      const colorizedLevel = {
+        info: `\x1b[32m${levelUpper}\x1b[0m`,
+        error: `\x1b[31m${levelUpper}\x1b[0m`,
+        warn: `\x1b[33m${levelUpper}\x1b[0m`,
+        debug: `\x1b[34m${levelUpper}\x1b[0m`,
+        verbose: `\x1b[90m${levelUpper}\x1b[0m`,
+        http: `\x1b[35m${levelUpper}\x1b[0m`,
+      }[level] || levelUpper  // Default color for unknown levels
+
+      // Format metadata in new line
+      let metadataLine = ''
+      if (formattedMetadata && Object.keys(formattedMetadata).length > 0) {
+        metadataLine = `\n└─ Metadata: ${formattedMetadata}`
       }
+
+      // Format stack trace
+      let stackLine = ''
+      if (stack) {
+        stackLine = `\n└─ \x1b[31mStack:\x1b[0m ${(stack as string).split('\n').slice(0, 5).join('\n')}`
+      }
+
+      const logMessage = `${timestamp} | ${colorizedLevel} | ${colorizedContext} | ${colorizedRequestId} | ${message}${metadataLine}${stackLine}` + `\n`
 
       return logMessage
     })
 
-    // Create the logger instance with console and daily rotation file transports
+    // Create the logger instance with console and daily rotation file transports (General)
     const loggerInstance = createLogger({
       level: this.logLevel,
       format: combine(
         timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS A' }),
-        label({ label: 'application' }),
         errors({ stack: true }),
-        align(),
         splat(),
       ),
       transports: [
         // Console transport
         new transports.Console({
           format: combine(
-            colorize(),
             consoleLogFormat
           )
         }),
@@ -352,7 +395,64 @@ export class WinstonLoggerService implements IWinstonLoggerService {
     if (context.route) parts.push(context.route)
     if (context.action) parts.push(context.action)
 
-    return parts.length > 0 ? parts.join('::') : '-'
+    return parts.length > 0 ? `[${parts.join('::')}]` : '-'
+  }
+
+  /**
+   * Processes log parameters to ensure consistent structure
+   * @private
+   * @param {string | ILogParams} messageOrParams - Log message string or params object
+   * @param {ILogContext | string | string[]} [context] - Context for the log message (e.g., module, method, route, action or combined string)
+   * @param {string} [requestId] - Unique request identifier (generated if not provided)
+   * @param {any} [metadata] - Additional structured data to be logged
+   * @param {Error} [error] - Error object containing stack trace information
+   * @returns {ILogParams} Processed log parameters object
+   */
+  private proccessLogParams (
+    messageOrParams: string | ILogParams,
+    context?: ILogContext | string | string[],
+    requestId?: string,
+    metadata?: any,
+    error?: Error
+  ): ILogParams {
+    if (typeof messageOrParams === 'string') {
+      return {
+        message: messageOrParams,
+        context,
+        requestId: requestId || uuidv4(),
+        metadata: metadata || {},
+        error
+      }
+    }
+
+    return {
+      message: messageOrParams.message,
+      context: messageOrParams.context || context,
+      requestId: messageOrParams.requestId || requestId || uuidv4(),
+      metadata: messageOrParams.metadata || metadata || {},
+      error: messageOrParams.error || error
+    }
+  }
+
+  private log (
+    level: 'info' | 'error' | 'warn' | 'debug' | 'verbose' | 'http',
+    messageOrParams: string | ILogParams,
+    context?: ILogContext | string | string[],
+    requestId?: string,
+    metadata?: any,
+    error?: Error
+  ): void {
+    const params = this.proccessLogParams(messageOrParams, context, requestId, metadata, error)
+
+    const logData = {
+      message: params.message,
+      context: this.formatContext(params.context),
+      requestId: params.requestId,
+      metadata: params.metadata,
+      ...(params.error?.stack ? { stack: params.error.stack } : {})
+    }
+
+    this.logger.log(level, logData)
   }
 
   /**
@@ -364,27 +464,7 @@ export class WinstonLoggerService implements IWinstonLoggerService {
    * @returns {void}
    */
    public info(messageOrParams: string | ILogParams, context?: ILogContext | string | string[], requestId?: string, metadata?: any): void {
-    let params: ILogParams
-    
-    if (typeof messageOrParams === 'string') {
-      params = {
-        message: messageOrParams,
-        context,
-        requestId: requestId || uuidv4(),
-        metadata: metadata || {}
-      }
-    } else {
-      params = messageOrParams
-      params.requestId = params.requestId || requestId || uuidv4()
-      params.metadata = params.metadata || metadata || {}
-    }
-    
-    this.logger.info({
-      message: params.message,
-      context: this.formatContext(params.context),
-      requestId: params.requestId,
-      metadata: params.metadata
-    })
+    this.log('info', messageOrParams, context, requestId, metadata)
   }
 
   /**
@@ -397,32 +477,14 @@ export class WinstonLoggerService implements IWinstonLoggerService {
    * @returns {void}
    */
   public error(messageOrParams: string | ILogParams, context?: ILogContext | string | string[], requestId?: string, metadata?: any, error?: Error): void {
-    let params: ILogParams
-
-    if (typeof messageOrParams === 'string') {
-      params = {
-        message: messageOrParams,
-        context,
-        requestId: requestId || uuidv4(),
-        metadata: metadata || {},
-        error
-      }
-    } else {
-      params = {
-        message: messageOrParams.message,
-        context: messageOrParams.context || context,
-        requestId: messageOrParams.requestId || requestId || uuidv4(),
-        metadata: messageOrParams.metadata || metadata || {},
-        error: messageOrParams.error || error
-      }
+    // Get messageOrParams as Error when log with error is the first parameter (Check at runtime)
+    if (messageOrParams instanceof Error) {
+      this.log('error', messageOrParams.message, context, requestId, metadata, messageOrParams)
+      return
     }
-    this.logger.error({
-      message: params.message,
-      context: this.formatContext(params.context),
-      requestId: params.requestId,
-      metadata: params.metadata,
-      stack: params.error?.stack
-    })
+
+    // messageOrParams string or ILogParams
+    this.log('error', messageOrParams, context, requestId, metadata, error)
   }
 
   /**
@@ -434,27 +496,7 @@ export class WinstonLoggerService implements IWinstonLoggerService {
    * @returns {void}
    */
   public warn(messageOrParams: string | ILogParams, context?: ILogContext | string | string[], requestId?: string, metadata?: any): void {
-    let params: ILogParams
-    
-    if (typeof messageOrParams === 'string') {
-      params = {
-        message: messageOrParams,
-        context,
-        requestId: requestId || uuidv4(),
-        metadata: metadata || {}
-      }
-    } else {
-      params = messageOrParams
-      params.requestId = params.requestId || uuidv4()
-      params.metadata = params.metadata || {}
-    }
-    
-    this.logger.warn({
-      message: params.message,
-      context: this.formatContext(params.context),
-      requestId: params.requestId,
-      metadata: params.metadata
-    })
+    this.log('warn', messageOrParams, context, requestId, metadata)
   }
 
   /**
@@ -466,27 +508,7 @@ export class WinstonLoggerService implements IWinstonLoggerService {
    * @returns {void}
    */
   public debug(messageOrParams: string | ILogParams, context?: ILogContext | string | string[], requestId?: string, metadata?: any): void {
-    let params: ILogParams
-    
-    if (typeof messageOrParams === 'string') {
-      params = {
-        message: messageOrParams,
-        context,
-        requestId: requestId || uuidv4(),
-        metadata: metadata || {}
-      }
-    } else {
-      params = messageOrParams
-      params.requestId = params.requestId || requestId || uuidv4()
-      params.metadata = params.metadata || metadata || {}
-    }
-    
-    this.logger.debug({
-      message: params.message,
-      context: this.formatContext(params.context),
-      requestId: params.requestId,
-      metadata: params.metadata
-    })
+    this.log('debug', messageOrParams, context, requestId, metadata)
   }
 
   /**
@@ -498,27 +520,7 @@ export class WinstonLoggerService implements IWinstonLoggerService {
    * @returns {void}
    */
   public verbose(messageOrParams: string | ILogParams, context?: ILogContext | string | string[], requestId?: string, metadata?: any): void {
-    let params: ILogParams
-    
-    if (typeof messageOrParams === 'string') {
-      params = {
-        message: messageOrParams,
-        context,
-        requestId: requestId || uuidv4(),
-        metadata: metadata || {}
-      }
-    } else {
-      params = messageOrParams
-      params.requestId = params.requestId || uuidv4()
-      params.metadata = params.metadata || {}
-    }
-    
-    this.logger.verbose({
-      message: params.message,
-      context: this.formatContext(params.context),
-      requestId: params.requestId,
-      metadata: params.metadata
-    })
+    this.log('verbose', messageOrParams, context, requestId, metadata)
   }
 
   /**
@@ -530,56 +532,36 @@ export class WinstonLoggerService implements IWinstonLoggerService {
    * @returns {void}
    */
   public http(messageOrParams: string | ILogParams, context?: ILogContext | string | string[], requestId?: string, metadata?: any): void {
-    let params: ILogParams
-    
-    if (typeof messageOrParams === 'string') {
-      params = {
-        message: messageOrParams,
-        context,
-        requestId: requestId || uuidv4(),
-        metadata: metadata || {}
-      }
-    } else {
-      params = messageOrParams
-      params.requestId = params.requestId || uuidv4()
-      params.metadata = params.metadata || {}
-    }
-    
-    this.logger.http({
-      message: params.message,
-      context: this.formatContext(params.context),
-      requestId: params.requestId,
-      metadata: params.metadata
-    })
+    this.log('http', messageOrParams, context, requestId, metadata)
   }
 }
 
 // Example usage
-// const logger = WinstonLoggerService.getInstance()
-// const contextObj = { module: 'Controller', method: 'GET', route: '/api/v1/resource', action: 'fetch' }
-// const contextArray = ['Controller', 'GET', '/api/v1/resource', 'fetch']
-// const requestId = uuidv4()
-// const metadata = { userId: 123, action: 'fetch' }
-// const error = new Error('Huhu, something went wrong')
+  // const logger = WinstonLoggerService.getInstance()
+  // const contextObj = { module: 'Controller', method: 'GET', route: '/api/v1/resource', action: 'fetch' }
+  // const contextArray = ['Controller', 'GET', '/api/v1/resource', 'fetch']
+  // const requestId = uuidv4()
+  // const metadata = { userId: 123, action: 'fetch' }
+  // const error = new Error('Huhu, something went wrong')
 
-// logger.debug('This is an info test message 1')
-// logger.debug('This is a debug test message 2', contextObj)
-// logger.debug('This is a debug test message 3', contextArray)
-// logger.debug('This is a debug test message 4', contextObj, requestId)
-// logger.debug('This is a debug test message 5', contextArray, requestId)
-// logger.debug('This is a debug test message 6', contextObj, requestId, metadata)
-// logger.debug('This is a debug test message 7', contextArray, requestId, metadata)
+  // logger.debug('This is an info test message 1')
+  // logger.debug('This is a debug test message 2', contextObj)
+  // logger.debug('This is a debug test message 3', contextArray)
+  // logger.debug('This is a debug test message 4', contextObj, requestId)
+  // logger.debug('This is a debug test message 5', contextArray, requestId)
+  // logger.debug('This is a debug test message 6', contextObj, requestId, metadata)
+  // logger.debug('This is a debug test message 7', contextArray, requestId, metadata)
 
-// logger.error('This is an error test message 1')
-// logger.error('This is an error test message 2', contextObj)
-// logger.error('This is an error test message 3', contextArray)
-// logger.error('This is an error test message 4', contextObj, requestId)
-// logger.error('This is an error test message 5', contextArray, requestId)
-// logger.error('This is an error test message 6', contextObj, requestId, metadata)
-// logger.error('This is an error test message 7', contextArray, requestId, metadata)
-// logger.error('This is an error test message 7', contextObj, requestId, metadata, error)
-// logger.error('This is an error test message 8', contextArray, requestId, metadata, error)
-// logger.error(error)
+  // logger.error('This is an error test message 1')
+  // logger.error('This is an error test message 2', contextObj)
+  // logger.error('This is an error test message 3', contextArray)
+  // logger.error('This is an error test message 4', contextObj, requestId)
+  // logger.error('This is an error test message 5', contextArray, requestId)
+  // logger.error('This is an error test message 6', contextObj, requestId, metadata)
+  // logger.error('This is an error test message 7', contextArray, requestId, metadata)
+  // logger.error('This is an error test message 8', contextObj, requestId, metadata, error)
+  // logger.error('This is an error test message 9', contextArray, requestId, metadata, error)
+  // logger.error(error)
 
-// logger.info('User logged in', { module: 'Auth', action: 'login' }, 'req-123', { userId: 123 })
-// logger.info({ message: 'User logged in', context: ['Auth', 'POST', '/login'], metadata: { userId: 123 } })
+  // logger.info('User logged in', { module: 'Auth', action: 'login' }, 'req-123', { userId: 123 })
+  // logger.info({ message: 'User logged in', context: ['Auth', 'POST', '/login'], metadata: { userId: 123 } })
