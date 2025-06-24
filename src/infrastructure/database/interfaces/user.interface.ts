@@ -74,9 +74,9 @@ export interface IUser extends BaseSchema {
   /** Email verification status */
   verify_status: UserVerifyStatus
   /** Optional token for email verification */
-  email_verify_token?: string
+  email_verify_token?: string | null
   /** Optional token for password reset */
-  forgot_password_token?: string
+  forgot_password_token?: string | null
 
   /** List of user IDs in private circle for restricted post visibility (max 150) */
   close_circle: ObjectId[]
