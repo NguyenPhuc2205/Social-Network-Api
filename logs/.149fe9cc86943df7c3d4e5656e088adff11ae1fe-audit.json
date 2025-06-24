@@ -1,0 +1,35 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\VSCodeProject\\NodeJS-Super\\project\\server\\logs\\.149fe9cc86943df7c3d4e5656e088adff11ae1fe-audit.json",
+    "files": [
+        {
+            "date": 1748054269901,
+            "name": "D:\\VSCodeProject\\NodeJS-Super\\project\\server\\logs\\application-2025-05-24-09.log",
+            "hash": "98fccd1181ab2ac95ab90eaa96d63a7636868c56b6b4961ef827a96eaf2ad1d2"
+        },
+        {
+            "date": 1748060224145,
+            "name": "D:\\VSCodeProject\\NodeJS-Super\\project\\server\\logs\\application-2025-05-24-11.log",
+            "hash": "663bd9e6cbc6b14f2a62a84d207c422d86506616d1854a1df6547ce33fdb7a0c"
+        },
+        {
+            "date": 1748193670293,
+            "name": "D:\\VSCodeProject\\NodeJS-Super\\project\\server\\logs\\application-2025-05-26-00.log",
+            "hash": "c6b76aa9afa74b8b738b178d587ec6e9e7fda14f67d31dd90186158a0eb07349"
+        },
+        {
+            "date": 1748247847117,
+            "name": "D:\\VSCodeProject\\NodeJS-Super\\project\\server\\logs\\application-2025-05-26-15.log",
+            "hash": "2068d95cc89f4470a9f79ce5dc7f46ebe1fefa42b315061acf96137e4aad9d1d"
+        },
+        {
+            "date": 1748264707971,
+            "name": "D:\\VSCodeProject\\NodeJS-Super\\project\\server\\logs\\application-2025-05-26-20.log",
+            "hash": "1c3eb3c11c97de6eaf96370e2946378e583575bb9a5fcba79b784e916ae993a2"
+        }
+    ],
+    "hashType": "sha256"
+}
